@@ -7,7 +7,6 @@
 
 	<name>JCommandEssentials</name>
 	<url>https://github.com/jamesst20/JCommandEssentials/</url>
-	<description>Ingame/Forum link plugin</description>
 
 	<!-- Source code -->
 	<scm>
@@ -19,7 +18,7 @@
 	<!-- Continuous integration -->
 	<ciManagement>
 		<system>jenkins</system>
-		<url>http://jenkins.thebigdigmc.info/job/OKB3%20Renewed/</url>
+		<url>http://jenkins.greatmancode.com/job/JCommandEssentials/</url>
 	</ciManagement>
 
 	<properties>
