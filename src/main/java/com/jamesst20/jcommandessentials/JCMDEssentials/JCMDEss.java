@@ -20,6 +20,7 @@ import com.jamesst20.jcommandessentials.Commands.KillCommand;
 import com.jamesst20.jcommandessentials.Commands.LockCommand;
 import com.jamesst20.jcommandessentials.Commands.MotdCommand;
 import com.jamesst20.jcommandessentials.Commands.MsgCommand;
+import com.jamesst20.jcommandessentials.Commands.OpenInventoryCommand;
 import com.jamesst20.jcommandessentials.Commands.SetHomeCommand;
 import com.jamesst20.jcommandessentials.Commands.ServerMotdCommand;
 import com.jamesst20.jcommandessentials.Commands.SetSpawnCommand;
@@ -118,6 +119,7 @@ public class JCMDEss extends JavaPlugin{
         Methods.regC("kill", new KillCommand());
         Methods.regC("workbench", new WorkbenchCommand());
         Methods.regC("flyspeed", new FlySpeedCommand());
+        Methods.regC("openinventory", new OpenInventoryCommand());
     }
     public void setCmdsConfig() {
     	Methods.registerCommandConfigDefaultValue("enablecmd");
@@ -154,5 +156,6 @@ public class JCMDEss extends JavaPlugin{
     	Methods.registerCommandConfigDefaultValue("kill");
     	Methods.registerCommandConfigDefaultValue("workbench");
     	Methods.registerCommandConfigDefaultValue("flyspeed");
+    	Methods.registerCommandConfigDefaultValue("openinventory");
     }
 }

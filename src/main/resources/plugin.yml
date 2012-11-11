@@ -119,3 +119,7 @@ commands:
    flyspeed:
        description: 'Get or set fly speed'
        usage: /flyspeed get [player] or /flyspeed set <speed> [player]
+   openinventory:
+       description: 'Open the inventory of a player'
+       usage: /openinventory <player>
+       aliases: [openinv, invopen, inventoryopen, oi]
