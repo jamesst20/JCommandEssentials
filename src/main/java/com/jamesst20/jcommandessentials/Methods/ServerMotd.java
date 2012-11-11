@@ -41,6 +41,6 @@ public class ServerMotd {
 	private static String coloring(String string)
 	  {
 	    if (string == null) return null;
-	    return string.replaceAll("&([0-9a-fA-Fk-oK-OrR])", "�$1");
+	    return string.replaceAll("&([0-9a-fA-Fk-oK-OrR])", "\u00A7$1");
 	  }
 }
