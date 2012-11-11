@@ -112,3 +112,7 @@ commands:
    kill:
        description: 'Kill yourself or a player'
        usage: /kill [player]
+   workbench:
+       description: 'Force opening a workbench anywhere'
+       usage: /workbench
+       aliases: [craft, crafting, craftingtable, crafttable, wb, ct]

@@ -35,6 +35,7 @@ import com.jamesst20.jcommandessentials.Commands.TpaCommand;
 import com.jamesst20.jcommandessentials.Commands.TpcCommand;
 import com.jamesst20.jcommandessentials.Commands.UnbanCommand;
 import com.jamesst20.jcommandessentials.Commands.WeatherCommand;
+import com.jamesst20.jcommandessentials.Commands.WorkbenchCommand;
 import com.jamesst20.jcommandessentials.Listener.ThePlayerListener;
 import com.jamesst20.jcommandessentials.Listener.ServerListener;
 import com.jamesst20.jcommandessentials.Methods.Methods;
@@ -114,6 +115,7 @@ public class JCMDEss extends JavaPlugin{
         Methods.regC("unban", new UnbanCommand());
         Methods.regC("clearinventory", new ClearInventoryCommand());
         Methods.regC("kill", new KillCommand());
+        Methods.regC("workbench", new WorkbenchCommand());
     }
     public void setCmdsConfig() {
     	Methods.registerCommandConfigDefaultValue("enablecmd");
@@ -148,5 +150,6 @@ public class JCMDEss extends JavaPlugin{
     	Methods.registerCommandConfigDefaultValue("unban");
     	Methods.registerCommandConfigDefaultValue("clearinventory");
     	Methods.registerCommandConfigDefaultValue("kill");
+    	Methods.registerCommandConfigDefaultValue("workbench");
     }
 }
