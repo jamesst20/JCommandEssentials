@@ -1,5 +1,5 @@
 name: 'JCommandEssentials'
-version: 2.1
+version: 2.2
 authors: [Jamesst20]
 main: com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss
 commands:
