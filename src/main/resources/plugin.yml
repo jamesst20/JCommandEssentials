@@ -1,0 +1,107 @@
+name: 'JCommandEssentials'
+version: 2.1
+authors: [Jamesst20]
+main: com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss
+commands:
+   jcommandessentials:
+       description: 'JCommandsEssentials plugin'
+       usage: /jcommandessentials
+       aliases: [jcmdess]
+   enablecmd:
+       description: 'Enable a JCMDEssentials Command'
+       usage: /enablecmd <cmd>
+   disablecmd:
+       description: 'Disable a JCMDEssentials Command'
+       usage: /disablecmd <cmd>
+   sethome:
+       description: 'Set your home location'
+       usage: /setHome [Optional Home Name]
+   home:
+       description: 'Teleport to your home location'
+       usage: /Home [Optional Home Name]
+       aliases: tphome
+   weather:
+       description: 'Set the weather of the current or other worlds'
+       usage: /weather <sun,rain,storm,thunder> [world]
+       aliases: [sun, rain, storm, thunder]
+   tpa:
+       description: 'Ask a player to teleport to him'
+       usage: /tpa <player>
+   tpaccept:
+       description: 'Accept a teleport request'
+       usage: /tpaccept
+       aliases: tpaaccept
+   tpdeny:
+       description: 'Deny a teleport request'
+       usage: /tpdeny
+       aliases: tpadeny
+   tp:
+       description: 'Teleport yourself or another player to a player'
+       usage: /tp <player> [player]
+   tpall:
+       description: 'Teleport all players to you'
+       usage: /tpall
+   tphere:
+       description: 'Teleport a player to your location'
+       usage: /tphere <player>
+   time:
+       description: 'Set the time of a world'
+       usage: /day [world], /night [world], /time day/night [world]
+       aliases: [day, night]
+   broadcast:
+       description: 'Broadcast a message'
+       usage: /broadcast <message>
+   spawn:
+       description: 'Teleport yourself or another player to spawn'
+       usage: /spawn [player]
+   setspawn:
+       description: 'Set default server spawn'
+       usage: /setspawn
+   fly:
+       description: 'Enabled or disable fly for yourself or another player'
+       usage: /fly [player]
+   god:
+       description: 'Enable or disable god mode for yourself or another player'
+       usage: /god [player]
+   motd:
+       description: 'Read the message of the day'
+       usage: /motd
+   freeze:
+       description: 'Prevent a player from moving'
+       usage: /freeze <player>
+   lock:
+       description: 'Lock the server : Prevent breaking/placing blocks, chat messages and mobs spawning'
+       usage: /lock
+   servermotd:
+       description: 'Set the server list motd'
+       usage: /servermotd set <motd>, /servermotd enable, /servermotd disable
+   sudo:
+       description: 'Run a command as another player'
+       usage: /sudo <command [args]>
+   gamemode:
+       description: 'Change your or a player gamemode'
+       usage: /<gamemode/gm> <creative/survival/adventure> [player] or /<creative/survival/adventure> [player]
+       aliases: [gm, survival, creative, adventure]
+   heal:
+       description: 'Heal a player (Health and Food)'
+       usage: /heal
+   msg:
+       description: 'Send a private message to a player'
+       usage: /msg <player> <message> or /pm <player> <message>
+       aliases: pm
+   staff:
+       description: 'Send a message to the staff chat'
+       usage: /staff <message>
+   tpc:
+       description: 'Teleport yourself or a player to coordinates'
+       usage: /tpc <x> <y> <z> [player]
+       aliases: [tppos, tpos, tpcoord]
+   kick:
+       description: 'Kick a player'
+       usage: /kick <player> [reason]
+   ban:
+       description: 'Ban a player'
+       usage: /ban <player> [reason]
+   unban:
+       description: 'Unban a player'
+       usage: /unban <player>
