@@ -109,3 +109,6 @@ commands:
        description: 'Clear your or a player inventory'
        usage: /clearinventory [player]
        aliases: [ci, clear, clearinv, /ciinv]
+   kill:
+       description: 'Kill yourself or a player'
+       usage: /kill [player]
