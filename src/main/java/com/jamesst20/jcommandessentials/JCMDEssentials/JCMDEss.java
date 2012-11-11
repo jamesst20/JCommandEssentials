@@ -8,6 +8,7 @@ import com.jamesst20.jcommandessentials.Commands.ClearInventoryCommand;
 import com.jamesst20.jcommandessentials.Commands.DisableCmdCommand;
 import com.jamesst20.jcommandessentials.Commands.EnableCmdCommand;
 import com.jamesst20.jcommandessentials.Commands.FlyCommand;
+import com.jamesst20.jcommandessentials.Commands.FlySpeedCommand;
 import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
 import com.jamesst20.jcommandessentials.Commands.GameModeCommand;
 import com.jamesst20.jcommandessentials.Commands.GodCommand;
@@ -116,6 +117,7 @@ public class JCMDEss extends JavaPlugin{
         Methods.regC("clearinventory", new ClearInventoryCommand());
         Methods.regC("kill", new KillCommand());
         Methods.regC("workbench", new WorkbenchCommand());
+        Methods.regC("flyspeed", new FlySpeedCommand());
     }
     public void setCmdsConfig() {
     	Methods.registerCommandConfigDefaultValue("enablecmd");
@@ -151,5 +153,6 @@ public class JCMDEss extends JavaPlugin{
     	Methods.registerCommandConfigDefaultValue("clearinventory");
     	Methods.registerCommandConfigDefaultValue("kill");
     	Methods.registerCommandConfigDefaultValue("workbench");
+    	Methods.registerCommandConfigDefaultValue("flyspeed");
     }
 }

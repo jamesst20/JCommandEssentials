@@ -116,3 +116,6 @@ commands:
        description: 'Force opening a workbench anywhere'
        usage: /workbench
        aliases: [craft, crafting, craftingtable, crafttable, wb, ct]
+   flyspeed:
+       description: 'Get or set fly speed'
+       usage: /flyspeed get [player] or /flyspeed set <speed> [player]
