@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.jamesst20.jcommandessentials.Commands.BanCommand;
 import com.jamesst20.jcommandessentials.Commands.BroadcastCommand;
+import com.jamesst20.jcommandessentials.Commands.ClearInventoryCommand;
 import com.jamesst20.jcommandessentials.Commands.DisableCmdCommand;
 import com.jamesst20.jcommandessentials.Commands.EnableCmdCommand;
 import com.jamesst20.jcommandessentials.Commands.FlyCommand;
@@ -110,6 +111,7 @@ public class JCMDEss extends JavaPlugin{
         Methods.regC("kick", new KickCommand());
         Methods.regC("ban", new BanCommand());
         Methods.regC("unban", new UnbanCommand());
+        Methods.regC("clearinventory", new ClearInventoryCommand());
     }
     public void setCmdsConfig() {
     	Methods.registerCommandConfigDefaultValue("enablecmd");
@@ -142,5 +144,6 @@ public class JCMDEss extends JavaPlugin{
     	Methods.registerCommandConfigDefaultValue("kick");
     	Methods.registerCommandConfigDefaultValue("ban");
     	Methods.registerCommandConfigDefaultValue("unban");
+    	Methods.registerCommandConfigDefaultValue("clearinventory");
     }
 }
