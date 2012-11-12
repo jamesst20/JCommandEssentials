@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.jamesst20.jcommandessentials.Methods.Methods;
+import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class FreezeCommand implements CommandExecutor {
 	public static HashSet<String> frozenPlayers = new HashSet<String>();

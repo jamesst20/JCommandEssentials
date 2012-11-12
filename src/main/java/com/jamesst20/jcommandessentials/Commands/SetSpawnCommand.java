@@ -10,8 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import com.jamesst20.jcommandessentials.Methods.Config;
-import com.jamesst20.jcommandessentials.Methods.Methods;
+import com.jamesst20.jcommandessentials.Utils.Config;
+import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class SetSpawnCommand implements CommandExecutor{
 	

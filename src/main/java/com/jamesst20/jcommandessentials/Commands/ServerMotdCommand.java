@@ -4,8 +4,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.jamesst20.jcommandessentials.Methods.Methods;
-import com.jamesst20.jcommandessentials.Methods.ServerMotd;
+import com.jamesst20.jcommandessentials.Utils.Methods;
+import com.jamesst20.jcommandessentials.Utils.ServerMotd;
 
 public class ServerMotdCommand implements CommandExecutor{
 	

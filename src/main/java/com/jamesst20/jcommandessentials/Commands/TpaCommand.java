@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-import com.jamesst20.jcommandessentials.Methods.Methods;
+import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class TpaCommand implements CommandExecutor {
 	public static Map<String, String> tpaPlayers = new HashMap<String, String>();

@@ -7,7 +7,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-import com.jamesst20.jcommandessentials.Methods.Config;
+import com.jamesst20.jcommandessentials.Utils.Config;
 
 public class JWorldConfig {
 	JCMDEss plugin = JCMDEss.plugin;

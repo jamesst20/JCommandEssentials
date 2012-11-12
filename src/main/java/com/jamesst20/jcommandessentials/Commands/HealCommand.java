@@ -1,6 +1,6 @@
 package com.jamesst20.jcommandessentials.Commands;
 
-import com.jamesst20.jcommandessentials.Methods.Methods;
+import com.jamesst20.jcommandessentials.Utils.Methods;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

@@ -5,7 +5,7 @@ import java.io.File;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import com.jamesst20.jcommandessentials.Methods.Config;
+import com.jamesst20.jcommandessentials.Utils.Config;
 
 public class JOfflinePlayerConfig {
 	OfflinePlayer player = null;

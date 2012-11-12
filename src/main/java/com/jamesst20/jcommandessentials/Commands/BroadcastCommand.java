@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.jamesst20.jcommandessentials.Methods.Methods;
+import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class BroadcastCommand implements CommandExecutor{
 	

@@ -5,8 +5,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import com.jamesst20.jcommandessentials.Methods.Methods;
 import com.jamesst20.jcommandessentials.Objects.JOfflinePlayerConfig;
+import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class UnbanCommand implements CommandExecutor{
 

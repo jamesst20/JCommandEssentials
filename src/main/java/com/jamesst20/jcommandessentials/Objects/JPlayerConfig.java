@@ -9,7 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import com.jamesst20.jcommandessentials.Methods.Config;
+import com.jamesst20.jcommandessentials.Utils.Config;
 
 public class JPlayerConfig {
 	Player player = null;
