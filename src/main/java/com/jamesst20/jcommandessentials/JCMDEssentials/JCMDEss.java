@@ -2,6 +2,7 @@ package com.jamesst20.jcommandessentials.JCMDEssentials;
 
 import java.io.IOException;
 
+import com.jamesst20.jcommandessentials.Commands.AfkCommand;
 import com.jamesst20.jcommandessentials.Commands.BanCommand;
 import com.jamesst20.jcommandessentials.Commands.BroadcastCommand;
 import com.jamesst20.jcommandessentials.Commands.ClearInventoryCommand;
@@ -41,9 +42,10 @@ import com.jamesst20.jcommandessentials.Commands.WeatherCommand;
 import com.jamesst20.jcommandessentials.Commands.WorkbenchCommand;
 import com.jamesst20.jcommandessentials.Listener.ThePlayerListener;
 import com.jamesst20.jcommandessentials.Listener.ServerListener;
-import com.jamesst20.jcommandessentials.Methods.Methods;
-import com.jamesst20.jcommandessentials.Methods.Motd;
-import com.jamesst20.jcommandessentials.Methods.ServerMotd;
+import com.jamesst20.jcommandessentials.Utils.AfkUtils;
+import com.jamesst20.jcommandessentials.Utils.Methods;
+import com.jamesst20.jcommandessentials.Utils.Motd;
+import com.jamesst20.jcommandessentials.Utils.ServerMotd;
 
 import com.jamesst20.jcommandessentials.mcstats.Metrics;
 
@@ -77,6 +79,8 @@ public class JCMDEss extends JavaPlugin{
     private void registerEvents(){
     	Bukkit.getServer().getPluginManager().registerEvents(new ThePlayerListener(), this);
     	Bukkit.getServer().getPluginManager().registerEvents(new ServerListener(), this);
+    	AfkUtils.addAfkListener(new ThePlayerListener());
+    	AfkUtils.startTask();
     }
     
     private void writeDefaultSettings(){
@@ -122,6 +126,7 @@ public class JCMDEss extends JavaPlugin{
         Methods.regC("flyspeed", new FlySpeedCommand());
         Methods.regC("openinventory", new OpenInventoryCommand());
         Methods.regC("vanish", new VanishCommand());
+        Methods.regC("afk", new AfkCommand());
     }
     public void setCmdsConfig() {
     	Methods.registerCommandConfigDefaultValue("enablecmd");
@@ -160,5 +165,6 @@ public class JCMDEss extends JavaPlugin{
     	Methods.registerCommandConfigDefaultValue("flyspeed");
     	Methods.registerCommandConfigDefaultValue("openinventory");
     	Methods.registerCommandConfigDefaultValue("vanish");
+    	Methods.registerCommandConfigDefaultValue("afk");
     }
 }

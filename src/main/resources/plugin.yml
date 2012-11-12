@@ -126,3 +126,6 @@ commands:
    vanish:
        description: 'Make yourself or a player invisible/visible from other players'
        usage: /vanish [player]
+   afk:
+       description: 'Tells everyone that you are now back or away'
+       usage: /afk

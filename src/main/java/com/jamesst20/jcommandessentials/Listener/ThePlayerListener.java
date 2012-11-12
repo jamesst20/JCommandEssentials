@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -19,11 +20,13 @@ import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
 import com.jamesst20.jcommandessentials.Commands.GodCommand;
 import com.jamesst20.jcommandessentials.Commands.LockCommand;
 import com.jamesst20.jcommandessentials.Commands.VanishCommand;
-import com.jamesst20.jcommandessentials.Methods.Methods;
-import com.jamesst20.jcommandessentials.Methods.Motd;
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
+import com.jamesst20.jcommandessentials.Utils.AfkUtils;
+import com.jamesst20.jcommandessentials.Utils.Methods;
+import com.jamesst20.jcommandessentials.Utils.Motd;
+import com.jamesst20.jcommandessentials.Utils.AfkUtils.AfkListener;
 
-public class ThePlayerListener implements Listener {
+public class ThePlayerListener implements Listener, AfkListener {
 	String serverLocked = "The server is currently locked!";
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -36,6 +39,7 @@ public class ThePlayerListener implements Listener {
 		for (String players:VanishCommand.vanishedPlayers){
 			Methods.hidePlayerFrom(player, Bukkit.getServer().getPlayer(players));
 		}
+		AfkUtils.addPlayer(e.getPlayer());
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -44,7 +48,7 @@ public class ThePlayerListener implements Listener {
 		Player player = e.getPlayer();
 		if (player.isBanned()) {
 			e.setKickMessage(new JPlayerConfig(player).getBanReason());
-		}
+		}		
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -53,6 +57,7 @@ public class ThePlayerListener implements Listener {
 			GodCommand.godPlayers.remove(e.getPlayer().getName()); /*Remove God mode on disconnect*/
 		}
 		new JPlayerConfig(e.getPlayer()).onDisconnect();// Save Player Config
+		AfkUtils.removePlayer(e.getPlayer());
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -71,6 +76,7 @@ public class ThePlayerListener implements Listener {
 		if (FreezeCommand.frozenPlayers.contains(e.getPlayer().getName())) {
 			e.setCancelled(true);
 		}
+		AfkUtils.updatePlayerActivity(e.getPlayer());
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -82,6 +88,7 @@ public class ThePlayerListener implements Listener {
 				e.setCancelled(true);
 			}
 		}
+		AfkUtils.updatePlayerActivity(e.getPlayer());
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -112,4 +119,18 @@ public class ThePlayerListener implements Listener {
 			e.setCancelled(true);
 		}
 	}
+
+	@Override
+	public void playerAfkStateChanged(Player player, boolean afk) {
+		if (afk){
+			Methods.broadcastMessage(Methods.red(player.getDisplayName())+ " is now " + Methods.red("afk") + "!");
+		}else{
+			Methods.broadcastMessage(Methods.red(player.getDisplayName())+ " is now " + Methods.green("back") + "!");
+		}		
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	  public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e){
+		
+	  }
 }
