@@ -123,3 +123,6 @@ commands:
        description: 'Open the inventory of a player'
        usage: /openinventory <player>
        aliases: [openinv, invopen, inventoryopen, oi]
+   vanish:
+       description: 'Make yourself or a player invisible/visible from other players'
+       usage: /vanish [player]

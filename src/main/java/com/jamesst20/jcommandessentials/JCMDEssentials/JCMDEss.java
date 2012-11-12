@@ -36,6 +36,7 @@ import com.jamesst20.jcommandessentials.Commands.TpHereCommand;
 import com.jamesst20.jcommandessentials.Commands.TpaCommand;
 import com.jamesst20.jcommandessentials.Commands.TpcCommand;
 import com.jamesst20.jcommandessentials.Commands.UnbanCommand;
+import com.jamesst20.jcommandessentials.Commands.VanishCommand;
 import com.jamesst20.jcommandessentials.Commands.WeatherCommand;
 import com.jamesst20.jcommandessentials.Commands.WorkbenchCommand;
 import com.jamesst20.jcommandessentials.Listener.ThePlayerListener;
@@ -120,6 +121,7 @@ public class JCMDEss extends JavaPlugin{
         Methods.regC("workbench", new WorkbenchCommand());
         Methods.regC("flyspeed", new FlySpeedCommand());
         Methods.regC("openinventory", new OpenInventoryCommand());
+        Methods.regC("vanish", new VanishCommand());
     }
     public void setCmdsConfig() {
     	Methods.registerCommandConfigDefaultValue("enablecmd");
@@ -157,5 +159,6 @@ public class JCMDEss extends JavaPlugin{
     	Methods.registerCommandConfigDefaultValue("workbench");
     	Methods.registerCommandConfigDefaultValue("flyspeed");
     	Methods.registerCommandConfigDefaultValue("openinventory");
+    	Methods.registerCommandConfigDefaultValue("vanish");
     }
 }

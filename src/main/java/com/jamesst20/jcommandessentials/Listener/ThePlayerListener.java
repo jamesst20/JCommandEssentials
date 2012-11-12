@@ -1,5 +1,6 @@
 package com.jamesst20.jcommandessentials.Listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,6 +18,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
 import com.jamesst20.jcommandessentials.Commands.GodCommand;
 import com.jamesst20.jcommandessentials.Commands.LockCommand;
+import com.jamesst20.jcommandessentials.Commands.VanishCommand;
 import com.jamesst20.jcommandessentials.Methods.Methods;
 import com.jamesst20.jcommandessentials.Methods.Motd;
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
@@ -31,7 +33,9 @@ public class ThePlayerListener implements Listener {
 		if (Motd.isEnable()) {
 			Motd.sendMotd(player);
 		}
-
+		for (String players:VanishCommand.vanishedPlayers){
+			Methods.hidePlayerFrom(player, Bukkit.getServer().getPlayer(players));
+		}
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
