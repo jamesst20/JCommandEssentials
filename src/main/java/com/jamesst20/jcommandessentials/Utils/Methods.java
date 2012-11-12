@@ -1,4 +1,4 @@
-package com.jamesst20.jcommandessentials.Methods;
+package com.jamesst20.jcommandessentials.Utils;
 
 import java.io.File;
 import java.io.FileReader;
@@ -121,6 +121,9 @@ public class Methods {
 
 	public static String red(String word) {
 		return ChatColor.RED + word + ChatColor.DARK_AQUA + "";
+	}
+	public static String green(String word) {
+		return ChatColor.GREEN + word + ChatColor.DARK_AQUA + "";
 	}
 
 	public static String readFile(String fileName) {

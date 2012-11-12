@@ -1,4 +1,4 @@
-package com.jamesst20.jcommandessentials.Methods;
+package com.jamesst20.jcommandessentials.Utils;
 
 import java.io.File;
 import java.io.FileWriter;
