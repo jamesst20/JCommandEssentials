@@ -77,7 +77,7 @@ commands:
        usage: /servermotd set <motd>, /servermotd enable, /servermotd disable
    sudo:
        description: 'Run a command as another player'
-       usage: /sudo <command [args]>
+       usage: /sudo <player> <command [args]>
    gamemode:
        description: 'Change your or a player gamemode'
        usage: /<gamemode/gm> <creative/survival/adventure> [player] or /<creative/survival/adventure> [player]
