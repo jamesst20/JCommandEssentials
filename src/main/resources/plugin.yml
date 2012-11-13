@@ -128,4 +128,4 @@ commands:
        usage: /vanish [player]
    afk:
        description: 'Tells everyone that you are now back or away'
-       usage: /afk
+       usage: /afk or /afk [enable/disable/delay] [delay]
