@@ -16,22 +16,22 @@ public class ClearInventoryCommand implements CommandExecutor {
 			return true;
 		}
 		if (args.length == 0) {
-			if(Methods.isConsole(cs)){
+			if (Methods.isConsole(cs)) {
 				Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't clean its own inventory.");
 				return true;
 			}
-			Player player = ((Player)cs);
+			Player player = ((Player) cs);
 			player.getInventory().clear();
 			Methods.sendPlayerMessage(cs, "You cleared your inventory.");
 			return true;
 		} else if (args.length == 1) {
 			Player player = Bukkit.getServer().getPlayer(args[0]);
-			if (player != null){
+			if (player != null) {
 				player.getInventory().clear();
 				Methods.sendPlayerMessage(cs, "You cleared the inventory of " + Methods.red(player.getDisplayName()) + ".");
 				Methods.sendPlayerMessage(player, "Your inventory has been cleaned.");
 				return true;
-			}else{
+			} else {
 				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
 				return true;
 			}

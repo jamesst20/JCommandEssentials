@@ -11,20 +11,16 @@ import com.jamesst20.jcommandessentials.Utils.Motd;
 
 public class MotdCommand implements CommandExecutor {
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd,
-			String[] args) {
+	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
 
 		if (args.length == 0) {
 			if (Methods.isConsole(cs)) {
-				Methods.sendPlayerMessage(cs, ChatColor.RED
-						+ "Sorry, only in-game players can use /motd.");
-				Methods.sendPlayerMessage(cs, ChatColor.RED
-						+ "You can only use : /motd set/enable/disable");
+				Methods.sendPlayerMessage(cs, ChatColor.RED + "Sorry, only in-game players can use /motd.");
+				Methods.sendPlayerMessage(cs, ChatColor.RED + "You can only use : /motd set/enable/disable");
 				return true;
 			}
 			if (Motd.isEnable()) {
-				if (!Methods
-						.hasPermissionTell(cs, "JCMDEss.commands.motd.read")) {
+				if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.motd.read")) {
 					return true;
 				}
 				Motd.sendMotd(((Player) cs));
@@ -39,13 +35,11 @@ public class MotdCommand implements CommandExecutor {
 			}
 			if (args[0].equalsIgnoreCase("enable")) {
 				Motd.enableMotd();
-				Methods.sendPlayerMessage(cs,
-						"Motd is now " + Methods.red("enabled") + "!");
+				Methods.sendPlayerMessage(cs, "Motd is now " + Methods.red("enabled") + "!");
 				return true;
 			} else if (args[0].equalsIgnoreCase("disable")) {
 				Motd.disableMotd();
-				Methods.sendPlayerMessage(cs,
-						"Motd is now " + Methods.red("disabled") + "!");
+				Methods.sendPlayerMessage(cs, "Motd is now " + Methods.red("disabled") + "!");
 				return true;
 			} else {
 				return false;

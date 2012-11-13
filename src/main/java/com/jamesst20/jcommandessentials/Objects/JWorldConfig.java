@@ -14,14 +14,15 @@ public class JWorldConfig {
 	World world = null;
 	File worldConfigFile = null;
 	YamlConfiguration worldConfig = null;
-	
-	public JWorldConfig(World world){
+
+	public JWorldConfig(World world) {
 		Config.dirCreate("worlds");
 		worldConfigFile = Config.getConfigFile("worlds/" + world.getName());
 	}
-	
-	public void setSpawn(Location loc){
-		//Bukkit.getServer().getWorld(getName()).setSpawnLocation((int)loc.getX(), (int)loc.getY(), (int)loc.getZ());
+
+	public void setSpawn(Location loc) {
+		// Bukkit.getServer().getWorld(getName()).setSpawnLocation((int)loc.getX(),
+		// (int)loc.getY(), (int)loc.getZ());
 		worldConfig.set("world.spawn.x", loc.getX());
 		worldConfig.set("world.spawn.y", loc.getY());
 		worldConfig.set("world.spawn.z", loc.getZ());
@@ -29,26 +30,28 @@ public class JWorldConfig {
 		worldConfig.set("world.spawn.pitch", loc.getYaw());
 		Config.saveConfig(worldConfigFile, worldConfig);
 	}
-	
-	public Location getSpawn(){
-		Location sLoc = new Location(world, worldConfig.getDouble("spawns." + getName() + ".x"), 
-				worldConfig.getDouble("spawns." + getName() + ".y"), 
-				worldConfig.getDouble("spawns." + getName() + ".z"), 
-				(float)worldConfig.getDouble("spawns." + getName() + ".yaw"), 
-				(float)worldConfig.getDouble("spawns." + getName() + ".pitch"));
+
+	public Location getSpawn() {
+		Location sLoc = new Location(world, worldConfig.getDouble("spawns." + getName() + ".x"),
+				worldConfig.getDouble("spawns." + getName() + ".y"), worldConfig.getDouble("spawns." + getName() + ".z"),
+				(float) worldConfig.getDouble("spawns." + getName() + ".yaw"), (float) worldConfig.getDouble("spawns."
+						+ getName() + ".pitch"));
 		return sLoc;
 	}
-	
-	public World getWorld(){
+
+	public World getWorld() {
 		return world;
 	}
-	public String getName(){
+
+	public String getName() {
 		return world.getName();
 	}
-	public YamlConfiguration getConfig(){
+
+	public YamlConfiguration getConfig() {
 		return worldConfig;
 	}
-	public File getConfigFile(){
+
+	public File getConfigFile() {
 		return worldConfigFile;
 	}
 }

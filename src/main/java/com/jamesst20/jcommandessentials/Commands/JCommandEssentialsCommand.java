@@ -10,31 +10,20 @@ import org.bukkit.command.CommandSender;
 
 public class JCommandEssentialsCommand implements CommandExecutor {
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd,
-			String[] args) {
+	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
 		if (args.length == 0) {
 			if (Methods.isConsole(cs)) {
-				Methods.sendPlayerMessage(cs,
-						"==========================================");
-				Methods.sendPlayerMessage(cs,
-						"=    JCommandEssentials by Jamesst20     =");
-				Methods.sendPlayerMessage(cs,
-						"=     Get Version : /JCMDEss version     =");
-				Methods.sendPlayerMessage(cs,
-						"=    Reloads Config : /JCMDEss reload    =");
-				Methods.sendPlayerMessage(cs,
-						"==========================================");
+				Methods.sendPlayerMessage(cs, "==========================================");
+				Methods.sendPlayerMessage(cs, "=    JCommandEssentials by Jamesst20     =");
+				Methods.sendPlayerMessage(cs, "=     Get Version : /JCMDEss version     =");
+				Methods.sendPlayerMessage(cs, "=    Reloads Config : /JCMDEss reload    =");
+				Methods.sendPlayerMessage(cs, "==========================================");
 			} else {
-				Methods.sendPlayerMessage(cs,
-						"==========================================");
-				Methods.sendPlayerMessage(cs,
-						"=        JCommandEssentials by Jamesst20        =");
-				Methods.sendPlayerMessage(cs,
-						"=          Get Version : /JCMDEss version          =");
-				Methods.sendPlayerMessage(cs,
-						"=         Reloads Config : /JCMDEss reload        =");
-				Methods.sendPlayerMessage(cs,
-						"==========================================");
+				Methods.sendPlayerMessage(cs, "==========================================");
+				Methods.sendPlayerMessage(cs, "=        JCommandEssentials by Jamesst20        =");
+				Methods.sendPlayerMessage(cs, "=          Get Version : /JCMDEss version          =");
+				Methods.sendPlayerMessage(cs, "=         Reloads Config : /JCMDEss reload        =");
+				Methods.sendPlayerMessage(cs, "==========================================");
 			}
 		} else if (args[0].equalsIgnoreCase("reload") && args.length == 1) {
 			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.reload"))
@@ -44,8 +33,7 @@ public class JCommandEssentialsCommand implements CommandExecutor {
 		} else if (args[0].equalsIgnoreCase("version") && args.length == 1) {
 			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.version"))
 				return true;
-			Methods.sendPlayerMessage(cs, "Version : " + ChatColor.RED
-					+ JCMDEss.plugin.getDescription().getVersion());
+			Methods.sendPlayerMessage(cs, "Version : " + ChatColor.RED + JCMDEss.plugin.getDescription().getVersion());
 		} else {
 			return false;
 		}

@@ -14,21 +14,18 @@ import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 
 public class Motd {
 	static JCMDEss plugin = JCMDEss.plugin;
-	
+
 	public static void sendMotd(Player player) {
 		Scanner scanner = new Scanner(Methods.readFile("motd.txt"));
 		while (scanner.hasNextLine()) {
-			player.sendMessage(setMotdFeatures(
-					ChatColor.translateAlternateColorCodes('&',
-							scanner.nextLine()), player));
+			player.sendMessage(setMotdFeatures(ChatColor.translateAlternateColorCodes('&', scanner.nextLine()), player));
 		}
 		scanner.close();
 	}
 
 	public static void setMotd(String msg, CommandSender player) {
 		if (player != null) {
-			Methods.sendPlayerMessage(player,
-					"Please, edit the file using a text editor.");
+			Methods.sendPlayerMessage(player, "Please, edit the file using a text editor.");
 		}
 	}
 
@@ -53,17 +50,21 @@ public class Motd {
 			}
 		}
 	}
-	public static void enableMotd(){
+
+	public static void enableMotd() {
 		plugin.getConfig().set("enable.motd", Boolean.valueOf(true));
 		plugin.saveConfig();
 	}
-	public static void disableMotd(){
+
+	public static void disableMotd() {
 		plugin.getConfig().set("enable.motd", Boolean.valueOf(false));
 		plugin.saveConfig();
 	}
-	public static void motdDisabled(CommandSender cs){
+
+	public static void motdDisabled(CommandSender cs) {
 		Methods.sendPlayerMessage(cs, ChatColor.RED + "Motd is disabled.");
 	}
+
 	public static boolean isEnable() {
 		return JCMDEss.plugin.getConfig().getBoolean("enable.motd", true);
 	}

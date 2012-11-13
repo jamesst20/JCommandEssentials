@@ -11,37 +11,36 @@ import org.bukkit.entity.Player;
 
 public class HealCommand implements CommandExecutor {
 
-
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
-		if (args.length == 0){
-			if(Methods.isConsole(cs)){
+		if (args.length == 0) {
+			if (Methods.isConsole(cs)) {
 				Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't heal itself.");
 				return true;
 			}
-			if (!Methods.hasPermission(cs, "JCMDEss.commands.heal.self")){
+			if (!Methods.hasPermission(cs, "JCMDEss.commands.heal.self")) {
 				return true;
 			}
-			((Player)cs).setFoodLevel(20);
-			((Player)cs).setHealth(20);
+			((Player) cs).setFoodLevel(20);
+			((Player) cs).setHealth(20);
 			Methods.sendPlayerMessage(cs, "You healed yourself!");
 			return true;
-		}else if(args.length == 1){
-			if (!Methods.hasPermission(cs, "JCMDEss.commands.heal.others")){
+		} else if (args.length == 1) {
+			if (!Methods.hasPermission(cs, "JCMDEss.commands.heal.others")) {
 				return true;
 			}
 			Player player = Bukkit.getServer().getPlayer(args[0]);
-			if (player != null){
+			if (player != null) {
 				player.setFoodLevel(20);
 				player.setHealth(20);
 				Methods.sendPlayerMessage(cs, "You healed " + Methods.red(player.getDisplayName()) + ".");
 				Methods.sendPlayerMessage(player, "You have been healed.");
 				return true;
-			}else{
+			} else {
 				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
 				return true;
 			}
-		}else{
+		} else {
 			return false;
 		}
 	}

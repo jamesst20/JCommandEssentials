@@ -16,40 +16,42 @@ public class GodCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
-		if (args.length == 0){
+		if (args.length == 0) {
 			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.god.self")) {
 				return true;
 			}
-			if(Methods.isConsole(cs)){
+			if (Methods.isConsole(cs)) {
 				Methods.sendPlayerMessage(cs, ChatColor.RED + "Console can only enable god mode on other players.");
 				return true;
 			}
-			if (!godPlayers.contains(cs.getName())){
+			if (!godPlayers.contains(cs.getName())) {
 				godPlayers.add(cs.getName());
 				Methods.sendPlayerMessage(cs, "God mode " + Methods.red("enabled") + ".");
-			}else{
+			} else {
 				godPlayers.remove(cs.getName());
 				Methods.sendPlayerMessage(cs, "God mode " + Methods.red("disabled") + ".");
 			}
-		}else if (args.length == 1){
+		} else if (args.length == 1) {
 			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.god.others")) {
 				return true;
 			}
 			Player target = Bukkit.getServer().getPlayer(args[0]);
-			if (target == null){
+			if (target == null) {
 				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
 				return true;
 			}
-			if (!godPlayers.contains(target.getName())){
+			if (!godPlayers.contains(target.getName())) {
 				godPlayers.add(target.getName());
-				Methods.sendPlayerMessage(cs, "You " +  Methods.red("enabled") + " god mode for " + Methods.red(target.getDisplayName()) + ".");
+				Methods.sendPlayerMessage(cs,
+						"You " + Methods.red("enabled") + " god mode for " + Methods.red(target.getDisplayName()) + ".");
 				Methods.sendPlayerMessage(target, "God mode " + Methods.red("enabled") + ".");
-			}else{
+			} else {
 				godPlayers.remove(target.getName());
-				Methods.sendPlayerMessage(cs, "You " +  Methods.red("disabled") + " god mode for " + Methods.red(target.getDisplayName()) + ".");
+				Methods.sendPlayerMessage(cs,
+						"You " + Methods.red("disabled") + " god mode for " + Methods.red(target.getDisplayName()) + ".");
 				Methods.sendPlayerMessage(target, "God mode " + Methods.red("disabled") + ".");
 			}
-		}else{
+		} else {
 			return false;
 		}
 		return true;

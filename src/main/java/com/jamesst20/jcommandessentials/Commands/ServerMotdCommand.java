@@ -7,33 +7,33 @@ import org.bukkit.command.CommandSender;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.ServerMotd;
 
-public class ServerMotdCommand implements CommandExecutor{
-	
-    @Override
-    public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
-    	if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.servermotd")){
-    		return true;
-    	}
-    	if (args.length < 1){
-    		return false;
-    	}
-    	if (args[0].equalsIgnoreCase("set")){
-    		String motd = "";
-    		for (int i = 1; i< args.length; i++){
-    			motd += args[i] + " ";
-    		}
-        	ServerMotd.setServerMotd(motd);
-        	Methods.sendPlayerMessage(cs, "Server motd set!");
-    	}else if(args[0].equalsIgnoreCase("enable")){
-    		ServerMotd.enableServerMotd();
-    		Methods.sendPlayerMessage(cs, "Server list motd is now " + Methods.red("enabled") + "!");
-    	}else if(args[0].equalsIgnoreCase("disable")){
-    		ServerMotd.disableServerMotd();
-    		Methods.sendPlayerMessage(cs, "Server list motd is now " + Methods.red("disabled") + "!");
-    	}else{
-    		return false;
-    	}
-    	return true;
-    }
-    
+public class ServerMotdCommand implements CommandExecutor {
+
+	@Override
+	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+		if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.servermotd")) {
+			return true;
+		}
+		if (args.length < 1) {
+			return false;
+		}
+		if (args[0].equalsIgnoreCase("set")) {
+			String motd = "";
+			for (int i = 1; i < args.length; i++) {
+				motd += args[i] + " ";
+			}
+			ServerMotd.setServerMotd(motd);
+			Methods.sendPlayerMessage(cs, "Server motd set!");
+		} else if (args[0].equalsIgnoreCase("enable")) {
+			ServerMotd.enableServerMotd();
+			Methods.sendPlayerMessage(cs, "Server list motd is now " + Methods.red("enabled") + "!");
+		} else if (args[0].equalsIgnoreCase("disable")) {
+			ServerMotd.disableServerMotd();
+			Methods.sendPlayerMessage(cs, "Server list motd is now " + Methods.red("disabled") + "!");
+		} else {
+			return false;
+		}
+		return true;
+	}
+
 }

@@ -36,7 +36,7 @@ public class ThePlayerListener implements Listener, AfkListener {
 		if (Motd.isEnable()) {
 			Motd.sendMotd(player);
 		}
-		for (String players:VanishCommand.vanishedPlayers){
+		for (String players : VanishCommand.vanishedPlayers) {
 			Methods.hidePlayerFrom(player, Bukkit.getServer().getPlayer(players));
 		}
 		AfkUtils.addPlayer(e.getPlayer());
@@ -44,17 +44,17 @@ public class ThePlayerListener implements Listener, AfkListener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerLogin(PlayerLoginEvent e) {
-		/*This is not OnPlayerJoin!!!*/
+		/* This is not OnPlayerJoin!!! */
 		Player player = e.getPlayer();
 		if (player.isBanned()) {
 			e.setKickMessage(new JPlayerConfig(player).getBanReason());
-		}		
+		}
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		if (GodCommand.godPlayers.contains(e.getPlayer().getName())) {
-			GodCommand.godPlayers.remove(e.getPlayer().getName()); /*Remove God mode on disconnect*/
+			GodCommand.godPlayers.remove(e.getPlayer().getName());
 		}
 		new JPlayerConfig(e.getPlayer()).onDisconnect();// Save Player Config
 		AfkUtils.removePlayer(e.getPlayer());
@@ -62,10 +62,8 @@ public class ThePlayerListener implements Listener, AfkListener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDamage(EntityDamageEvent e) {
-		// God mod.
 		if (e.getEntity() instanceof Player) {
-			if (GodCommand.godPlayers.contains(((Player) e.getEntity())
-					.getName())) {
+			if (GodCommand.godPlayers.contains(((Player) e.getEntity()).getName())) {
 				e.setCancelled(true);
 			}
 		}
@@ -122,15 +120,15 @@ public class ThePlayerListener implements Listener, AfkListener {
 
 	@Override
 	public void playerAfkStateChanged(Player player, boolean afk) {
-		if (afk){
-			Methods.broadcastMessage(Methods.red(player.getDisplayName())+ " is now " + Methods.red("afk") + "!");
-		}else{
-			Methods.broadcastMessage(Methods.red(player.getDisplayName())+ " is now " + Methods.green("back") + "!");
-		}		
+		if (afk) {
+			Methods.broadcastMessage(Methods.red(player.getDisplayName()) + " is now " + Methods.red("afk") + "!");
+		} else {
+			Methods.broadcastMessage(Methods.red(player.getDisplayName()) + " is now " + Methods.green("back") + "!");
+		}
 	}
-	
-	@EventHandler(priority=EventPriority.NORMAL)
-	  public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e){
+
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
 		
-	  }
+	}
 }

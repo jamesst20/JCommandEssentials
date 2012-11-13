@@ -13,26 +13,26 @@ import org.bukkit.entity.Player;
 import com.jamesst20.jcommandessentials.Utils.Config;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 
-public class SetSpawnCommand implements CommandExecutor{
-	
-    @Override
-    public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
-    	if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.setspawn")){
-    		return true;
-    	}
-    	if (Methods.isConsole(cs)){
-    		Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't use /setspawn.");
-    		return true;
-    	}
-    	if (args.length == 0){
-    		setDefaultSpawn(((Player)cs).getLocation());
-    		Methods.sendPlayerMessage(cs, "Default spawn set to your location.");
-    		return true;
-    	}else{
-    		return false;
-    	}
-    }
-    
+public class SetSpawnCommand implements CommandExecutor {
+
+	@Override
+	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+		if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.setspawn")) {
+			return true;
+		}
+		if (Methods.isConsole(cs)) {
+			Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't use /setspawn.");
+			return true;
+		}
+		if (args.length == 0) {
+			setDefaultSpawn(((Player) cs).getLocation());
+			Methods.sendPlayerMessage(cs, "Default spawn set to your location.");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	private void setDefaultSpawn(Location loc) {
 		File spawnConfigFile = Config.getConfigFile("spawns.yml");
 		YamlConfiguration spawnConfig = Config.getCustomConfig(spawnConfigFile);

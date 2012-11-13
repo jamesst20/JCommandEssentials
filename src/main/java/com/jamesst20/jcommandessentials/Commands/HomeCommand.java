@@ -11,11 +11,9 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class HomeCommand implements CommandExecutor {
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd,
-			String[] args) {
+	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
 		if (Methods.isConsole(cs)) {
-			Methods.sendPlayerMessage(cs, ChatColor.RED
-					+ "The console can't tp home.");
+			Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't tp home.");
 			return true;
 		}
 		if (args.length == 0) {
@@ -36,11 +34,9 @@ public class HomeCommand implements CommandExecutor {
 			JPlayerConfig playerConf = new JPlayerConfig((Player) cs);
 			if (playerConf.getHome(args[0]) != null) {
 				((Player) cs).teleport(playerConf.getHome(args[0]));
-				Methods.sendPlayerMessage(cs,
-						"You teleported to " + Methods.red(args[0]) + ".");
+				Methods.sendPlayerMessage(cs, "You teleported to " + Methods.red(args[0]) + ".");
 			} else {
-				Methods.sendPlayerMessage(cs,
-						"Your home " + Methods.red(args[0]) + " is not set.");
+				Methods.sendPlayerMessage(cs, "Your home " + Methods.red(args[0]) + " is not set.");
 			}
 		} else {
 

@@ -7,7 +7,6 @@ import org.bukkit.event.server.ServerListPingEvent;
 
 import com.jamesst20.jcommandessentials.Utils.ServerMotd;
 
-
 public class ServerListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

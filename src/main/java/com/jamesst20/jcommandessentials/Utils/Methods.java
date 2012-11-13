@@ -33,8 +33,7 @@ public class Methods {
 	/* This doesn't override anything! */
 	public static void registerCommandConfigDefaultValue(String command) {
 		if (plugin.getConfig().get("commands." + command) == null) {
-			plugin.getConfig()
-					.set("commands." + command, Boolean.valueOf(true));
+			plugin.getConfig().set("commands." + command, Boolean.valueOf(true));
 			plugin.saveConfig();
 		}
 	}
@@ -67,11 +66,9 @@ public class Methods {
 
 	public static void sendPlayerMessage(CommandSender p, String message) {
 		if (isConsole(p)) {
-			Bukkit.getConsoleSender().sendMessage(
-					prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC + message);
+			Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC + message);
 		} else {
-			p.sendMessage(prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC
-					+ message);
+			p.sendMessage(prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC + message);
 		}
 	}
 
@@ -104,24 +101,22 @@ public class Methods {
 		if (isConsole(cs)) {
 			log(prefix + "WTF, Console has no permission.");
 		} else {
-			cs.sendMessage(ChatColor.RED
-					+ "You do not have the permission to run this command.");
+			cs.sendMessage(ChatColor.RED + "You do not have the permission to run this command.");
 		}
 	}
 
 	public static void noPermissions(Player p) {
-		p.sendMessage(ChatColor.RED
-				+ "You do not have the permission to run this command.");
+		p.sendMessage(ChatColor.RED + "You do not have the permission to run this command.");
 	}
 
 	public static void broadcastMessage(String message) {
-		Bukkit.getServer().broadcastMessage(
-				ChatColor.DARK_AQUA + "" + ChatColor.ITALIC + message);
+		Bukkit.getServer().broadcastMessage(ChatColor.DARK_AQUA + "" + ChatColor.ITALIC + message);
 	}
 
 	public static String red(String word) {
 		return ChatColor.RED + word + ChatColor.DARK_AQUA + "";
 	}
+
 	public static String green(String word) {
 		return ChatColor.GREEN + word + ChatColor.DARK_AQUA + "";
 	}
@@ -172,11 +167,13 @@ public class Methods {
 			}
 		}
 	}
+
 	public static void hidePlayerFrom(Player p, Player pToHide) {
-		if (p != null && pToHide != null){
+		if (p != null && pToHide != null) {
 			p.hidePlayer(pToHide);
 		}
 	}
+
 	public static void showPlayer(Player p) {
 		for (Player onlinePlayers : Bukkit.getServer().getOnlinePlayers()) {
 			if (!hasPermission(onlinePlayers, "JCMDEss.vanish.exempt")) {
@@ -186,10 +183,9 @@ public class Methods {
 	}
 
 	public static void playerNotFound(CommandSender cs, String player) {
-		sendPlayerMessage(cs, "The player " + red(player)
-				+ " couldn't be found.");
+		sendPlayerMessage(cs, "The player " + red(player) + " couldn't be found.");
 	}
 
-	public static String prefix = ChatColor.WHITE + "[" + ChatColor.GREEN
-			+ "JCMD" + ChatColor.DARK_GREEN + "Ess" + ChatColor.WHITE + "] ";
+	public static String prefix = ChatColor.WHITE + "[" + ChatColor.GREEN + "JCMD" + ChatColor.DARK_GREEN + "Ess"
+			+ ChatColor.WHITE + "] ";
 }

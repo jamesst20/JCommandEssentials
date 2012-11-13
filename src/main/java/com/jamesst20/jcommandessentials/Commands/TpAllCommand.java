@@ -13,20 +13,20 @@ public class TpAllCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
-		if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpall")){
+		if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpall")) {
 			return true;
 		}
-		if (args.length != 0){
+		if (args.length != 0) {
 			return false;
 		}
-		if (Methods.isConsole(cs)){
+		if (Methods.isConsole(cs)) {
 			Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't tp player to itself.");
 			return true;
 		}
-		Player me = ((Player)cs);
-		for (Player player:Bukkit.getServer().getOnlinePlayers()){
+		Player me = ((Player) cs);
+		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 			player.teleport(me);
-			Methods.sendPlayerMessage(player, "You have been teleported to " + Methods.red(me.getDisplayName())+ ".");
+			Methods.sendPlayerMessage(player, "You have been teleported to " + Methods.red(me.getDisplayName()) + ".");
 		}
 		return true;
 	}

@@ -14,10 +14,9 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 public class TpcCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd,
-			String[] args) {
+	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
 		if (args.length == 3) {
-			if(Methods.isConsole(cs)){
+			if (Methods.isConsole(cs)) {
 				Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can only tp other player.");
 				return true;
 			}
@@ -25,24 +24,16 @@ public class TpcCommand implements CommandExecutor {
 				return true;
 			}
 			Player player = ((Player) cs);
-			Location loc = toLocation(player.getWorld(), args[0], args[1],
-					args[2]);
+			Location loc = toLocation(player.getWorld(), args[0], args[1], args[2]);
 			if (loc != null) {
 				player.teleport(loc);
 				Methods.sendPlayerMessage(
 						cs,
-						"You teleported to ("
-								+ Methods.red(String.valueOf((int) loc
-										.getX()))
-								+ ", "
-								+ Methods.red(String.valueOf((int) loc
-										.getY()))
-								+ ", "
-								+ Methods.red(String.valueOf((int) loc
-										.getZ())) + ").");
+						"You teleported to (" + Methods.red(String.valueOf((int) loc.getX())) + ", "
+								+ Methods.red(String.valueOf((int) loc.getY())) + ", "
+								+ Methods.red(String.valueOf((int) loc.getZ())) + ").");
 			} else {
-				Methods.sendPlayerMessage(cs, ChatColor.RED
-						+ "Invalid location.");
+				Methods.sendPlayerMessage(cs, ChatColor.RED + "Invalid location.");
 			}
 		} else if (args.length == 4) {
 			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpc.others")) {
@@ -50,42 +41,25 @@ public class TpcCommand implements CommandExecutor {
 			}
 			Player player = Bukkit.getServer().getPlayer(args[0]);
 			if (player != null) {
-				Location loc = toLocation(player.getWorld(), args[1], args[2],
-						args[3]);
+				Location loc = toLocation(player.getWorld(), args[1], args[2], args[3]);
 				if (loc != null) {
 					player.teleport(loc);
 					Methods.sendPlayerMessage(
 							cs,
-							"You teleported "
-									+ Methods.red(player.getDisplayName())
-									+ " to ("
-									+ Methods.red(String.valueOf((int) loc
-											.getX()))
-									+ ", "
-									+ Methods.red(String.valueOf((int) loc
-											.getY()))
-									+ ", "
-									+ Methods.red(String.valueOf((int) loc
-											.getZ())) + ").");
+							"You teleported " + Methods.red(player.getDisplayName()) + " to ("
+									+ Methods.red(String.valueOf((int) loc.getX())) + ", "
+									+ Methods.red(String.valueOf((int) loc.getY())) + ", "
+									+ Methods.red(String.valueOf((int) loc.getZ())) + ").");
 					Methods.sendPlayerMessage(
 							player,
-							"You have been teleported to ("
-									+ Methods.red(String.valueOf((int) loc
-											.getX()))
-									+ ", "
-									+ Methods.red(String.valueOf((int) loc
-											.getY()))
-									+ ", "
-									+ Methods.red(String.valueOf((int) loc
-											.getZ())) + ").");
+							"You have been teleported to (" + Methods.red(String.valueOf((int) loc.getX())) + ", "
+									+ Methods.red(String.valueOf((int) loc.getY())) + ", "
+									+ Methods.red(String.valueOf((int) loc.getZ())) + ").");
 				} else {
-					Methods.sendPlayerMessage(cs, ChatColor.RED
-							+ "Invalid location.");
+					Methods.sendPlayerMessage(cs, ChatColor.RED + "Invalid location.");
 				}
 			} else {
-				Methods.sendPlayerMessage(cs,
-						"The player " + Methods.red(args[0])
-								+ " couldn't be found.");
+				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
 				return true;
 			}
 		} else {

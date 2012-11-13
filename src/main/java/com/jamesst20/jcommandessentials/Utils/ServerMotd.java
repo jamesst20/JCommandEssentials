@@ -5,42 +5,48 @@ import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 public class ServerMotd {
 	static JCMDEss plugin = JCMDEss.plugin;
 	private static String defaultMotd = "&f[&aJCMD&2Ess&f] &cMotd not set!";
-	
-	public static void setServerMotd(String message){
+
+	public static void setServerMotd(String message) {
 		plugin.getConfig().set("server.motd", message);
 		plugin.saveConfig();
 	}
-	public static String getServerMotd(){
+
+	public static String getServerMotd() {
 		String motd = plugin.getConfig().getString("server.motd");
-		if (motd != null){
+		if (motd != null) {
 			return coloring(plugin.getConfig().getString("server.motd"));
-		}else{
+		} else {
 			return "";
 		}
 	}
-	public static void disableServerMotd(){
+
+	public static void disableServerMotd() {
 		plugin.getConfig().set("enable.servermotd", Boolean.valueOf(false));
 		plugin.saveConfig();
 	}
-	public static void enableServerMotd(){
+
+	public static void enableServerMotd() {
 		plugin.getConfig().set("enable.servermotd", Boolean.valueOf(true));
 		plugin.saveConfig();
 	}
-	public static void setDefaultConfig(){
-		if (plugin.getConfig().get("enable.servermotd") == null){
+
+	public static void setDefaultConfig() {
+		if (plugin.getConfig().get("enable.servermotd") == null) {
 			plugin.getConfig().set("enable.servermotd", Boolean.valueOf(true));
 		}
-		if (plugin.getConfig().get("server.motd") == null){
+		if (plugin.getConfig().get("server.motd") == null) {
 			plugin.getConfig().set("server.motd", defaultMotd);
 		}
 		plugin.saveConfig();
 	}
-	public static boolean isEnabled(){
+
+	public static boolean isEnabled() {
 		return plugin.getConfig().getBoolean("enable.servermotd");
 	}
-	private static String coloring(String string)
-	  {
-	    if (string == null) return null;
-	    return string.replaceAll("&([0-9a-fA-Fk-oK-OrR])", "\u00A7$1");
-	  }
+
+	private static String coloring(String string) {
+		if (string == null)
+			return null;
+		return string.replaceAll("&([0-9a-fA-Fk-oK-OrR])", "\u00A7$1");
+	}
 }

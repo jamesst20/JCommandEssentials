@@ -12,11 +12,9 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 public class TpDenyCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd,
-			String[] args) {
+	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
 		if (Methods.isConsole(cs)) {
-			Methods.sendPlayerMessage(cs, ChatColor.RED
-					+ "Console can't deny a tp.");
+			Methods.sendPlayerMessage(cs, ChatColor.RED + "Console can't deny a tp.");
 			return true;
 		} else if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpa.deny")) {
 			return true;
@@ -24,21 +22,15 @@ public class TpDenyCommand implements CommandExecutor {
 			Player to = ((Player) cs);
 			Player from = null;
 			if (TpaCommand.tpaPlayers.containsKey(to.getName())) {
-				from = Bukkit.getServer().getPlayer(
-						TpaCommand.tpaPlayers.get(to.getName()).toString());
+				from = Bukkit.getServer().getPlayer(TpaCommand.tpaPlayers.get(to.getName()).toString());
 			}
 			if (from != null) {
-				Methods.sendPlayerMessage(from,
-						Methods.red(to.getDisplayName())
-								+ " has denied your teleport request.");
-				Methods.sendPlayerMessage(to,
-						"You denied " + Methods.red(from.getDisplayName())
-								+ "'s teleport request.");
+				Methods.sendPlayerMessage(from, Methods.red(to.getDisplayName()) + " has denied your teleport request.");
+				Methods.sendPlayerMessage(to, "You denied " + Methods.red(from.getDisplayName()) + "'s teleport request.");
 				TpaCommand.tpaPlayers.remove(to.getName());
 				return true;
 			} else {
-				Methods.sendPlayerMessage(to, ChatColor.RED
-						+ "You have no pending teleport request.");
+				Methods.sendPlayerMessage(to, ChatColor.RED + "You have no pending teleport request.");
 				return true;
 			}
 		} else {

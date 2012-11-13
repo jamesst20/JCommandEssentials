@@ -18,8 +18,7 @@ public class JOfflinePlayerConfig {
 		// We do not make files if the player isn't found. We leave stuff to
 		// null
 		if (playersDir.exists()) {
-			playerConfigFile = Config.getConfigFile("players/"
-					+ player.getName());
+			playerConfigFile = Config.getConfigFile("players/" + player.getName());
 			playerConfig = Config.getCustomConfig(playerConfigFile);
 		}
 	}
@@ -39,10 +38,10 @@ public class JOfflinePlayerConfig {
 	public String getBanReason() {
 		if (playerConfig != null) {
 			return playerConfig.getString("ban.reason", "You are banned.");
-		}else{
+		} else {
 			return null;
 		}
-		
+
 	}
 
 	public void removeBanReason() {

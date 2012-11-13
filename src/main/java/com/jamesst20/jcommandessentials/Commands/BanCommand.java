@@ -26,28 +26,18 @@ public class BanCommand implements CommandExecutor {
 				JPlayerConfig jConfig = new JPlayerConfig(player);
 				jConfig.setBanReason("");
 				player.kickPlayer(jConfig.getBanReason());
-				Methods.sendPlayerMessage(cs,
-						"You banned " + Methods.red(player.getDisplayName())
-								+ ".");
-				Methods.broadcastMessage(Methods.prefix
-						+ ChatColor.DARK_AQUA
-						+ ChatColor.ITALIC
-						+ Methods.red(player.getDisplayName()
-								+ " have been banned."));
+				Methods.sendPlayerMessage(cs, "You banned " + Methods.red(player.getDisplayName()) + ".");
+				Methods.broadcastMessage(Methods.prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC
+						+ Methods.red(player.getDisplayName() + " have been banned."));
 				return true;
 			} else {
 				OfflinePlayer oPlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
 				oPlayer.setBanned(true);
 				JOfflinePlayerConfig jConfig = new JOfflinePlayerConfig(oPlayer);
 				jConfig.setBanReason("");
-				Methods.sendPlayerMessage(cs,
-						"You banned an offline player: " + Methods.red(oPlayer.getName())
-								+ ".");
-				Methods.broadcastMessage(Methods.prefix
-						+ ChatColor.DARK_AQUA
-						+ ChatColor.ITALIC
-						+ Methods.red(oPlayer.getName()
-								+ " have been banned."));
+				Methods.sendPlayerMessage(cs, "You banned an offline player: " + Methods.red(oPlayer.getName()) + ".");
+				Methods.broadcastMessage(Methods.prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC
+						+ Methods.red(oPlayer.getName() + " have been banned."));
 				return true;
 			}
 		} else if (args.length > 1) {
@@ -63,14 +53,9 @@ public class BanCommand implements CommandExecutor {
 				jConfig.setBanReason(reason);
 				player.kickPlayer(reason);
 				Methods.sendPlayerMessage(cs,
-						"You banned " + Methods.red(player.getDisplayName())
-								+ ". Reason: " + Methods.red(reason));
-				Methods.broadcastMessage(Methods.prefix
-						+ ChatColor.DARK_AQUA
-						+ ChatColor.ITALIC
-						+ Methods.red(player.getDisplayName()
-								+ " have been banned. Reason: "
-								+ Methods.red(reason)));
+						"You banned " + Methods.red(player.getDisplayName()) + ". Reason: " + Methods.red(reason));
+				Methods.broadcastMessage(Methods.prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC
+						+ Methods.red(player.getDisplayName() + " have been banned. Reason: " + Methods.red(reason)));
 				return true;
 			} else {
 				String reason = "";
@@ -82,15 +67,10 @@ public class BanCommand implements CommandExecutor {
 				oPlayer.setBanned(true);
 				JOfflinePlayerConfig jConfig = new JOfflinePlayerConfig(oPlayer);
 				jConfig.setBanReason(reason);
-				Methods.sendPlayerMessage(cs,
-						"You banned an offline player: " + Methods.red(oPlayer.getName())
-								+ " Reason: " + Methods.red(reason));
-				Methods.broadcastMessage(Methods.prefix
-						+ ChatColor.DARK_AQUA
-						+ ChatColor.ITALIC
-						+ Methods.red(oPlayer.getName()
-								+ " have been banned. Reason: "
-								+ Methods.red(reason)));
+				Methods.sendPlayerMessage(cs, "You banned an offline player: " + Methods.red(oPlayer.getName())
+						+ " Reason: " + Methods.red(reason));
+				Methods.broadcastMessage(Methods.prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC
+						+ Methods.red(oPlayer.getName() + " have been banned. Reason: " + Methods.red(reason)));
 				return true;
 			}
 		} else {

@@ -40,8 +40,7 @@ public class JPlayerConfig {
 		Date date = new Date();
 		Timestamp time = new Timestamp(date.getTime());
 		playerConfig.set("timestamps.login", time.toString());
-		playerConfig.set("ipAddress", player.getAddress().getAddress()
-				.toString().replaceAll("/", ""));
+		playerConfig.set("ipAddress", player.getAddress().getAddress().toString().replaceAll("/", ""));
 		Config.saveConfig(playerConfigFile, playerConfig);
 	}
 
@@ -63,57 +62,50 @@ public class JPlayerConfig {
 	}
 
 	public void setHome(String name) {
-		playerConfig.set("homes." + name + ".world", player.getWorld()
-				.getName());
+		playerConfig.set("homes." + name + ".world", player.getWorld().getName());
 		playerConfig.set("homes." + name + ".x", player.getLocation().getX());
 		playerConfig.set("homes." + name + ".y", player.getLocation().getY());
 		playerConfig.set("homes." + name + ".z", player.getLocation().getZ());
-		playerConfig.set("homes." + name + ".yaw", player.getLocation()
-				.getYaw());
-		playerConfig.set("homes." + name + ".pitch", player.getLocation()
-				.getPitch());
+		playerConfig.set("homes." + name + ".yaw", player.getLocation().getYaw());
+		playerConfig.set("homes." + name + ".pitch", player.getLocation().getPitch());
 		Config.saveConfig(playerConfigFile, playerConfig);
 	}
 
 	public Location getHome() {
-		if (playerConfig.get("homes.home") == null){
+		if (playerConfig.get("homes.home") == null) {
 			return null;
 		}
-		return new Location(Bukkit.getServer().getWorld(
-				playerConfig.getString("homes.home.world")),
-				playerConfig.getDouble("homes.home.x"),
-				playerConfig.getDouble("homes.home.y"),
-				playerConfig.getDouble("homes.home.z"),
-				(float) playerConfig.getDouble("homes.home.yaw"),
+		return new Location(Bukkit.getServer().getWorld(playerConfig.getString("homes.home.world")),
+				playerConfig.getDouble("homes.home.x"), playerConfig.getDouble("homes.home.y"),
+				playerConfig.getDouble("homes.home.z"), (float) playerConfig.getDouble("homes.home.yaw"),
 				(float) playerConfig.getDouble("homes.home.pitch"));
 	}
 
 	public Location getHome(String name) {
-		if (playerConfig.get("homes." + name) == null){
+		if (playerConfig.get("homes." + name) == null) {
 			return null;
 		}
-		return new Location(Bukkit.getServer().getWorld(
-				playerConfig.getString("homes." + name + ".world")),
-				playerConfig.getDouble("homes." + name + ".x"),
-				playerConfig.getDouble("homes." + name + ".y"),
-				playerConfig.getDouble("homes." + name + ".z"),
-				(float) playerConfig.getDouble("homes." + name + ".yaw"),
+		return new Location(Bukkit.getServer().getWorld(playerConfig.getString("homes." + name + ".world")),
+				playerConfig.getDouble("homes." + name + ".x"), playerConfig.getDouble("homes." + name + ".y"),
+				playerConfig.getDouble("homes." + name + ".z"), (float) playerConfig.getDouble("homes." + name + ".yaw"),
 				(float) playerConfig.getDouble("homes." + name + ".pitch"));
 	}
-	
-	public void setBanReason(String reason){
-		if (reason.isEmpty()){
+
+	public void setBanReason(String reason) {
+		if (reason.isEmpty()) {
 			playerConfig.set("ban.reason", "You are banned.");
 			Config.saveConfig(playerConfigFile, playerConfig);
-		}else{
+		} else {
 			playerConfig.set("ban.reason", "Banned: " + reason);
 			Config.saveConfig(playerConfigFile, playerConfig);
 		}
 	}
-	public String getBanReason(){
+
+	public String getBanReason() {
 		return playerConfig.getString("ban.reason", "You are banned.");
 	}
-	public void removeBanReason(){
+
+	public void removeBanReason() {
 		playerConfig.set("ban", null);
 		Config.saveConfig(playerConfigFile, playerConfig);
 	}
