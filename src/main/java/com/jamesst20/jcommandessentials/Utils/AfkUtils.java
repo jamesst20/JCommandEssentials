@@ -29,7 +29,7 @@ public class AfkUtils {
 								if (!afkList.contains(players.getName())) {
 									if (idleTimeList.containsKey(players.getName())) {
 										long idleTimeSec = (System.currentTimeMillis() - idleTimeList.get(players.getName())) / 1000L;
-										if (idleTimeSec > 3L){
+										if (idleTimeSec > getDelay()){
 											setPlayerState(players, true);
 										}
 									} else {
@@ -38,7 +38,7 @@ public class AfkUtils {
 								}
 							}
 						}
-					}, 20L, 100L);// before start, repeat every x.
+					}, 20L, 100L);
 		}
 	}
 	
@@ -47,6 +47,20 @@ public class AfkUtils {
 			JCMDEss.plugin.getServer().getScheduler().cancelTask(taskID);
 			taskID = 0;
 		}
+	}
+	
+	private static long getDelay(){
+		if (JCMDEss.plugin.getConfig().getLong("afk.timeout") != 0){
+			return JCMDEss.plugin.getConfig().getLong("afk.timeout", 60L);
+		}else{
+			JCMDEss.plugin.getConfig().set("afk.timeout", 60L);
+			JCMDEss.plugin.saveConfig();
+			return 60L;
+		}
+	}
+	public static void setDelay(long delay){
+		JCMDEss.plugin.getConfig().set("afk.timeout", delay);
+		JCMDEss.plugin.saveConfig();
 	}
 	
 	public static void addPlayer(Player player) {
