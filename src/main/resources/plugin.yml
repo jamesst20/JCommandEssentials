@@ -133,3 +133,7 @@ commands:
        description: 'Kill all mobs on the server'
        usage: /killmobs
        aliases: [killmob, killallmob, killallmobs]
+   spawnmob:
+        description: 'Spawn mobs'
+        usage: /spawnmob <mob> <quantity>
+        aliases : spawnmobs

@@ -27,6 +27,7 @@ import com.jamesst20.jcommandessentials.Commands.SetHomeCommand;
 import com.jamesst20.jcommandessentials.Commands.ServerMotdCommand;
 import com.jamesst20.jcommandessentials.Commands.SetSpawnCommand;
 import com.jamesst20.jcommandessentials.Commands.SpawnCommand;
+import com.jamesst20.jcommandessentials.Commands.SpawnMobCommand;
 import com.jamesst20.jcommandessentials.Commands.StaffCommand;
 import com.jamesst20.jcommandessentials.Commands.SudoCommand;
 import com.jamesst20.jcommandessentials.Commands.TimeCommand;
@@ -132,6 +133,7 @@ public class JCMDEss extends JavaPlugin {
 		Methods.regC("vanish", new VanishCommand());
 		Methods.regC("afk", new AfkCommand());
 		Methods.regC("killmobs", new KillMobsCommand());
+		Methods.regC("spawnmob", new SpawnMobCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -173,5 +175,6 @@ public class JCMDEss extends JavaPlugin {
 		Methods.registerCommandConfigDefaultValue("vanish");
 		Methods.registerCommandConfigDefaultValue("afk");
 		Methods.registerCommandConfigDefaultValue("killmobs");
+		Methods.registerCommandConfigDefaultValue("spawnmob");
 	}
 }
