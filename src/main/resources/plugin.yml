@@ -129,3 +129,7 @@ commands:
    afk:
        description: 'Tells everyone that you are now back or away'
        usage: /afk or /afk [enable/disable/delay] [delay]
+   killmobs:
+       description: 'Kill all mobs on the server'
+       usage: /killmobs
+       aliases: [killmob, killallmob, killallmobs]

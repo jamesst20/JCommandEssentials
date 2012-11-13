@@ -18,6 +18,7 @@ import com.jamesst20.jcommandessentials.Commands.HomeCommand;
 import com.jamesst20.jcommandessentials.Commands.JCommandEssentialsCommand;
 import com.jamesst20.jcommandessentials.Commands.KickCommand;
 import com.jamesst20.jcommandessentials.Commands.KillCommand;
+import com.jamesst20.jcommandessentials.Commands.KillMobsCommand;
 import com.jamesst20.jcommandessentials.Commands.LockCommand;
 import com.jamesst20.jcommandessentials.Commands.MotdCommand;
 import com.jamesst20.jcommandessentials.Commands.MsgCommand;
@@ -130,6 +131,7 @@ public class JCMDEss extends JavaPlugin {
 		Methods.regC("openinventory", new OpenInventoryCommand());
 		Methods.regC("vanish", new VanishCommand());
 		Methods.regC("afk", new AfkCommand());
+		Methods.regC("killmobs", new KillMobsCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -170,5 +172,6 @@ public class JCMDEss extends JavaPlugin {
 		Methods.registerCommandConfigDefaultValue("openinventory");
 		Methods.registerCommandConfigDefaultValue("vanish");
 		Methods.registerCommandConfigDefaultValue("afk");
+		Methods.registerCommandConfigDefaultValue("killmobs");
 	}
 }
