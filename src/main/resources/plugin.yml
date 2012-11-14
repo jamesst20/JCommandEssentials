@@ -150,3 +150,7 @@ commands:
         description: 'Get your or a player IP'
         usage: /ip [player]
         aliases: [getip, ipaddress, getipaddress]
+   mute:
+        description: 'Mute a player'
+        usage: /mute <player>
+        aliases: unmute

@@ -24,6 +24,7 @@ import com.jamesst20.jcommandessentials.Commands.KillMobsCommand;
 import com.jamesst20.jcommandessentials.Commands.LockCommand;
 import com.jamesst20.jcommandessentials.Commands.MotdCommand;
 import com.jamesst20.jcommandessentials.Commands.MsgCommand;
+import com.jamesst20.jcommandessentials.Commands.MuteCommand;
 import com.jamesst20.jcommandessentials.Commands.OpenInventoryCommand;
 import com.jamesst20.jcommandessentials.Commands.SetHomeCommand;
 import com.jamesst20.jcommandessentials.Commands.ServerMotdCommand;
@@ -138,6 +139,7 @@ public class JCMDEss extends JavaPlugin {
 		Methods.regC("spawnmob", new SpawnMobCommand());
                 Methods.regC("handicap", new HandicapCommand());
                 Methods.regC("ip", new IpCommand());
+                Methods.regC("mute", new MuteCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -182,5 +184,6 @@ public class JCMDEss extends JavaPlugin {
 		Methods.registerCommandConfigDefaultValue("spawnmob");
                 Methods.registerCommandConfigDefaultValue("handicap");
                 Methods.registerCommandConfigDefaultValue("ip");
+                Methods.registerCommandConfigDefaultValue("mute");
 	}
 }

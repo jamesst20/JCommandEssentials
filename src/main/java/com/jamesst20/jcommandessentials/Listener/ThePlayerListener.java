@@ -20,6 +20,7 @@ import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
 import com.jamesst20.jcommandessentials.Commands.GodCommand;
 import com.jamesst20.jcommandessentials.Commands.HandicapCommand;
 import com.jamesst20.jcommandessentials.Commands.LockCommand;
+import com.jamesst20.jcommandessentials.Commands.MuteCommand;
 import com.jamesst20.jcommandessentials.Commands.VanishCommand;
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils;
@@ -88,6 +89,12 @@ public class ThePlayerListener implements Listener, AfkListener {
 				e.setCancelled(true);
 			}
 		}
+                if (MuteCommand.mutedPlayersList.contains(e.getPlayer().getName())){
+                    if (!Methods.hasPermission(e.getPlayer(), "JCMDEss.commands.mute.exempt")){
+                        Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "You are muted!");
+                        e.setCancelled(true);
+                    }
+                }
 		AfkUtils.updatePlayerActivity(e.getPlayer());
 	}
 
