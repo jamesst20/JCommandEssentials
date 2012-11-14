@@ -11,7 +11,7 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 public class SudoCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.sudo")) {
 			return true;
 		}

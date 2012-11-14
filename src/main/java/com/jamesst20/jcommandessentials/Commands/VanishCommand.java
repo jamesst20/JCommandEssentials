@@ -15,7 +15,7 @@ public class VanishCommand implements CommandExecutor {
 	public static HashSet<String> vanishedPlayers = new HashSet<String>();
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (args.length == 0) {
 			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.vanish.self")) {
 				return true;

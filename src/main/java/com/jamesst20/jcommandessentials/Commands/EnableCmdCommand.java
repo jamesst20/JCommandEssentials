@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 
 public class EnableCmdCommand implements CommandExecutor {
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.EnableCMD")) {
 			return true;
 		}

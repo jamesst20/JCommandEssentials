@@ -17,7 +17,7 @@ public class TpaCommand implements CommandExecutor {
 	public static Map<String, String> tpaPlayers = new HashMap<String, String>();
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (Methods.isConsole(cs)) {
 			Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't tpa.");
 			return true;

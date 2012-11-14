@@ -11,7 +11,7 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class HomeCommand implements CommandExecutor {
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (Methods.isConsole(cs)) {
 			Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't tp home.");
 			return true;

@@ -11,7 +11,7 @@ public class LockCommand implements CommandExecutor {
 	public static boolean serverLocked = false;
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.lock")) {
 			return true;
 		}

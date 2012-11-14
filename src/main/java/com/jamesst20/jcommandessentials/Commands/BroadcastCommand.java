@@ -9,7 +9,7 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 public class BroadcastCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.broadcast")) {
 			return true;
 		} else if (args.length < 1) {

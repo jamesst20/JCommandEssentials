@@ -18,7 +18,7 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 public class SpawnCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (args.length == 0) {
 			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.spawn.self")) {
 				return true;

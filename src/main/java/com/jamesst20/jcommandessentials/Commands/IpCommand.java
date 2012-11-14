@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 public class IpCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+    public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
         if(args.length == 0){
             if (Methods.isConsole(cs)){
                 Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't check its own ip.");

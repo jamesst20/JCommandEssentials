@@ -14,7 +14,7 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 public class TpcCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (args.length == 3) {
 			if (Methods.isConsole(cs)) {
 				Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can only tp other player.");

@@ -11,7 +11,7 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class FlySpeedCommand implements CommandExecutor {
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmnd, String cmd, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
 		if (args.length < 1 || args.length > 3) {
 			return false;
 		}
