@@ -48,7 +48,7 @@ public class TpaCommand implements CommandExecutor {
 			}, 35L * 20L);
 			return true;
 		} else {
-			Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " is not found.");
+			Methods.playerNotFound(cs, args[0]);
 			return true;
 		}
 	}

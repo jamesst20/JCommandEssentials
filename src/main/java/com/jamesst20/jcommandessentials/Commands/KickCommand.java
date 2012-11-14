@@ -23,7 +23,7 @@ public class KickCommand implements CommandExecutor {
 				Methods.broadcastMessage(Methods.prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC
 						+ Methods.red(player.getDisplayName() + " have been kicked."));
 			} else {
-				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+				Methods.playerNotFound(cs, args[0]);
 				return true;
 			}
 		} else if (args.length > 1) {
@@ -40,7 +40,7 @@ public class KickCommand implements CommandExecutor {
 				Methods.broadcastMessage(Methods.prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC
 						+ Methods.red(player.getDisplayName() + " have been kicked. Reason: " + Methods.red(reason)));
 			} else {
-				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+				Methods.playerNotFound(cs, args[0]);
 				return true;
 			}
 		} else {

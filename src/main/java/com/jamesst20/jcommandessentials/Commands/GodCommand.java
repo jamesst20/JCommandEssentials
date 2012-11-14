@@ -37,7 +37,7 @@ public class GodCommand implements CommandExecutor {
 			}
 			Player target = Bukkit.getServer().getPlayer(args[0]);
 			if (target == null) {
-				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+				Methods.playerNotFound(cs, args[0]);
 				return true;
 			}
 			if (!godPlayers.contains(target.getName())) {

@@ -32,7 +32,7 @@ public class ClearInventoryCommand implements CommandExecutor {
 				Methods.sendPlayerMessage(player, "Your inventory has been cleaned.");
 				return true;
 			} else {
-				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+				Methods.playerNotFound(cs, args[0]);
 				return true;
 			}
 		} else {

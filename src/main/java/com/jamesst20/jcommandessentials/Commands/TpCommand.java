@@ -30,7 +30,7 @@ public class TpCommand implements CommandExecutor {
 				from.teleport(to);
 				return true;
 			} else {
-				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+				Methods.playerNotFound(cs, args[0]);
 				return true;
 			}
 		} else if (args.length == 2) {
@@ -47,9 +47,9 @@ public class TpCommand implements CommandExecutor {
 				Methods.sendPlayerMessage(to, Methods.red(from.getDisplayName()) + " have been teleported to you.");
 				from.teleport(to);
 			} else if (from == null) {
-				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+				Methods.playerNotFound(cs, args[0]);
 			} else if (to == null) {
-				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[1]) + " couldn't be found.");
+				Methods.playerNotFound(cs, args[1]);
 			}
 			return true;
 		} else {

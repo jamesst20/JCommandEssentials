@@ -38,7 +38,7 @@ public class FlySpeedCommand implements CommandExecutor {
 							"Fly speed of " + Methods.red(player.getDisplayName()) + " is "
 									+ Methods.red(String.valueOf(player.getFlySpeed() * 10)) + ".");
 				} else {
-					Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+					Methods.playerNotFound(cs, args[0]);
 					return true;
 				}
 				return true;
@@ -88,7 +88,7 @@ public class FlySpeedCommand implements CommandExecutor {
 						return true;
 					}
 				} else {
-					Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[2]) + " couldn't be found.");
+					Methods.playerNotFound(cs, args[2]);
 					return true;
 				}
 			} else {

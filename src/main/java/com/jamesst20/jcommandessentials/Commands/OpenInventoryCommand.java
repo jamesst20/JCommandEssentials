@@ -30,7 +30,7 @@ public class OpenInventoryCommand implements CommandExecutor {
 			Methods.sendPlayerMessage(cs, "You opened the inventory of " + Methods.red(player.getDisplayName()) + ".");
 			return true;
 		} else {
-			Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+			Methods.playerNotFound(cs, args[0]);
 			return true;
 		}
 	}

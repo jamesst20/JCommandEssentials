@@ -18,20 +18,19 @@ public class SudoCommand implements CommandExecutor {
 		if (args.length < 2) {
 			return false;
 		}
-		String playerStr = args[0];
 		String theCommand = "";
 		for (int i = 1; i < args.length; i++) {
 			theCommand += args[i] + " ";
 		}
 		theCommand = Methods.replaceLast(theCommand, " ", "");
-		Player player = Bukkit.getServer().getPlayer(playerStr);
+		Player player = Bukkit.getServer().getPlayer(args[0]);
 		if (player != null) {
 			player.performCommand(theCommand);
 			Methods.sendPlayerMessage(cs,
 					"Forced " + Methods.red(player.getDisplayName()) + " to run: '" + Methods.red(theCommand) + "'");
 			return true;
 		} else {
-			Methods.sendPlayerMessage(cs, "The player " + Methods.red(playerStr) + " couldn't be found.");
+			Methods.playerNotFound(cs, args[0]);
 			return true;
 		}
 	}

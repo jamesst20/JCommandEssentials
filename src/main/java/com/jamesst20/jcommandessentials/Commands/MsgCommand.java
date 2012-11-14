@@ -36,7 +36,7 @@ public class MsgCommand implements CommandExecutor {
 			to.sendMessage(ChatColor.GOLD + "[" + from + ChatColor.GOLD + " -> me] " + ChatColor.WHITE + message);
 			return true;
 		} else {
-			Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " couldn't be found.");
+			Methods.playerNotFound(cs, args[0]);
 			return true;
 		}
 	}

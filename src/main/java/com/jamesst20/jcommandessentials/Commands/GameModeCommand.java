@@ -121,7 +121,7 @@ public class GameModeCommand implements CommandExecutor {
 			Methods.sendPlayerMessage(player, "You are now in " + Methods.red("creative") + "!");
 			return true;
 		} else {
-			Methods.sendPlayerMessage(cs, "The player " + Methods.red(name) + " couldn't be found.");
+			Methods.playerNotFound(cs, name);
 			return false;
 		}
 	}
@@ -142,7 +142,7 @@ public class GameModeCommand implements CommandExecutor {
 			Methods.sendPlayerMessage(player, "You are now in " + Methods.red("survival") + "!");
 			return true;
 		} else {
-			Methods.sendPlayerMessage(cs, "The player " + Methods.red(name) + " couldn't be found.");
+			Methods.playerNotFound(cs, name);
 			return false;
 		}
 	}
@@ -163,7 +163,7 @@ public class GameModeCommand implements CommandExecutor {
 			Methods.sendPlayerMessage(player, "You are now in " + Methods.red("adventure") + "!");
 			return true;
 		} else {
-			Methods.sendPlayerMessage(cs, "The player " + Methods.red(name) + " couldn't be found.");
+			Methods.playerNotFound(cs, name);
 			return false;
 		}
 	}

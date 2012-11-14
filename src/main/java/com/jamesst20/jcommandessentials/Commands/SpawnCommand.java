@@ -58,7 +58,7 @@ public class SpawnCommand implements CommandExecutor {
 				Methods.sendPlayerMessage(player, "You have been teleported to spawn.");
 				return true;
 			} else {
-				Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " is not found.");
+				Methods.playerNotFound(cs, args[0]);
 				return true;
 			}
 		} else {
