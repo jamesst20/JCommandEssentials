@@ -63,15 +63,18 @@ commands:
    god:
        description: 'Enable or disable god mode for yourself or another player'
        usage: /god [player]
+       aliases: ungod
    motd:
        description: 'Read the message of the day'
        usage: /motd
    freeze:
        description: 'Prevent a player from moving'
        usage: /freeze <player>
+       aliases: unfreeze
    lock:
        description: 'Lock the server : Prevent breaking/placing blocks, chat messages and mobs spawning'
        usage: /lock
+       aliases: unlock
    servermotd:
        description: 'Set the server list motd'
        usage: /servermotd set <motd>, /servermotd enable, /servermotd disable
@@ -126,9 +129,11 @@ commands:
    vanish:
        description: 'Make yourself or a player invisible/visible from other players'
        usage: /vanish [player]
+       aliases: unvanish
    afk:
        description: 'Tells everyone that you are now back or away'
        usage: /afk or /afk [enable/disable/delay] [delay]
+       aliases: unafk
    killmobs:
        description: 'Kill all mobs on the server'
        usage: /killmobs
@@ -140,6 +145,7 @@ commands:
    handicap:
         description: 'Block a player from using commands'
         usage: /handicap <player>
+        aliases: unhandicap
    ip:
         description: 'Get your or a player IP'
         usage: /ip [player]
