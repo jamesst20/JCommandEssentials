@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
 import com.jamesst20.jcommandessentials.Commands.GodCommand;
+import com.jamesst20.jcommandessentials.Commands.HandicapCommand;
 import com.jamesst20.jcommandessentials.Commands.LockCommand;
 import com.jamesst20.jcommandessentials.Commands.VanishCommand;
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
@@ -25,6 +26,7 @@ import com.jamesst20.jcommandessentials.Utils.AfkUtils;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils.AfkListener;
+import org.bukkit.ChatColor;
 
 public class ThePlayerListener implements Listener, AfkListener {
 	String serverLocked = "The server is currently locked!";
@@ -129,6 +131,11 @@ public class ThePlayerListener implements Listener, AfkListener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
-		
+            if (HandicapCommand.handicappedList.contains(e.getPlayer().getName())){
+                if (!Methods.hasPermission(e.getPlayer(), "JCMDEss.commands.handicap.exempt")){
+                    Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "You're not allowed to use command.");
+                    e.setCancelled(true);
+                }
+            }
 	}
 }

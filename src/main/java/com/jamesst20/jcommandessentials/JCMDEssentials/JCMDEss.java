@@ -13,6 +13,7 @@ import com.jamesst20.jcommandessentials.Commands.FlySpeedCommand;
 import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
 import com.jamesst20.jcommandessentials.Commands.GameModeCommand;
 import com.jamesst20.jcommandessentials.Commands.GodCommand;
+import com.jamesst20.jcommandessentials.Commands.HandicapCommand;
 import com.jamesst20.jcommandessentials.Commands.HealCommand;
 import com.jamesst20.jcommandessentials.Commands.HomeCommand;
 import com.jamesst20.jcommandessentials.Commands.JCommandEssentialsCommand;
@@ -134,6 +135,7 @@ public class JCMDEss extends JavaPlugin {
 		Methods.regC("afk", new AfkCommand());
 		Methods.regC("killmobs", new KillMobsCommand());
 		Methods.regC("spawnmob", new SpawnMobCommand());
+                Methods.regC("handicap", new HandicapCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -176,5 +178,6 @@ public class JCMDEss extends JavaPlugin {
 		Methods.registerCommandConfigDefaultValue("afk");
 		Methods.registerCommandConfigDefaultValue("killmobs");
 		Methods.registerCommandConfigDefaultValue("spawnmob");
+                Methods.registerCommandConfigDefaultValue("handicap");
 	}
 }

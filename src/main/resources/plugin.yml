@@ -137,3 +137,6 @@ commands:
         description: 'Spawn mobs'
         usage: /spawnmob <mob> <quantity>
         aliases : spawnmobs
+   handicap:
+        description: 'Block a player from using command'
+        usage: /handicap <player>
