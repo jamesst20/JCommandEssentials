@@ -140,3 +140,7 @@ commands:
    handicap:
         description: 'Block a player from using commands'
         usage: /handicap <player>
+   ip:
+        description: 'Get your or a player IP'
+        usage: /ip [player]
+        aliases: [getip, ipaddress, getipaddress]
