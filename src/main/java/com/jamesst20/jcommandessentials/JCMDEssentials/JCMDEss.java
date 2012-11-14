@@ -57,7 +57,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class JCMDEss extends JavaPlugin {
 	public static JCMDEss plugin;
-//Netbeans Commit Test.
+
 	@Override
 	public void onEnable() {
 		plugin = this;
