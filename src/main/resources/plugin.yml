@@ -138,5 +138,5 @@ commands:
         usage: /spawnmob <mob> <quantity>
         aliases : spawnmobs
    handicap:
-        description: 'Block a player from using command'
+        description: 'Block a player from using commands'
         usage: /handicap <player>
