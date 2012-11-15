@@ -28,6 +28,7 @@ import com.jamesst20.jcommandessentials.Commands.MuteCommand;
 import com.jamesst20.jcommandessentials.Commands.OpenInventoryCommand;
 import com.jamesst20.jcommandessentials.Commands.SetHomeCommand;
 import com.jamesst20.jcommandessentials.Commands.ServerMotdCommand;
+import com.jamesst20.jcommandessentials.Commands.SetExpCommand;
 import com.jamesst20.jcommandessentials.Commands.SetSpawnCommand;
 import com.jamesst20.jcommandessentials.Commands.SpawnCommand;
 import com.jamesst20.jcommandessentials.Commands.SpawnMobCommand;
@@ -142,6 +143,7 @@ public class JCMDEss extends JavaPlugin {
                 Methods.regC("ip", new IpCommand());
                 Methods.regC("mute", new MuteCommand());
                 Methods.regC("tpthere", new TpThereCommand());
+                Methods.regC("setexp", new SetExpCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -188,5 +190,6 @@ public class JCMDEss extends JavaPlugin {
                 Methods.registerCommandConfigDefaultValue("ip");
                 Methods.registerCommandConfigDefaultValue("mute");
                 Methods.registerCommandConfigDefaultValue("tpthere");
+                Methods.registerCommandConfigDefaultValue("setexp");
 	}
 }

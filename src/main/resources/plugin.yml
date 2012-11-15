@@ -158,3 +158,7 @@ commands:
         description: 'Teleport yourself or a player to your target block'
         usage: /tpthere [player]
         aliases: put
+   setexp:
+        description: 'Set your or a player experience level'
+        usage: /setexp [player] <exp>
+        aliases: [setxp, xp, exp]
