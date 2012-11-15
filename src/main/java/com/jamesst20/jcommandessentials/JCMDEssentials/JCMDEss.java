@@ -39,6 +39,7 @@ import com.jamesst20.jcommandessentials.Commands.TpAllCommand;
 import com.jamesst20.jcommandessentials.Commands.TpCommand;
 import com.jamesst20.jcommandessentials.Commands.TpDenyCommand;
 import com.jamesst20.jcommandessentials.Commands.TpHereCommand;
+import com.jamesst20.jcommandessentials.Commands.TpThereCommand;
 import com.jamesst20.jcommandessentials.Commands.TpaCommand;
 import com.jamesst20.jcommandessentials.Commands.TpcCommand;
 import com.jamesst20.jcommandessentials.Commands.UnbanCommand;
@@ -140,6 +141,7 @@ public class JCMDEss extends JavaPlugin {
                 Methods.regC("handicap", new HandicapCommand());
                 Methods.regC("ip", new IpCommand());
                 Methods.regC("mute", new MuteCommand());
+                Methods.regC("tpthere", new TpThereCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -185,5 +187,6 @@ public class JCMDEss extends JavaPlugin {
                 Methods.registerCommandConfigDefaultValue("handicap");
                 Methods.registerCommandConfigDefaultValue("ip");
                 Methods.registerCommandConfigDefaultValue("mute");
+                Methods.registerCommandConfigDefaultValue("tpthere");
 	}
 }

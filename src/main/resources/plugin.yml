@@ -154,3 +154,7 @@ commands:
         description: 'Mute a player'
         usage: /mute <player>
         aliases: unmute
+   tpthere:
+        description: 'Teleport yourself or a player to your target block'
+        usage: /tpthere [player]
+        aliases: put
