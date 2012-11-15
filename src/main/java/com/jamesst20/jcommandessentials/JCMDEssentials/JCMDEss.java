@@ -8,6 +8,7 @@ import com.jamesst20.jcommandessentials.Commands.BroadcastCommand;
 import com.jamesst20.jcommandessentials.Commands.ClearInventoryCommand;
 import com.jamesst20.jcommandessentials.Commands.DisableCmdCommand;
 import com.jamesst20.jcommandessentials.Commands.EnableCmdCommand;
+import com.jamesst20.jcommandessentials.Commands.EnchantCommand;
 import com.jamesst20.jcommandessentials.Commands.FlyCommand;
 import com.jamesst20.jcommandessentials.Commands.FlySpeedCommand;
 import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
@@ -144,6 +145,7 @@ public class JCMDEss extends JavaPlugin {
                 Methods.regC("mute", new MuteCommand());
                 Methods.regC("tpthere", new TpThereCommand());
                 Methods.regC("setexp", new SetExpCommand());
+                Methods.regC("enchant", new EnchantCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -191,5 +193,6 @@ public class JCMDEss extends JavaPlugin {
                 Methods.registerCommandConfigDefaultValue("mute");
                 Methods.registerCommandConfigDefaultValue("tpthere");
                 Methods.registerCommandConfigDefaultValue("setexp");
+                Methods.registerCommandConfigDefaultValue("enchant");
 	}
 }

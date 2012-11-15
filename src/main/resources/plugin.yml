@@ -162,3 +162,7 @@ commands:
         description: 'Set your or a player experience level'
         usage: /setexp [player] <exp>
         aliases: [setxp, xp, exp]
+   enchant:
+        description: 'Enchant the item you are holding'
+        usage: /enchant <enchantment> <level>
+        aliases: [enchantment, enchantments, enchantitem]
