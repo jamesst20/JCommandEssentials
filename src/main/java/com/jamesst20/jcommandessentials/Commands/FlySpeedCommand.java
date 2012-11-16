@@ -25,7 +25,7 @@ public class FlySpeedCommand implements CommandExecutor {
 					return true;
 				}
 				Player player = ((Player) cs);
-				Methods.sendPlayerMessage(cs, "Your fly speed is " + Methods.red(player.getFlySpeed() * 10 + "."));
+				Methods.sendPlayerMessage(cs, "Your fly speed is " + Methods.red(player.getFlySpeed() * 10F + "."));
 				return true;
 			} else if (args.length == 2) {
 				if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.flyspeed.get.others")) {
@@ -36,7 +36,7 @@ public class FlySpeedCommand implements CommandExecutor {
 					Methods.sendPlayerMessage(
 							cs,
 							"Fly speed of " + Methods.red(player.getDisplayName()) + " is "
-									+ Methods.red(String.valueOf(player.getFlySpeed() * 10)) + ".");
+									+ Methods.red(String.valueOf(player.getFlySpeed() * 10F)) + ".");
 				} else {
 					Methods.playerNotFound(cs, args[0]);
 					return true;
@@ -56,7 +56,7 @@ public class FlySpeedCommand implements CommandExecutor {
 				}
 				Player player = ((Player) cs);
 				try {
-					float flySpeed = Float.parseFloat(args[1]) / 10.0F;
+					float flySpeed = Float.parseFloat(args[1]) / 10F;
 					player.setFlySpeed(flySpeed);
 					Methods.sendPlayerMessage(cs, "Your flying speed has been set to " + Methods.red(args[1]) + ".");
 					return true;
@@ -74,7 +74,7 @@ public class FlySpeedCommand implements CommandExecutor {
 				Player player = Bukkit.getServer().getPlayer(args[2]);
 				if (player != null) {
 					try {
-						float flySpeed = Float.parseFloat(args[1]) / 10.0F;
+						float flySpeed = Float.parseFloat(args[1]) / 10F;
 						player.setFlySpeed(flySpeed);
 						Methods.sendPlayerMessage(cs, "Flying speed of " + Methods.red(player.getDisplayName()) + " set to "
 								+ Methods.red(args[1]) + ".");
