@@ -166,3 +166,6 @@ commands:
         description: 'Enchant the item you are holding'
         usage: /enchant <enchantment> <level>
         aliases: [enchantment, enchantments, enchantitem]
+   nick:
+        description: 'Change your or a player nickname'
+        usage: /nick [player] <nick>

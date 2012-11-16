@@ -26,6 +26,7 @@ import com.jamesst20.jcommandessentials.Commands.LockCommand;
 import com.jamesst20.jcommandessentials.Commands.MotdCommand;
 import com.jamesst20.jcommandessentials.Commands.MsgCommand;
 import com.jamesst20.jcommandessentials.Commands.MuteCommand;
+import com.jamesst20.jcommandessentials.Commands.NickCommand;
 import com.jamesst20.jcommandessentials.Commands.OpenInventoryCommand;
 import com.jamesst20.jcommandessentials.Commands.SetHomeCommand;
 import com.jamesst20.jcommandessentials.Commands.ServerMotdCommand;
@@ -146,6 +147,7 @@ public class JCMDEss extends JavaPlugin {
                 Methods.regC("tpthere", new TpThereCommand());
                 Methods.regC("setexp", new SetExpCommand());
                 Methods.regC("enchant", new EnchantCommand());
+                Methods.regC("nick", new NickCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -194,5 +196,6 @@ public class JCMDEss extends JavaPlugin {
                 Methods.registerCommandConfigDefaultValue("tpthere");
                 Methods.registerCommandConfigDefaultValue("setexp");
                 Methods.registerCommandConfigDefaultValue("enchant");
+                Methods.registerCommandConfigDefaultValue("nick");
 	}
 }
