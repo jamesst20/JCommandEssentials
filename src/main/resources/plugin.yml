@@ -166,3 +166,7 @@ commands:
         description: 'Enchant the item you are holding'
         usage: /enchant <enchantment> <level>
         aliases: [enchantment, enchantments, enchantitem]
+   walkspeed:
+        description: 'Manage your or a player walking speed'
+        usage: /walkspeed get [player], /walkspeed set <speed> [player]
+        aliases: [wspeed, speedwalk, walk, run]

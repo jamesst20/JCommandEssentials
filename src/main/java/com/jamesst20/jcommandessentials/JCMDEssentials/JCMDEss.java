@@ -46,6 +46,7 @@ import com.jamesst20.jcommandessentials.Commands.TpaCommand;
 import com.jamesst20.jcommandessentials.Commands.TpcCommand;
 import com.jamesst20.jcommandessentials.Commands.UnbanCommand;
 import com.jamesst20.jcommandessentials.Commands.VanishCommand;
+import com.jamesst20.jcommandessentials.Commands.WalkSpeedCommand;
 import com.jamesst20.jcommandessentials.Commands.WeatherCommand;
 import com.jamesst20.jcommandessentials.Commands.WorkbenchCommand;
 import com.jamesst20.jcommandessentials.Listener.ThePlayerListener;
@@ -146,6 +147,7 @@ public class JCMDEss extends JavaPlugin {
                 Methods.regC("tpthere", new TpThereCommand());
                 Methods.regC("setexp", new SetExpCommand());
                 Methods.regC("enchant", new EnchantCommand());
+                Methods.regC("walkspeed", new WalkSpeedCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -194,5 +196,6 @@ public class JCMDEss extends JavaPlugin {
                 Methods.registerCommandConfigDefaultValue("tpthere");
                 Methods.registerCommandConfigDefaultValue("setexp");
                 Methods.registerCommandConfigDefaultValue("enchant");
+                Methods.registerCommandConfigDefaultValue("walkspeed");
 	}
 }
