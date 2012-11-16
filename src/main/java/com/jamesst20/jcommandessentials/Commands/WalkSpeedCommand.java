@@ -44,6 +44,9 @@ public class WalkSpeedCommand implements CommandExecutor {
                     Methods.sendPlayerMessage(cs, ChatColor.RED + "Console can only change walk speed of other players.");
                     return true;
                 }
+                if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.walkspeed.set.self")) {
+                    return true;
+                }
                 Player player = ((Player) cs);
                 try {
                     float speed = Float.parseFloat(args[1]) / 10F;
@@ -60,6 +63,9 @@ public class WalkSpeedCommand implements CommandExecutor {
                     return true;
                 }
             } else if (args.length == 3) {
+                if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.walkspeed.set.others")) {
+                    return true;
+                }
                 Player player = Bukkit.getServer().getPlayer(args[2]);
                 if (player != null) {
                     try {

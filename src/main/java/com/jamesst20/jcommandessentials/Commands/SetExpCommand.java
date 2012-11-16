@@ -30,6 +30,9 @@ public class SetExpCommand implements CommandExecutor {
                 return true;
             }
         } else if (args.length == 2) {
+            if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.setxp.others")) {
+                return true;
+            }
             Player player = Bukkit.getServer().getPlayer(args[0]);
             if (player != null) {
                 try {
