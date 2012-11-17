@@ -63,7 +63,7 @@ public class WeatherCommand implements CommandExecutor {
 			} else if (cmd.equalsIgnoreCase("sun")) {
 				if (Bukkit.getServer().getWorld(args[0]) != null) {
 					Bukkit.getServer().getWorld(args[0]).setStorm(false);
-					Methods.sendPlayerMessage(cs, "Weather set to sunnyin " + Bukkit.getServer().getWorld(args[0]).getName()
+					Methods.sendPlayerMessage(cs, "Weather set to sunny in " + Bukkit.getServer().getWorld(args[0]).getName()
 							+ "!");
 					return true;
 				} else {

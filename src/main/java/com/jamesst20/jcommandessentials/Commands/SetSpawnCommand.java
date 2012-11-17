@@ -25,7 +25,9 @@ public class SetSpawnCommand implements CommandExecutor {
 			return true;
 		}
 		if (args.length == 0) {
-			setDefaultSpawn(((Player) cs).getLocation());
+                    Location location = ((Player)cs).getLocation();
+			setDefaultSpawn(location);
+                        ((Player)cs).getWorld().setSpawnLocation((int)location.getX(), (int)location.getY(), (int)location.getZ());
 			Methods.sendPlayerMessage(cs, "Default spawn set to your location.");
 			return true;
 		} else {
