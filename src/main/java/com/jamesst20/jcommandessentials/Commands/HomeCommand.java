@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
 import com.jamesst20.jcommandessentials.Utils.Methods;
+import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 
 public class HomeCommand implements CommandExecutor {
 	@Override
@@ -22,8 +23,13 @@ public class HomeCommand implements CommandExecutor {
 			}
 			JPlayerConfig playerConf = new JPlayerConfig((Player) cs);
 			if (playerConf.getHome() != null) {
-				((Player) cs).teleport(playerConf.getHome());
+                            if (TeleportDelay.getDelay() < 1){
+                                ((Player) cs).teleport(playerConf.getHome());
 				Methods.sendPlayerMessage(cs, "You teleported to home.");
+                            }else{
+                                TeleportDelay.schedulePlayer(((Player)cs), playerConf.getHome());
+                                Methods.sendPlayerMessage(cs, "Don't move! You will be teleported in " + Methods.red(String.valueOf(TeleportDelay.getDelay())) + " seconds.");
+                            }				
 			} else {
 				Methods.sendPlayerMessage(cs, ChatColor.RED + "Home not set.");
 			}
@@ -33,8 +39,13 @@ public class HomeCommand implements CommandExecutor {
 			}
 			JPlayerConfig playerConf = new JPlayerConfig((Player) cs);
 			if (playerConf.getHome(args[0]) != null) {
-				((Player) cs).teleport(playerConf.getHome(args[0]));
+                            if (TeleportDelay.getDelay() < 1){
+                                ((Player) cs).teleport(playerConf.getHome(args[0]));
 				Methods.sendPlayerMessage(cs, "You teleported to " + Methods.red(args[0]) + ".");
+                            }else{
+                                TeleportDelay.schedulePlayer(((Player)cs), playerConf.getHome(args[0]));
+                                Methods.sendPlayerMessage(cs, "Don't move! You will be teleported in " + Methods.red(String.valueOf(TeleportDelay.getDelay())) + " seconds.");
+                            }				
 			} else {
 				Methods.sendPlayerMessage(cs, "Your home " + Methods.red(args[0]) + " is not set.");
 			}

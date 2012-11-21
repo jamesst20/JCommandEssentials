@@ -27,6 +27,7 @@ import com.jamesst20.jcommandessentials.Utils.AfkUtils;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils.AfkListener;
+import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 import org.bukkit.ChatColor;
 
 public class ThePlayerListener implements Listener, AfkListener {
@@ -77,6 +78,11 @@ public class ThePlayerListener implements Listener, AfkListener {
 		if (FreezeCommand.frozenPlayers.contains(e.getPlayer().getName())) {
 			e.setCancelled(true);
 		}
+                if(TeleportDelay.isPlayerQueued(e.getPlayer())){
+                    if (e.getFrom().getX() != e.getTo().getX()||e.getFrom().getY() != e.getTo().getY()||e.getFrom().getZ() != e.getTo().getZ()){
+                        TeleportDelay.removeScheduledPlayer(e.getPlayer());
+                    }                    
+                }
 		AfkUtils.updatePlayerActivity(e.getPlayer());
 	}
 

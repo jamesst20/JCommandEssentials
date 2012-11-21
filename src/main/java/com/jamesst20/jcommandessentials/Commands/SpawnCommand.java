@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 
 import com.jamesst20.jcommandessentials.Utils.Config;
 import com.jamesst20.jcommandessentials.Utils.Methods;
+import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 
 public class SpawnCommand implements CommandExecutor {
 
@@ -29,13 +30,25 @@ public class SpawnCommand implements CommandExecutor {
 			}
 			Location spawn = getDefaultSpawn();
 			if (spawn != null) {
-				Methods.sendPlayerMessage(cs, "You teleported to the default spawn.");
+                            if (TeleportDelay.getDelay() < 1){
+                                Methods.sendPlayerMessage(cs, "You teleported to the default spawn.");
 				((Player) cs).teleport(spawn);
-				return true;
+                            }else{
+                                TeleportDelay.schedulePlayer(((Player)cs), spawn);
+                                Methods.sendPlayerMessage(cs, "Don't move! You will be teleported in " + Methods.red(String.valueOf(TeleportDelay.getDelay())) + " seconds.");
+                            }
+                            return true;
 			} else {
-				Methods.sendPlayerMessage(cs, ChatColor.RED + "JCMDEss spawn not set !");
+                            if (TeleportDelay.getDelay() < 1){
+                                Methods.sendPlayerMessage(cs, ChatColor.RED + "JCMDEss spawn not set !");
 				Methods.sendPlayerMessage(cs, "Teleporting to the world spawn instead.");
 				((Player) cs).teleport(((Player) cs).getWorld().getSpawnLocation());
+                            }else{
+                                TeleportDelay.schedulePlayer(((Player)cs), ((Player) cs).getWorld().getSpawnLocation());
+                                Methods.sendPlayerMessage(cs, ChatColor.RED + "JCMDEss spawn not set !");
+				Methods.sendPlayerMessage(cs, "Teleporting to the world spawn instead.");
+                                Methods.sendPlayerMessage(cs, "Don't move! You will be teleported in " + Methods.red(String.valueOf(TeleportDelay.getDelay())) + " seconds.");
+                            }				
 				return true;
 			}
 		} else if (args.length == 1) {

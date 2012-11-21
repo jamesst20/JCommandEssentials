@@ -55,6 +55,7 @@ import com.jamesst20.jcommandessentials.Utils.AfkUtils;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.ServerMotd;
+import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 
 import com.jamesst20.jcommandessentials.mcstats.Metrics;
 
@@ -98,6 +99,7 @@ public class JCMDEss extends JavaPlugin {
 		Methods.writeConfigDefaultValues("enable.motd", true);
 		Motd.writeDefaultMotd();
 		ServerMotd.setDefaultConfig();
+                TeleportDelay.setDefaultDelay();
 	}
 
 	private void registerCommands() {
