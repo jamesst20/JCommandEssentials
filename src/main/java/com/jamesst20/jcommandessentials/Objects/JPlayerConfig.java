@@ -1,112 +1,105 @@
 package com.jamesst20.jcommandessentials.Objects;
 
-import java.io.File;
+import com.jamesst20.config.JYamlConfiguration;
+import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import java.sql.Timestamp;
 import java.util.Date;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import com.jamesst20.jcommandessentials.Utils.Config;
-
 public class JPlayerConfig {
-	Player player = null;
-	File playerConfigFile = null;
-	YamlConfiguration playerConfig = null;
 
-	public JPlayerConfig(Player a) {
-		File playersDir = new File(Config.plugin.getDataFolder(), "players");
-		if (!playersDir.exists()) {
-			playersDir.mkdir();
-		}
-		player = a;
-		playerConfigFile = Config.getConfigFile("players/" + player.getName());
-		playerConfig = Config.getCustomConfig(playerConfigFile);
-	}
+    Player player;
+    JYamlConfiguration playerConfig;
 
-	public void setNewbieConfig() {
-		Date date = new Date();
-		Timestamp time = new Timestamp(date.getTime());
-		playerConfig.set("timestamps.joindate", time.toString());
-		Config.saveConfig(playerConfigFile, playerConfig);
-	}
+    public JPlayerConfig(Player p) {
+        player = p;
+        playerConfig = new JYamlConfiguration(JCMDEss.plugin, "players/" + player.getName());
+    }
 
-	public void onLogin() {
-		if (playerConfig.getValues(true).isEmpty()) {
-			setNewbieConfig();
-		}
-		Date date = new Date();
-		Timestamp time = new Timestamp(date.getTime());
-		playerConfig.set("timestamps.login", time.toString());
-		playerConfig.set("ipAddress", player.getAddress().getAddress().toString().replaceAll("/", ""));
-		Config.saveConfig(playerConfigFile, playerConfig);
-	}
+    public void setNewbieConfig() {
+        Date date = new Date();
+        Timestamp time = new Timestamp(date.getTime());
+        playerConfig.set("timestamps.joindate", time.toString());
+        playerConfig.saveConfig();
+    }
 
-	public void onDisconnect() {
-		Date date = new Date();
-		Timestamp time = new Timestamp(date.getTime());
-		playerConfig.set("timestamps.logout", time.toString());
-		Config.saveConfig(playerConfigFile, playerConfig);
-	}
+    public void onLogin() {
+        if (playerConfig.getConfig().getValues(true).isEmpty()) {
+            setNewbieConfig();
+        }
+        Date date = new Date();
+        Timestamp time = new Timestamp(date.getTime());
+        playerConfig.set("timestamps.login", time.toString());
+        playerConfig.set("ipAddress", player.getAddress().getAddress().toString().replaceAll("/", ""));
+        playerConfig.saveConfig();
+    }
 
-	public void setHome() {
-		playerConfig.set("homes.home.world", player.getWorld().getName());
-		playerConfig.set("homes.home.x", player.getLocation().getX());
-		playerConfig.set("homes.home.y", player.getLocation().getY());
-		playerConfig.set("homes.home.z", player.getLocation().getZ());
-		playerConfig.set("homes.home.yaw", player.getLocation().getYaw());
-		playerConfig.set("homes.home.pitch", player.getLocation().getPitch());
-		Config.saveConfig(playerConfigFile, playerConfig);
-	}
+    public void onDisconnect() {
+        Date date = new Date();
+        Timestamp time = new Timestamp(date.getTime());
+        playerConfig.set("timestamps.logout", time.toString());
+        playerConfig.saveConfig();
+    }
 
-	public void setHome(String name) {
-		playerConfig.set("homes." + name + ".world", player.getWorld().getName());
-		playerConfig.set("homes." + name + ".x", player.getLocation().getX());
-		playerConfig.set("homes." + name + ".y", player.getLocation().getY());
-		playerConfig.set("homes." + name + ".z", player.getLocation().getZ());
-		playerConfig.set("homes." + name + ".yaw", player.getLocation().getYaw());
-		playerConfig.set("homes." + name + ".pitch", player.getLocation().getPitch());
-		Config.saveConfig(playerConfigFile, playerConfig);
-	}
+    public void setHome() {
+        playerConfig.set("homes.home.world", player.getWorld().getName());
+        playerConfig.set("homes.home.x", player.getLocation().getX());
+        playerConfig.set("homes.home.y", player.getLocation().getY());
+        playerConfig.set("homes.home.z", player.getLocation().getZ());
+        playerConfig.set("homes.home.yaw", player.getLocation().getYaw());
+        playerConfig.set("homes.home.pitch", player.getLocation().getPitch());
+        playerConfig.saveConfig();
+    }
 
-	public Location getHome() {
-		if (playerConfig.get("homes.home") == null) {
-			return null;
-		}
-		return new Location(Bukkit.getServer().getWorld(playerConfig.getString("homes.home.world")),
-				playerConfig.getDouble("homes.home.x"), playerConfig.getDouble("homes.home.y"),
-				playerConfig.getDouble("homes.home.z"), (float) playerConfig.getDouble("homes.home.yaw"),
-				(float) playerConfig.getDouble("homes.home.pitch"));
-	}
+    public void setHome(String name) {
+        playerConfig.set("homes." + name + ".world", player.getWorld().getName());
+        playerConfig.set("homes." + name + ".x", player.getLocation().getX());
+        playerConfig.set("homes." + name + ".y", player.getLocation().getY());
+        playerConfig.set("homes." + name + ".z", player.getLocation().getZ());
+        playerConfig.set("homes." + name + ".yaw", player.getLocation().getYaw());
+        playerConfig.set("homes." + name + ".pitch", player.getLocation().getPitch());
+        playerConfig.saveConfig();
+    }
 
-	public Location getHome(String name) {
-		if (playerConfig.get("homes." + name) == null) {
-			return null;
-		}
-		return new Location(Bukkit.getServer().getWorld(playerConfig.getString("homes." + name + ".world")),
-				playerConfig.getDouble("homes." + name + ".x"), playerConfig.getDouble("homes." + name + ".y"),
-				playerConfig.getDouble("homes." + name + ".z"), (float) playerConfig.getDouble("homes." + name + ".yaw"),
-				(float) playerConfig.getDouble("homes." + name + ".pitch"));
-	}
+    public Location getHome() {
+        if (playerConfig.getConfig().get("homes.home") == null) {
+            return null;
+        }
+        return new Location(Bukkit.getServer().getWorld(playerConfig.getConfig().getString("homes.home.world")),
+                playerConfig.getConfig().getDouble("homes.home.x"), playerConfig.getConfig().getDouble("homes.home.y"),
+                playerConfig.getConfig().getDouble("homes.home.z"), (float) playerConfig.getConfig().getDouble("homes.home.yaw"),
+                (float) playerConfig.getConfig().getDouble("homes.home.pitch"));
+    }
 
-	public void setBanReason(String reason) {
-		if (reason.isEmpty()) {
-			playerConfig.set("ban.reason", "You are banned.");
-			Config.saveConfig(playerConfigFile, playerConfig);
-		} else {
-			playerConfig.set("ban.reason", "Banned: " + reason);
-			Config.saveConfig(playerConfigFile, playerConfig);
-		}
-	}
+    public Location getHome(String name) {
+        if (playerConfig.getConfig().get("homes." + name) == null) {
+            return null;
+        }
+        return new Location(Bukkit.getServer().getWorld(playerConfig.getConfig().getString("homes." + name + ".world")),
+                playerConfig.getConfig().getDouble("homes." + name + ".x"), playerConfig.getConfig().getDouble("homes." + name + ".y"),
+                playerConfig.getConfig().getDouble("homes." + name + ".z"), (float) playerConfig.getConfig().getDouble("homes." + name + ".yaw"),
+                (float) playerConfig.getConfig().getDouble("homes." + name + ".pitch"));
+    }
 
-	public String getBanReason() {
-		return playerConfig.getString("ban.reason", "You are banned.");
-	}
+    public void setBanReason(String reason) {
+        if (reason.isEmpty()) {
+            playerConfig.set("ban.reason", "You are banned.");
+            playerConfig.saveConfig();
+        } else {
+            playerConfig.set("ban.reason", "Banned: " + reason);
+            playerConfig.saveConfig();
+        }
+    }
 
-	public void removeBanReason() {
-		playerConfig.set("ban", null);
-		Config.saveConfig(playerConfigFile, playerConfig);
-	}
+    public String getBanReason() {
+        return playerConfig.getConfig().getString("ban.reason", "You are banned.");
+    }
+
+    public void removeBanReason() {
+        playerConfig.set("ban", null);
+        playerConfig.saveConfig();
+    }
 }

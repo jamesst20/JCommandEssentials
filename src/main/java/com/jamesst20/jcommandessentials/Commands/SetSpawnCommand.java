@@ -1,16 +1,15 @@
 package com.jamesst20.jcommandessentials.Commands;
 
-import java.io.File;
+import com.jamesst20.config.JYamlConfiguration;
+import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import com.jamesst20.jcommandessentials.Utils.Config;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class SetSpawnCommand implements CommandExecutor {
@@ -36,14 +35,13 @@ public class SetSpawnCommand implements CommandExecutor {
     }
 
     private void setDefaultSpawn(Location loc) {
-        File spawnConfigFile = Config.getConfigFile("spawns.yml");
-        YamlConfiguration spawnConfig = Config.getCustomConfig(spawnConfigFile);
+        JYamlConfiguration spawnConfig = new JYamlConfiguration(JCMDEss.plugin, "spawns.yml");
         spawnConfig.set("spawns.default.world", loc.getWorld().getName());
         spawnConfig.set("spawns.default.x", loc.getX());
         spawnConfig.set("spawns.default.y", loc.getY());
         spawnConfig.set("spawns.default.z", loc.getZ());
         spawnConfig.set("spawns.default.yaw", loc.getYaw());
         spawnConfig.set("spawns.default.pitch", loc.getPitch());
-        Config.saveConfig(spawnConfigFile, spawnConfig);
+        spawnConfig.saveConfig();
     }
 }

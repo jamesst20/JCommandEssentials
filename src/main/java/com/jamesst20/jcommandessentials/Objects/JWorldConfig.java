@@ -1,57 +1,48 @@
 package com.jamesst20.jcommandessentials.Objects;
 
-import java.io.File;
+import com.jamesst20.config.JYamlConfiguration;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-import com.jamesst20.jcommandessentials.Utils.Config;
 
 public class JWorldConfig {
-	JCMDEss plugin = JCMDEss.plugin;
-	World world = null;
-	File worldConfigFile = null;
-	YamlConfiguration worldConfig = null;
 
-	public JWorldConfig(World world) {
-		Config.dirCreate("worlds");
-		worldConfigFile = Config.getConfigFile("worlds/" + world.getName());
-	}
+    JCMDEss plugin = JCMDEss.plugin;
+    World world = null;
+    JYamlConfiguration worldConfig = null;
 
-	public void setSpawn(Location loc) {
-		// Bukkit.getServer().getWorld(getName()).setSpawnLocation((int)loc.getX(),
-		// (int)loc.getY(), (int)loc.getZ());
-		worldConfig.set("world.spawn.x", loc.getX());
-		worldConfig.set("world.spawn.y", loc.getY());
-		worldConfig.set("world.spawn.z", loc.getZ());
-		worldConfig.set("world.spawn.yaw", loc.getPitch());
-		worldConfig.set("world.spawn.pitch", loc.getYaw());
-		Config.saveConfig(worldConfigFile, worldConfig);
-	}
+    public JWorldConfig(World world) {
+        worldConfig = new JYamlConfiguration(plugin, "worlds/" + world.getName());
+    }
 
-	public Location getSpawn() {
-		Location sLoc = new Location(world, worldConfig.getDouble("spawns." + getName() + ".x"),
-				worldConfig.getDouble("spawns." + getName() + ".y"), worldConfig.getDouble("spawns." + getName() + ".z"),
-				(float) worldConfig.getDouble("spawns." + getName() + ".yaw"), (float) worldConfig.getDouble("spawns."
-						+ getName() + ".pitch"));
-		return sLoc;
-	}
+    public void setSpawn(Location loc) {
+        worldConfig.set("world.spawn.x", loc.getX());
+        worldConfig.set("world.spawn.y", loc.getY());
+        worldConfig.set("world.spawn.z", loc.getZ());
+        worldConfig.set("world.spawn.yaw", loc.getPitch());
+        worldConfig.set("world.spawn.pitch", loc.getYaw());
+        worldConfig.saveConfig();
+    }
 
-	public World getWorld() {
-		return world;
-	}
+    public Location getSpawn() {
+        Location sLoc = new Location(world, worldConfig.getConfig().getDouble("spawns." + getName() + ".x"),
+                worldConfig.getConfig().getDouble("spawns." + getName() + ".y"), worldConfig.getConfig().getDouble("spawns." + getName() + ".z"),
+                (float) worldConfig.getConfig().getDouble("spawns." + getName() + ".yaw"), (float) worldConfig.getConfig().getDouble("spawns."
+                + getName() + ".pitch"));
+        return sLoc;
+    }
 
-	public String getName() {
-		return world.getName();
-	}
+    public World getWorld() {
+        return world;
+    }
 
-	public YamlConfiguration getConfig() {
-		return worldConfig;
-	}
+    public String getName() {
+        return world.getName();
+    }
 
-	public File getConfigFile() {
-		return worldConfigFile;
-	}
+    public JYamlConfiguration getConfig() {
+        return worldConfig;
+    }
 }
