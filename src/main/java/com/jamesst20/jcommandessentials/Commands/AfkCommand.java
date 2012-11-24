@@ -51,7 +51,7 @@ public class AfkCommand implements CommandExecutor {
 					return true;
 				}
 				try {
-					long delay = 0;
+					long delay;
 					delay = Long.parseLong(args[1]);
 					AfkUtils.setDelay(delay);
 					Methods.sendPlayerMessage(cs, "Auto AFK delay set to " + Methods.red(String.valueOf(delay))

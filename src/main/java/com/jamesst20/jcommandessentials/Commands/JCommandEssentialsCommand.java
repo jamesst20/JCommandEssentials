@@ -26,13 +26,15 @@ public class JCommandEssentialsCommand implements CommandExecutor {
 				Methods.sendPlayerMessage(cs, "==========================================");
 			}
 		} else if (args[0].equalsIgnoreCase("reload") && args.length == 1) {
-			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.reload"))
-				return true;
+			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.reload")){
+                            return true;
+                        }
 			JCMDEss.plugin.reloadConfig();
 			Methods.sendPlayerMessage(cs, "Config has been reloaded!");
 		} else if (args[0].equalsIgnoreCase("version") && args.length == 1) {
-			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.version"))
-				return true;
+			if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.version")){
+                            return true;
+                        }
 			Methods.sendPlayerMessage(cs, "Version : " + ChatColor.RED + JCMDEss.plugin.getDescription().getVersion());
 		} else {
 			return false;

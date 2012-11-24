@@ -19,7 +19,7 @@ public class MsgCommand implements CommandExecutor {
 		if (args.length < 2) {
 			return false;
 		}
-		String from = "";
+		String from;
 		if (Methods.isConsole(cs)) {
 			from = "Console";
 		} else {

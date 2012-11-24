@@ -23,7 +23,7 @@ public class SpawnMobCommand implements CommandExecutor {
 		if (args.length == 0) {
 			StringBuilder x = new StringBuilder();
 			for (EntityType e : EntityType.values()) {
-				x.append(e.toString() + ", ");
+				x.append(e.toString()).append(", ");
 			}
 			Methods.sendPlayerMessage(cs, "You can spawn the following mobs/entities: ");
 			Methods.sendPlayerMessage(cs, x.toString().trim());
