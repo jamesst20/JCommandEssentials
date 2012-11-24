@@ -135,8 +135,8 @@ commands:
        usage: /afk or /afk [enable/disable/delay] [delay]
        aliases: unafk
    killmobs:
-       description: 'Kill all mobs on the server'
-       usage: /killmobs
+       description: 'Kill mobs on the server'
+       usage: /killmobs [animals/monsters/MobName]
        aliases: [killmob, killallmob, killallmobs]
    spawnmob:
         description: 'Spawn mobs'
