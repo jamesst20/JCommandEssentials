@@ -22,11 +22,11 @@ public class EnchantCommand implements CommandExecutor {
         if (args.length == 0) {
             StringBuilder enchantList = new StringBuilder();
             for (Enchantment enchant : Enchantment.values()) {
-                enchantList.append("&4").append(formatEnchantment(enchant.getName())).append("&3, ");
+                enchantList.append("&c").append(formatEnchantment(enchant.getName())).append("&3, ");
             }
             enchantList = Methods.replaceLast(enchantList, ", ", "");
             Methods.sendPlayerMessage(cs, "/enchant <enchantment> <level>");
-            Methods.sendPlayerMessage(cs, Methods.coloring("You can apply those enchantments : " + "&4All&3, " + enchantList + "&3."));
+            Methods.sendPlayerMessage(cs, Methods.coloring("You can apply those enchantments : " + "&cAll&3, " + enchantList + "&3."));
             return true;
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("all")){
