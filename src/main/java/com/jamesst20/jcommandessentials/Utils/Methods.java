@@ -145,21 +145,21 @@ public class Methods {
     }
 
     public static String getFormattedOnlinePlayers() {
-        String players = "";
+        StringBuilder players = new StringBuilder();
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            players += player.getDisplayName() + ", ";
+            players.append(player.getDisplayName()).append(", ");
         }
         players = replaceLast(players, ", ", "");
-        return players;
+        return players.toString();
     }
 
-    public static String replaceLast(String string, String from, String to) {
+    public static StringBuilder replaceLast(StringBuilder string, String from, String to) {
         int lastIndex = string.lastIndexOf(from);
         if (lastIndex < 0) {
             return string;
         }
         String tail = string.substring(lastIndex).replaceFirst(from, to);
-        return string.substring(0, lastIndex) + tail;
+        return new StringBuilder(string.substring(0, lastIndex)).append(tail);
     }
 
     public static void hidePlayer(Player p) {

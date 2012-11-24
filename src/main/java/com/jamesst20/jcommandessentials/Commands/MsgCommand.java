@@ -27,9 +27,9 @@ public class MsgCommand implements CommandExecutor {
 		}
 		Player to = Bukkit.getServer().getPlayer(args[0]);
 		if (to != null) {
-			String message = "";
+			StringBuilder message = new StringBuilder();
 			for (int i = 1; i < args.length; i++) {
-				message += args[i] + " ";
+				message.append(args[i]).append(" ");
 			}
 			cs.sendMessage(ChatColor.GOLD + "[me -> " + to.getDisplayName() + ChatColor.GOLD + "] " + ChatColor.WHITE
 					+ message);

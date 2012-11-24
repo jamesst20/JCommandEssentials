@@ -19,9 +19,9 @@ public class StaffCommand implements CommandExecutor {
 		if (args.length < 1) {
 			return false;
 		}
-		String message = "";
+		StringBuilder message = new StringBuilder();
 		for (int i = 0; i < args.length; i++) {
-			message += args[i] + " ";
+			message.append(args[i]).append(" ");
 		}
 		if (Methods.isConsole(cs)) {
 			for (Player player : Bukkit.getServer().getOnlinePlayers()) {

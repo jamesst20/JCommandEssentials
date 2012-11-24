@@ -18,11 +18,11 @@ public class ServerMotdCommand implements CommandExecutor {
 			return false;
 		}
 		if (args[0].equalsIgnoreCase("set")) {
-			String motd = "";
+			StringBuilder motd = new StringBuilder();
 			for (int i = 1; i < args.length; i++) {
-				motd += args[i] + " ";
+				motd.append(args[i]).append(" ");
 			}
-			ServerMotd.setServerMotd(motd);
+			ServerMotd.setServerMotd(motd.toString());
 			Methods.sendPlayerMessage(cs, "Server motd set!");
 		} else if (args[0].equalsIgnoreCase("enable")) {
 			ServerMotd.enableServerMotd();

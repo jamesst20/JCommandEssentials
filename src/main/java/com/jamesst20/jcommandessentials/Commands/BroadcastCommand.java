@@ -15,11 +15,11 @@ public class BroadcastCommand implements CommandExecutor {
 		} else if (args.length < 1) {
 			return false;
 		}
-		String message = "";
+		StringBuilder message = new StringBuilder();
 		for (String msg : args) {
-			message += msg + " ";
+			message.append(msg).append(" ");
 		}
-		Methods.broadcastMessage(message);
+		Methods.broadcastMessage(message.toString());
 		return true;
 	}
 
