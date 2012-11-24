@@ -170,3 +170,7 @@ commands:
         description: 'Manage your or a player walking speed'
         usage: /walkspeed get [player], /walkspeed set <speed> [player]
         aliases: [wspeed, speedwalk, walk, run]
+   tpback:
+        description: 'Teleport to your last location'
+        usage: /tpback [player]
+        aliases: [teleportback, tplastlocation, back, teleportlastlocation, tplast, teleportlast]

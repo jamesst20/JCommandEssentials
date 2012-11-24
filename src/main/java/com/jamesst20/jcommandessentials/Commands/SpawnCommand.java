@@ -30,7 +30,7 @@ public class SpawnCommand implements CommandExecutor {
             Location spawn = getDefaultSpawn();
             if (spawn != null) {
                 if (TeleportDelay.getDelay() < 1) {
-                    Methods.sendPlayerMessage(cs, "You teleported to the default spawn.");
+                    Methods.sendPlayerMessage(cs, "You teleported to spawn.");
                     ((Player) cs).teleport(spawn);
                 } else {
                     TeleportDelay.schedulePlayer(((Player) cs), spawn);

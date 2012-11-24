@@ -38,6 +38,7 @@ import com.jamesst20.jcommandessentials.Commands.SudoCommand;
 import com.jamesst20.jcommandessentials.Commands.TimeCommand;
 import com.jamesst20.jcommandessentials.Commands.TpAcceptCommand;
 import com.jamesst20.jcommandessentials.Commands.TpAllCommand;
+import com.jamesst20.jcommandessentials.Commands.TpBackCommand;
 import com.jamesst20.jcommandessentials.Commands.TpCommand;
 import com.jamesst20.jcommandessentials.Commands.TpDenyCommand;
 import com.jamesst20.jcommandessentials.Commands.TpHereCommand;
@@ -150,6 +151,7 @@ public class JCMDEss extends JavaPlugin {
                 Methods.regC("setexp", new SetExpCommand());
                 Methods.regC("enchant", new EnchantCommand());
                 Methods.regC("walkspeed", new WalkSpeedCommand());
+                Methods.regC("tpback", new TpBackCommand());
 	}
 
 	public void setCmdsConfig() {
@@ -199,5 +201,6 @@ public class JCMDEss extends JavaPlugin {
                 Methods.registerCommandConfigDefaultValue("setexp");
                 Methods.registerCommandConfigDefaultValue("enchant");
                 Methods.registerCommandConfigDefaultValue("walkspeed");
+                Methods.registerCommandConfigDefaultValue("tpback");
 	}
 }
