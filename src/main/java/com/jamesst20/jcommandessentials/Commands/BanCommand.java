@@ -22,6 +22,10 @@ public class BanCommand implements CommandExecutor {
         if (args.length == 1) {
             Player player = Bukkit.getServer().getPlayerExact(args[0]);
             if (player != null) {
+                if (Methods.hasPermission(player, "JCMDEss.commands.ban.exempt")) {
+                    Methods.sendPlayerMessage(cs, "You are not allowed to ban " + Methods.red(player.getName()) + ".");
+                    return true;
+                }
                 player.setBanned(true);
                 JPlayerConfig jConfig = new JPlayerConfig(player);
                 jConfig.setBanReason("");
@@ -43,6 +47,10 @@ public class BanCommand implements CommandExecutor {
         } else if (args.length > 1) {
             Player player = Bukkit.getServer().getPlayer(args[0]);
             if (player != null) {
+                if (Methods.hasPermission(player, "JCMDEss.commands.ban.exempt")) {
+                    Methods.sendPlayerMessage(cs, "You are not allowed to ban " + Methods.red(player.getName()) + ".");
+                    return true;
+                }
                 StringBuilder reason = new StringBuilder();
                 for (int i = 1; i < args.length; i++) {
                     reason.append(args[i]).append(" ");
