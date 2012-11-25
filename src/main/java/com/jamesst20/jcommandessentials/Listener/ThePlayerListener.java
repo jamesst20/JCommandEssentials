@@ -101,8 +101,10 @@ public class ThePlayerListener implements Listener, AfkListener {
             }
         }
         if (MuteCommand.mutedPlayersList.contains(e.getPlayer().getName())) {
-            Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "You are muted!");
-            e.setCancelled(true);
+            if (!Methods.hasPermission(e.getPlayer(), "JCMDEss.commands.mute.exempt")) {
+                Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "You are muted!");
+                e.setCancelled(true);
+            }
         }
         AfkUtils.updatePlayerActivity(e.getPlayer());
     }
@@ -161,12 +163,12 @@ public class ThePlayerListener implements Listener, AfkListener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerDeath(PlayerDeathEvent e) {
+    public void onPlayerDeath(PlayerDeathEvent e) {        
         TpBackCommand.playersLastTeleport.put(e.getEntity().getName(), e.getEntity().getLocation());
         if (Methods.hasPermission(e.getEntity(), TpBackCommand.permPrefix + ".self")) {
             Bukkit.getServer().broadcastMessage(e.getDeathMessage());
             e.setDeathMessage("");
             e.getEntity().sendMessage(ChatColor.GOLD + "Use /back command to return to your death point.");
-        }
+        }   
     }
 }
