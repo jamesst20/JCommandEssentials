@@ -19,7 +19,7 @@ public class JOfflinePlayerConfig {
         if (playersDir.exists()) {
             for (File file : playersDir.listFiles()) {
                 if (file != null) {
-                    if (file.getName().equalsIgnoreCase(player.getName() + ".yml")) {
+                    if (file.getName().equalsIgnoreCase(player.getName())) {
                         playerConfig = new JYamlConfiguration(JCMDEss.plugin, "players/" + file.getName());
                     }
                 }
@@ -88,5 +88,9 @@ public class JOfflinePlayerConfig {
 
     public boolean isBanned() {
         return player.isBanned();
+    }
+
+    public boolean playerExist() {
+        return playerConfig != null ? true : false;
     }
 }
