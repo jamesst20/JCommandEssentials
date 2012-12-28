@@ -3,6 +3,7 @@ package com.jamesst20.jcommandessentials.Objects;
 import com.jamesst20.config.JYamlConfiguration;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.bukkit.Bukkit;
@@ -20,9 +21,8 @@ public class JPlayerConfig {
     }
 
     public void setNewbieConfig() {
-        Date date = new Date();
-        Timestamp time = new Timestamp(date.getTime());
-        playerConfig.set("timestamps.joindate", time.toString());
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        playerConfig.set("timestamps.joindate", time.format(new Date()));
         playerConfig.saveConfig();
     }
 
@@ -30,17 +30,15 @@ public class JPlayerConfig {
         if (playerConfig.getConfig().getValues(true).isEmpty()) {
             setNewbieConfig();
         }
-        Date date = new Date();
-        Timestamp time = new Timestamp(date.getTime());
-        playerConfig.set("timestamps.login", time.toString());
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        playerConfig.set("timestamps.login", time.format(new Date()));
         playerConfig.set("ipAddress", player.getAddress().getAddress().toString().replaceAll("/", ""));
         playerConfig.saveConfig();
     }
 
     public void onDisconnect() {
-        Date date = new Date();
-        Timestamp time = new Timestamp(date.getTime());
-        playerConfig.set("timestamps.logout", time.toString());
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        playerConfig.set("timestamps.logout", time.format(new Date()));
         playerConfig.saveConfig();
     }
 
