@@ -15,8 +15,15 @@ public class JOfflinePlayerConfig {
         player = p;
         File playersDir = new File(JCMDEss.plugin.getDataFolder(), "players");
         // We do not make file if the player isn't found. We leave stuff to null
+        // We also make sure it is case insensitive
         if (playersDir.exists()) {
-            playerConfig = new JYamlConfiguration(JCMDEss.plugin, "players/" + player.getName());
+            for (File file : playersDir.listFiles()) {
+                if (file != null) {
+                    if (file.getName().equalsIgnoreCase(player.getName() + ".yml")) {
+                        playerConfig = new JYamlConfiguration(JCMDEss.plugin, "players/" + file.getName());
+                    }
+                }
+            }
         }
     }
 
@@ -38,7 +45,6 @@ public class JOfflinePlayerConfig {
         } else {
             return null;
         }
-
     }
 
     public void removeBanReason() {
@@ -46,5 +52,41 @@ public class JOfflinePlayerConfig {
             playerConfig.set("ban", null);
             playerConfig.saveConfig();
         }
+    }
+
+    public String getJoinDate() {
+        if (playerConfig != null) {
+            return playerConfig.getConfig().getString("timestamps.joindate");
+        }
+        return null;
+    }
+
+    public String getLastLogin() {
+        if (playerConfig != null) {
+            return playerConfig.getConfig().getString("timestamps.login");
+        }
+        return null;
+    }
+
+    public String getLastLogout() {
+        if (playerConfig != null) {
+            return playerConfig.getConfig().getString("timestamps.logout");
+        }
+        return null;
+    }
+
+    public String getLastIP() {
+        if (playerConfig != null) {
+            return playerConfig.getConfig().getString("ipAddress");
+        }
+        return null;
+    }
+
+    public String getName() {
+        return player.getName();
+    }
+
+    public boolean isBanned() {
+        return player.isBanned();
     }
 }
