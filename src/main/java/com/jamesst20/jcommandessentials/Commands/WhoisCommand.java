@@ -20,6 +20,7 @@ import com.jamesst20.jcommandessentials.Objects.JOfflinePlayerConfig;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -48,6 +49,15 @@ public class WhoisCommand implements CommandExecutor {
         String lastLogout = ChatColor.RED + oPlayer.getLastLogout();
         String lastIP = ChatColor.AQUA + oPlayer.getLastIP();
         String isOnline = Bukkit.getServer().getPlayer(args[0]) != null ? ChatColor.GREEN + "YES" : ChatColor.RED + "NO";
+        //Useless loop to check case insensitive...
+        boolean banned = false;
+        for (OfflinePlayer p:Bukkit.getServer().getBannedPlayers()){
+            if (p.getName().equalsIgnoreCase(args[0])){
+                banned = true;
+                break;
+            }
+        }
+        String bannedStr = banned ? ChatColor.RED + "YES" : ChatColor.GREEN + "NO";
         if (Methods.isConsole(cs)) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "==================================================");
             Methods.log(ChatColor.GOLD + "Player : " + ChatColor.AQUA + args[0] + ".");
@@ -56,6 +66,7 @@ public class WhoisCommand implements CommandExecutor {
             Methods.log(ChatColor.GOLD + "Last Login : " + lastLogin + ".");
             Methods.log(ChatColor.GOLD + "Last Logout : " + lastLogout + ".");
             Methods.log(ChatColor.GOLD + "Last IP : " + lastIP + ".");
+            Methods.log(ChatColor.GOLD + "Banned : " + bannedStr + ".");
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "==================================================");
         } else {
             Bukkit.getServer().getPlayer(cs.getName()).sendMessage(ChatColor.AQUA + "==================================================");
@@ -65,6 +76,7 @@ public class WhoisCommand implements CommandExecutor {
             Methods.sendPlayerMessage(cs, ChatColor.GOLD + "Last Login : " + lastLogin + ".");
             Methods.sendPlayerMessage(cs, ChatColor.GOLD + "Last Logout : " + lastLogout + ".");
             Methods.sendPlayerMessage(cs, ChatColor.GOLD + "Last IP : " + lastIP + ".");
+            Methods.sendPlayerMessage(cs, ChatColor.GOLD + "Banned : " + bannedStr + ".");
             Bukkit.getServer().getPlayer(cs.getName()).sendMessage(ChatColor.AQUA + "==================================================");
         }
         return true;
