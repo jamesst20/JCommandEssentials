@@ -174,3 +174,7 @@ commands:
         description: 'Teleport to your last location'
         usage: /tpback [player]
         aliases: [teleportback, tplastlocation, back, teleportlastlocation, tplast, teleportlast]
+   whois:
+        description: 'Get info of a player'
+        usage: /whois <player>
+        aliases: [playerinfo, getplayerinfo, getpinfo, pinfo, playerinfo]

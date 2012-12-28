@@ -111,6 +111,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.regC("enchant", new EnchantCommand());
         Methods.regC("walkspeed", new WalkSpeedCommand());
         Methods.regC("tpback", new TpBackCommand());
+        Methods.regC("whois", new WhoisCommand());
     }
 
     public void setCmdsConfig() {
@@ -161,6 +162,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.registerCommandConfigDefaultValue("enchant");
         Methods.registerCommandConfigDefaultValue("walkspeed");
         Methods.registerCommandConfigDefaultValue("tpback");
+        Methods.registerCommandConfigDefaultValue("whois");
     }
 
     private void checkForUpdate() {
