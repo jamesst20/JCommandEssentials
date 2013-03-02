@@ -23,7 +23,7 @@ public class TpBackCommand implements CommandExecutor {
                 Methods.sendPlayerMessage(cs, ChatColor.RED + "The console has no previous location.");
                 return true;
             }
-            if (!Methods.hasPermissionTell(cs, permPrefix + ".self")){
+            if (!Methods.hasPermissionTell(cs, permPrefix + ".self")) {
                 return true;
             }
             if (playersLastTeleport.containsKey(cs.getName())) {
@@ -39,7 +39,7 @@ public class TpBackCommand implements CommandExecutor {
                 Methods.sendPlayerMessage(cs, ChatColor.RED + "You have no previous location.");
             }
         } else if (args.length == 1) {
-            if (!Methods.hasPermissionTell(cs, permPrefix + ".others")){
+            if (!Methods.hasPermissionTell(cs, permPrefix + ".others")) {
                 return true;
             }
             Player player = Bukkit.getServer().getPlayer(args[0]);
@@ -59,9 +59,9 @@ public class TpBackCommand implements CommandExecutor {
         }
         return true;
     }
-    
-    public static void removePlayer(String name){
-        if (playersLastTeleport.containsKey(name)){
+
+    public static void removePlayer(String name) {
+        if (playersLastTeleport.containsKey(name)) {
             playersLastTeleport.remove(name);
         }
     }

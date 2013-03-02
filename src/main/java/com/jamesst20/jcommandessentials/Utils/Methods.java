@@ -1,10 +1,9 @@
 package com.jamesst20.jcommandessentials.Utils;
 
+import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
-import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;

@@ -19,28 +19,29 @@ public class TeleportDelay {
         playerTasks.remove(player.getName());
         Methods.sendPlayerMessage(player, "Teleportation " + Methods.red("canceled") + ".");
     }
-    
-    public static boolean isPlayerQueued(Player player){
+
+    public static boolean isPlayerQueued(Player player) {
         return playerTasks.containsKey(player.getName());
     }
 
     private static int scheduleTask(final Player p, final Location loc) {
-       return plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-           @Override
+        return plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+            @Override
             public void run() {
-               if (p != null){
-                   p.teleport(loc);
-                   playerTasks.remove(p.getName());
-               }                
+                if (p != null) {
+                    p.teleport(loc);
+                    playerTasks.remove(p.getName());
+                }
             }
         }, getDelay() * 20);
     }
-    
-    public static int getDelay(){
+
+    public static int getDelay() {
         return plugin.getConfig().getInt("teleport.delay", 5);
     }
-    public static void setDefaultDelay(){
-        if (plugin.getConfig().get("teleport.delay") == null){
+
+    public static void setDefaultDelay() {
+        if (plugin.getConfig().get("teleport.delay") == null) {
             plugin.getConfig().set("teleport.delay", 5);
         }
     }

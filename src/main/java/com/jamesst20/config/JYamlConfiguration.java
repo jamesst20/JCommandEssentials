@@ -57,8 +57,8 @@ public class JYamlConfiguration {
     public YamlConfiguration getConfig() {
         return config;
     }
-   
-    private void loadConfig(){
+
+    private void loadConfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
     }
 }

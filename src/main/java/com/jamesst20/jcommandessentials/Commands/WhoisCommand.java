@@ -51,8 +51,8 @@ public class WhoisCommand implements CommandExecutor {
         String isOnline = Bukkit.getServer().getPlayer(args[0]) != null ? ChatColor.GREEN + "YES" : ChatColor.RED + "NO";
         //Useless loop to check case insensitive...
         boolean banned = false;
-        for (OfflinePlayer p:Bukkit.getServer().getBannedPlayers()){
-            if (p.getName().equalsIgnoreCase(args[0])){
+        for (OfflinePlayer p : Bukkit.getServer().getBannedPlayers()) {
+            if (p.getName().equalsIgnoreCase(args[0])) {
                 banned = true;
                 break;
             }

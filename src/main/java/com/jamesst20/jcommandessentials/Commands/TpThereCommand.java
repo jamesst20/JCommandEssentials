@@ -30,15 +30,15 @@ public class TpThereCommand implements CommandExecutor {
                 return true;
             }
             Player player = Bukkit.getServer().getPlayer(args[0]);
-            if (player != null){
-                player.teleport(((Player)cs).getTargetBlock(null, 0).getRelative(BlockFace.UP, 1).getLocation());
+            if (player != null) {
+                player.teleport(((Player) cs).getTargetBlock(null, 0).getRelative(BlockFace.UP, 1).getLocation());
                 Methods.sendPlayerMessage(cs, "You teleported " + Methods.red(player.getDisplayName()) + " to your target block.");
-                Methods.sendPlayerMessage(player, "You have been teleported to " + Methods.red(cs.getName() + "'s")+ " target block!");
+                Methods.sendPlayerMessage(player, "You have been teleported to " + Methods.red(cs.getName() + "'s") + " target block!");
                 return true;
-            }else{
+            } else {
                 Methods.playerNotFound(cs, args[0]);
                 return true;
-            }            
+            }
         } else {
             return false;
         }

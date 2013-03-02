@@ -29,10 +29,10 @@ public class EnchantCommand implements CommandExecutor {
             Methods.sendPlayerMessage(cs, Methods.coloring("You can apply those enchantments : " + "&cAll&3, " + enchantList + "&3."));
             return true;
         } else if (args.length == 1) {
-            if (args[0].equalsIgnoreCase("all")){
+            if (args[0].equalsIgnoreCase("all")) {
                 enchantAll(cs, ((Player) cs));
                 return true;
-            }else{
+            } else {
                 return false;
             }
         } else if (args.length == 2) {

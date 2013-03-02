@@ -43,5 +43,5 @@ public class ServerMotd {
 
     public static boolean isEnabled() {
         return plugin.getConfig().getBoolean("enable.servermotd");
-    }    
+    }
 }

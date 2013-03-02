@@ -1,23 +1,20 @@
 package com.jamesst20.jcommandessentials.JCMDEssentials;
 
-import java.io.IOException;
-
 import com.jamesst20.jcommandessentials.Commands.*;
-import com.jamesst20.jcommandessentials.Listener.ThePlayerListener;
 import com.jamesst20.jcommandessentials.Listener.ServerListener;
+import com.jamesst20.jcommandessentials.Listener.ThePlayerListener;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.ServerMotd;
 import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 import com.jamesst20.jcommandessentials.Utils.WarpConfig;
-
 import com.jamesst20.jcommandessentials.mcstats.Metrics;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -175,11 +172,11 @@ public class JCMDEss extends JavaPlugin {
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             float currentVersion = Float.parseFloat(plugin.getDescription().getVersion());
             float newestVersion = Float.parseFloat(in.readLine());
-            if (currentVersion < newestVersion){
+            if (currentVersion < newestVersion) {
                 Methods.log(Methods.prefix + ChatColor.RED + "New update available! Current is " + currentVersion + " Newest is " + newestVersion);
-            }else{
+            } else {
                 Methods.log(Methods.prefix + ChatColor.GREEN + "JCommandEssentials is up to date!");
-            }                
+            }
             in.close();
         } catch (MalformedURLException e) {
             Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");

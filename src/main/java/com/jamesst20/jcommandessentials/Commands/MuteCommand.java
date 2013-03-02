@@ -24,7 +24,7 @@ public class MuteCommand implements CommandExecutor {
         Player player = Bukkit.getServer().getPlayer(args[0]);
         if (player != null) {
             if (player.getName().equalsIgnoreCase(cs.getName())) {
-                Methods.sendPlayerMessage(cs,ChatColor.RED + "You can't mute or unmute yourself.");
+                Methods.sendPlayerMessage(cs, ChatColor.RED + "You can't mute or unmute yourself.");
                 return true;
             }
             if (!mutedPlayersList.contains(player.getName())) {

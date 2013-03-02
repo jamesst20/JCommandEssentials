@@ -9,8 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class HandicapCommand implements CommandExecutor {
+
     public static HashSet<String> handicappedList = new HashSet<String>();
-    
+
     @Override
     public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
         if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.handicap")) {
@@ -21,12 +22,12 @@ public class HandicapCommand implements CommandExecutor {
         }
         Player player = Bukkit.getServer().getPlayer(args[0]);
         if (player != null) {
-            if (!handicappedList.contains(player.getName())){
+            if (!handicappedList.contains(player.getName())) {
                 handicappedList.add(player.getName());
                 Methods.sendPlayerMessage(cs, "You handicaped " + Methods.red(player.getDisplayName()) + ".");
                 Methods.sendPlayerMessage(player, "You're now " + Methods.red("blocked") + " from using commands.");
                 return true;
-            }else{
+            } else {
                 handicappedList.remove(player.getName());
                 Methods.sendPlayerMessage(cs, "You unhandicaped " + Methods.red(player.getDisplayName()) + ".");
                 Methods.sendPlayerMessage(player, "You're now " + Methods.red("allowed") + " to use commands.");

@@ -1,17 +1,16 @@
 package com.jamesst20.jcommandessentials.Commands;
 
+import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-
-import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.entity.Animals;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
+import org.bukkit.entity.Player;
 
 public class KillMobsCommand implements CommandExecutor {
 
@@ -74,9 +73,9 @@ public class KillMobsCommand implements CommandExecutor {
                     Methods.sendPlayerMessage(cs, Methods.red(mobName) + " isn't a valid entity or couldn't be found.");
                     StringBuilder entitiesList = new StringBuilder("&cAll&b, ");
                     for (EntityType e : EntityType.values()) {
-                        if (e.getName() != null){
+                        if (e.getName() != null) {
                             entitiesList.append("&c").append(e.getName()).append("&b").append(", ");
-                        }                        
+                        }
                     }
                     entitiesList = Methods.replaceLast(entitiesList, ", ", "");
                     Methods.sendPlayerMessage(cs, "Valid entities are : " + Methods.coloring(entitiesList.toString()));

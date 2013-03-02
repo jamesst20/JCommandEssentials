@@ -1,13 +1,12 @@
 package com.jamesst20.jcommandessentials.Commands;
 
+import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-
-import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class SpawnMobCommand implements CommandExecutor {
 
@@ -29,7 +28,7 @@ public class SpawnMobCommand implements CommandExecutor {
             Methods.sendPlayerMessage(cs, Methods.coloring(x.toString()));
             return true;
         } else if (args.length == 2) {
-            int count = 0;
+            int count;
             Player player = ((Player) cs);
             try {
                 count = Integer.parseInt(args[1]);

@@ -1,5 +1,8 @@
 package com.jamesst20.jcommandessentials.Commands;
 
+import com.jamesst20.jcommandessentials.Objects.JOfflinePlayerConfig;
+import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
+import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -7,10 +10,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import com.jamesst20.jcommandessentials.Objects.JOfflinePlayerConfig;
-import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
-import com.jamesst20.jcommandessentials.Utils.Methods;
 
 public class BanCommand implements CommandExecutor {
 

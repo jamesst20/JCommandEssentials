@@ -22,11 +22,11 @@ public class WarpCommand implements CommandExecutor {
                 return true;
             }
             Location location = WarpConfig.getWarpLocation(args[0]);
-            if (location != null){
-                Player player = (Player)cs;
+            if (location != null) {
+                Player player = (Player) cs;
                 player.teleport(location);
                 Methods.sendPlayerMessage(player, "You have teleported to " + args[0] + ".");
-            }else{
+            } else {
                 Methods.sendPlayerMessage(cs, ChatColor.RED + "The warp " + args[0] + " doesn't exist.");
                 return true;
             }
@@ -35,12 +35,12 @@ public class WarpCommand implements CommandExecutor {
                 if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.edit")) {
                     return true;
                 }
-                WarpConfig.createWarp((Player)cs, args[1]);
+                WarpConfig.createWarp((Player) cs, args[1]);
             } else if (args[0].equalsIgnoreCase("delete")) {
                 if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.edit")) {
                     return true;
                 }
-                WarpConfig.deleteWarp((Player)cs, args[1]);
+                WarpConfig.deleteWarp((Player) cs, args[1]);
             } else {
                 return false;
             }

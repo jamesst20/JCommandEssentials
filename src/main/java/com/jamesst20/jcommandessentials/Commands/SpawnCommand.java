@@ -2,7 +2,8 @@ package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.config.JYamlConfiguration;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-
+import com.jamesst20.jcommandessentials.Utils.Methods;
+import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -11,9 +12,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import com.jamesst20.jcommandessentials.Utils.Methods;
-import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 
 public class SpawnCommand implements CommandExecutor {
 

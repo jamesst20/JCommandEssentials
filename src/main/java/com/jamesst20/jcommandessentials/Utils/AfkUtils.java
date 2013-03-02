@@ -1,15 +1,12 @@
 package com.jamesst20.jcommandessentials.Utils;
 
+import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import java.util.EventListener;
 import java.util.HashMap;
 import java.util.HashSet;
-
 import javax.swing.event.EventListenerList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 
 public class AfkUtils {
 
