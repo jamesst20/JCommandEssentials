@@ -10,6 +10,7 @@ import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.ServerMotd;
 import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
+import com.jamesst20.jcommandessentials.Utils.WarpConfig;
 
 import com.jamesst20.jcommandessentials.mcstats.Metrics;
 import java.io.BufferedReader;
@@ -37,6 +38,7 @@ public class JCMDEss extends JavaPlugin {
         checkForUpdate();
         setCmdsConfig();
         writeDefaultSettings();
+        WarpConfig.reloadWarps();
         registerEvents();
         registerCommands();
         getLogger().info("Successfully enabled!");
@@ -112,6 +114,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.regC("walkspeed", new WalkSpeedCommand());
         Methods.regC("tpback", new TpBackCommand());
         Methods.regC("whois", new WhoisCommand());
+        Methods.regC("warp", new WarpCommand());
     }
 
     public void setCmdsConfig() {
@@ -163,6 +166,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.registerCommandConfigDefaultValue("walkspeed");
         Methods.registerCommandConfigDefaultValue("tpback");
         Methods.registerCommandConfigDefaultValue("whois");
+        Methods.registerCommandConfigDefaultValue("warp");
     }
 
     private void checkForUpdate() {

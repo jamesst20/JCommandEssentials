@@ -178,3 +178,6 @@ commands:
         description: 'Get info of a player'
         usage: /whois <player>
         aliases: [playerinfo, getplayerinfo, getpinfo, pinfo, playerinfo]
+   warp:
+        description: 'Teleport or edit a warp'
+        usage: /warp <name>, /warp <add/delete> <name>
