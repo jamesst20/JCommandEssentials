@@ -48,7 +48,7 @@ public class TpaHereCommand implements CommandExecutor {
                 return true;
             }
             tpaPlayers.put(playerToTeleport.getName(), playerAsked.getName()); // Save first the one who will type /tpaccept
-            Methods.sendPlayerMessage(playerAsked, "You asked to tp to you " + Methods.red(playerToTeleport.getDisplayName()) + ". Waiting for an answer.");
+            Methods.sendPlayerMessage(playerAsked, "You asked to tp here " + Methods.red(playerToTeleport.getDisplayName()) + ". Waiting for an answer.");
             Methods.sendPlayerMessage(playerToTeleport, Methods.red(playerAsked.getDisplayName()) + " wants to teleport you to him.");
             Methods.sendPlayerMessage(playerToTeleport, "Agree : " + Methods.red("/tpaccept"));
             Methods.sendPlayerMessage(playerToTeleport, "Disagree : " + Methods.red("/tpdeny"));
