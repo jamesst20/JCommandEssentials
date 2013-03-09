@@ -33,7 +33,7 @@ public class TpaHereCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
         if (Methods.isConsole(cs)) {
-            Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't tpa.");
+            Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't use tpahere.");
             return true;
         } else if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpahere")) {
             return true;
