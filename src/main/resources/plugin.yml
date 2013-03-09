@@ -185,3 +185,7 @@ commands:
         description: 'Give informations about an item'
         usage: /whatisit
         aliases: [wit, whatisthis, wti, wii]
+   tpahere:
+        description: 'Ask to teleport to you a player'
+        usage: /tpahere <name>
+        aliases: [tpherea, atphere]
