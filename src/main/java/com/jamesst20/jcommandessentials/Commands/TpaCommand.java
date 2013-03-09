@@ -20,7 +20,7 @@ public class TpaCommand implements CommandExecutor {
         if (Methods.isConsole(cs)) {
             Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't tpa.");
             return true;
-        } else if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpa.tp")) {
+        } else if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpa")) {
             return true;
         } else if (args.length != 1) {
             return false;
@@ -28,9 +28,12 @@ public class TpaCommand implements CommandExecutor {
         final Player from = ((Player) cs);
         final Player to = Bukkit.getServer().getPlayer(args[0]);
         if (from != null && to != null) {
-            tpaPlayers.put(to.getName(), from.getName()); // Destination, sender
-            Methods.sendPlayerMessage(from, "You asked to tp to " + Methods.red(to.getDisplayName())
-                    + ". Waiting for an answer.");
+            if(tpaPlayers.containsKey(from.getName())||tpaPlayers.containsKey(to.getName())||tpaPlayers.containsValue(from.getName())||tpaPlayers.containsValue(to.getName())||TpaHereCommand.tpaPlayers.containsKey(from.getName())||TpaHereCommand.tpaPlayers.containsKey(to.getName())||TpaHereCommand.tpaPlayers.containsValue(from.getName())||TpaHereCommand.tpaPlayers.containsValue(to.getName())){ 
+                Methods.sendPlayerMessage(cs, ChatColor.RED + "Error : You or " + to.getDisplayName() + " has already a pending request.");
+                return true;
+            }
+            tpaPlayers.put(to.getName(), from.getName()); // Save first the one who will type /tpaccept
+            Methods.sendPlayerMessage(from, "You asked to tp to " + Methods.red(to.getDisplayName()) + ". Waiting for an answer.");
             Methods.sendPlayerMessage(to, Methods.red(from.getDisplayName()) + " has asked to teleport to you.");
             Methods.sendPlayerMessage(to, "Agree : " + Methods.red("/tpaccept"));
             Methods.sendPlayerMessage(to, "Disagree : " + Methods.red("/tpdeny"));
@@ -39,10 +42,8 @@ public class TpaCommand implements CommandExecutor {
                 public void run() {
                     if (tpaPlayers.containsKey(to.getName())) {
                         tpaPlayers.remove(to.getName());
-                        Methods.sendPlayerMessage(from, Methods.red(to.getDisplayName())
-                                + " didn't answer your teleport request.");
-                        Methods.sendPlayerMessage(to, "You didn't answer " + Methods.red(from.getDisplayName())
-                                + " teleport request.");
+                        Methods.sendPlayerMessage(from, Methods.red(to.getDisplayName()) + " didn't answer your teleport request.");
+                        Methods.sendPlayerMessage(to, "You didn't answer " + Methods.red(from.getDisplayName()) + " teleport request.");
                     }
                 }
             }, 35L * 20L);

@@ -15,22 +15,41 @@ public class TpAcceptCommand implements CommandExecutor {
         if (Methods.isConsole(cs)) {
             Methods.sendPlayerMessage(cs, ChatColor.RED + "Console can't accept a tp.");
             return true;
-        } else if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpa.accept")) {
+        } else if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpaaccept")) {
             return true;
         } else if (args.length == 0) {
-            Player to = ((Player) cs);
-            Player from = null;
-            if (TpaCommand.tpaPlayers.containsKey(to.getName())) {
-                from = Bukkit.getServer().getPlayer(TpaCommand.tpaPlayers.get(to.getName()).toString());
-            }
-            if (from != null) {
-                Methods.sendPlayerMessage(from, Methods.red(to.getDisplayName()) + " has accepted your teleport request.");
-                Methods.sendPlayerMessage(to, "You accepted " + Methods.red(from.getDisplayName()) + "'s teleport request.");
-                from.teleport(to);
-                TpaCommand.tpaPlayers.remove(to.getName());
-                return true;
+            Player playerWhoAccept = ((Player) cs);
+            Player secondPlayer;
+            if (TpaCommand.tpaPlayers.containsKey(playerWhoAccept.getName())) {
+                //Dealing with /tpa
+                secondPlayer = Bukkit.getServer().getPlayer(TpaCommand.tpaPlayers.get(playerWhoAccept.getName()));
+                if (secondPlayer != null) {
+                    Methods.sendPlayerMessage(secondPlayer, Methods.red(playerWhoAccept.getDisplayName()) + " has accepted your teleport request.");
+                    Methods.sendPlayerMessage(playerWhoAccept, "You accepted " + Methods.red(secondPlayer.getDisplayName()) + "'s teleport request.");
+                    secondPlayer.teleport(playerWhoAccept);
+                    TpaCommand.tpaPlayers.remove(playerWhoAccept.getName());
+                    return true;
+                }else{
+                    Methods.sendPlayerMessage(playerWhoAccept, ChatColor.RED + "Player offline.");
+                    TpaCommand.tpaPlayers.remove(playerWhoAccept.getName());
+                    return true;
+                }
+            } else if (TpaHereCommand.tpaPlayers.containsKey(playerWhoAccept.getName())) {
+                //Dealing with /tpahere
+                secondPlayer = Bukkit.getServer().getPlayer(TpaHereCommand.tpaPlayers.get(playerWhoAccept.getName()));
+                if (secondPlayer != null) {
+                    Methods.sendPlayerMessage(secondPlayer, Methods.red(playerWhoAccept.getDisplayName()) + " has accepted your teleport request.");
+                    Methods.sendPlayerMessage(playerWhoAccept, "You accepted " + Methods.red(secondPlayer.getDisplayName()) + "'s teleport request.");
+                    playerWhoAccept.teleport(secondPlayer);
+                    TpaHereCommand.tpaPlayers.remove(playerWhoAccept.getName());
+                    return true;
+                }else{
+                    Methods.sendPlayerMessage(playerWhoAccept, ChatColor.RED + "Player offline.");
+                    TpaHereCommand.tpaPlayers.remove(playerWhoAccept.getName());
+                    return true;
+                }
             } else {
-                Methods.sendPlayerMessage(to, ChatColor.RED + "You have no pending teleport request.");
+                Methods.sendPlayerMessage(cs, ChatColor.RED + "You have no pending teleport request.");
                 return true;
             }
         } else {

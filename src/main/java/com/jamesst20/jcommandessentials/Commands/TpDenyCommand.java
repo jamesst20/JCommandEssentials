@@ -15,25 +15,28 @@ public class TpDenyCommand implements CommandExecutor {
         if (Methods.isConsole(cs)) {
             Methods.sendPlayerMessage(cs, ChatColor.RED + "Console can't deny a tp.");
             return true;
-        } else if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpa.deny")) {
+        } else if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.tpadeny")) {
             return true;
         } else if (args.length == 0) {
-            Player to = ((Player) cs);
-            Player from = null;
-            if (TpaCommand.tpaPlayers.containsKey(to.getName())) {
-                from = Bukkit.getServer().getPlayer(TpaCommand.tpaPlayers.get(to.getName()).toString());
-            }
-            if (from != null) {
-                Methods.sendPlayerMessage(from, Methods.red(to.getDisplayName()) + " has denied your teleport request.");
-                Methods.sendPlayerMessage(to, "You denied " + Methods.red(from.getDisplayName()) + "'s teleport request.");
-                TpaCommand.tpaPlayers.remove(to.getName());
-                return true;
+            Player playerWhoAccept = ((Player) cs);
+            Player secondPlayer;
+            if (TpaCommand.tpaPlayers.containsKey(playerWhoAccept.getName())) {
+                //Dealing with /tpa
+                secondPlayer = Bukkit.getServer().getPlayer(TpaCommand.tpaPlayers.get(playerWhoAccept.getName()));
+                TpaCommand.tpaPlayers.remove(playerWhoAccept.getName());
+            } else if (TpaHereCommand.tpaPlayers.containsKey(playerWhoAccept.getName())) {
+                //Dealing with /tpahere
+                secondPlayer = Bukkit.getServer().getPlayer(TpaHereCommand.tpaPlayers.get(playerWhoAccept.getName()));
+                TpaHereCommand.tpaPlayers.remove(playerWhoAccept.getName());
             } else {
-                Methods.sendPlayerMessage(to, ChatColor.RED + "You have no pending teleport request.");
+                Methods.sendPlayerMessage(cs, ChatColor.RED + "You have no pending teleport request.");
                 return true;
             }
+            Methods.sendPlayerMessage(secondPlayer, Methods.red(playerWhoAccept.getDisplayName()) + " has denied your teleport request.");
+            Methods.sendPlayerMessage(playerWhoAccept, "You denied " + Methods.red(secondPlayer.getDisplayName()) + "'s teleport request.");
         } else {
             return false;
         }
+        return true;
     }
 }
