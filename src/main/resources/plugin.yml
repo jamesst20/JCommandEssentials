@@ -181,3 +181,7 @@ commands:
    warp:
         description: 'Teleport or edit a warp'
         usage: /warp <name>, /warp <add/delete> <name>
+   whatisit:
+        description: 'Give informations about an item'
+        usage: /whatisit
+        aliases: [wit, whatisthis, wti, wii]

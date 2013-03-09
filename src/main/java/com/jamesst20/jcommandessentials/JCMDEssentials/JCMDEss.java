@@ -112,6 +112,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.regC("tpback", new TpBackCommand());
         Methods.regC("whois", new WhoisCommand());
         Methods.regC("warp", new WarpCommand());
+        Methods.regC("whatisit", new WhatIsItCommand());
     }
 
     public void setCmdsConfig() {
@@ -164,6 +165,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.registerCommandConfigDefaultValue("tpback");
         Methods.registerCommandConfigDefaultValue("whois");
         Methods.registerCommandConfigDefaultValue("warp");
+        Methods.registerCommandConfigDefaultValue("whatisit");
     }
 
     private void checkForUpdate() {
