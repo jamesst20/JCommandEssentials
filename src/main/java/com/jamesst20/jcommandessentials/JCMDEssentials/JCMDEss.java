@@ -32,9 +32,9 @@ public class JCMDEss extends JavaPlugin {
         } catch (IOException e) {
             Methods.log(ChatColor.RED + "Failed to send MCStats!");
         }
-        checkForUpdate();
-        setCmdsConfig();
         writeDefaultSettings();
+        setCmdsConfig();
+        checkForUpdate();
         WarpConfig.reloadWarps();
         registerEvents();
         registerCommands();
@@ -55,6 +55,7 @@ public class JCMDEss extends JavaPlugin {
     }
 
     private void writeDefaultSettings() {
+        Methods.writeConfigDefaultValues("enable.updatechecker", true);
         Methods.writeConfigDefaultValues("enable.motd", true);
         Motd.writeDefaultMotd();
         ServerMotd.setDefaultConfig();
@@ -171,25 +172,27 @@ public class JCMDEss extends JavaPlugin {
     }
 
     private void checkForUpdate() {
-        try {
-            URL url = new URL("http://pastebin.com/raw.php?i=wZr5D85x");
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-            float currentVersion = Float.parseFloat(plugin.getDescription().getVersion());
-            float newestVersion = Float.parseFloat(in.readLine());
-            if (currentVersion < newestVersion) {
-                Methods.log(Methods.prefix + ChatColor.RED + "New update available! Current is " + currentVersion + " Newest is " + newestVersion);
-            } else {
-                Methods.log(Methods.prefix + ChatColor.GREEN + "JCommandEssentials is up to date!");
+        if (plugin.getConfig().getBoolean("enable.updatechecker", true)) {
+            try {
+                URL url = new URL("http://pastebin.com/raw.php?i=wZr5D85x");
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+                float currentVersion = Float.parseFloat(plugin.getDescription().getVersion());
+                float newestVersion = Float.parseFloat(in.readLine());
+                if (currentVersion < newestVersion) {
+                    Methods.log(Methods.prefix + ChatColor.RED + "New update available! Current is " + currentVersion + " Newest is " + newestVersion);
+                } else {
+                    Methods.log(Methods.prefix + ChatColor.GREEN + "JCommandEssentials is up to date!");
+                }
+                in.close();
+            } catch (MalformedURLException e) {
+                Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");
+            } catch (IOException e) {
+                Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");
+            } catch (NumberFormatException e) {
+                Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");
+            } catch (NullPointerException e) {
+                Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");
             }
-            in.close();
-        } catch (MalformedURLException e) {
-            Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");
-        } catch (IOException e) {
-            Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");
-        } catch (NumberFormatException e) {
-            Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");
-        } catch (NullPointerException e) {
-            Methods.log(Methods.prefix + ChatColor.RED + "Failed to check for update.");
         }
     }
 }
