@@ -29,13 +29,21 @@ public class KillCommand implements CommandExecutor {
             if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.kill.others")) {
                 return true;
             }
-            Player player = Bukkit.getServer().getPlayer(args[0]);
-            if (player != null) {
-                player.setHealth(0);
-                player.getWorld().strikeLightningEffect(player.getLocation());
-                Methods.sendPlayerMessage(cs, "You killed " + Methods.red(player.getDisplayName()) + ".");
+            if (args[0].equalsIgnoreCase("*") || args[0].equalsIgnoreCase("all")) {
+                for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+                    player.setHealth(0);
+                    player.getWorld().strikeLightningEffect(player.getLocation());
+                }
+                Methods.sendPlayerMessage(cs, "You killed " + Methods.red("all") + " players in the server.");
             } else {
-                Methods.playerNotFound(cs, args[0]);
+                Player player = Bukkit.getServer().getPlayer(args[0]);
+                if (player != null) {
+                    player.setHealth(0);
+                    player.getWorld().strikeLightningEffect(player.getLocation());
+                    Methods.sendPlayerMessage(cs, "You killed " + Methods.red(player.getDisplayName()) + ".");
+                } else {
+                    Methods.playerNotFound(cs, args[0]);
+                }
             }
             return true;
         } else {

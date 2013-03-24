@@ -114,7 +114,7 @@ commands:
        aliases: [ci, clear, clearinv, /ciinv]
    kill:
        description: 'Kill yourself or a player'
-       usage: /kill [player]
+       usage: /kill [player/all/*]
    workbench:
        description: 'Force opening a workbench anywhere'
        usage: /workbench
