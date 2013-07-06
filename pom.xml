@@ -18,7 +18,7 @@
     <!-- Continuous integration -->
     <ciManagement>
         <system>jenkins</system>
-        <url>http://jenkins.greatmancode.com/job/JCommandEssentials/</url>
+        <url>http://build.greatmancode.com/</url>
     </ciManagement>
 
     <properties>
