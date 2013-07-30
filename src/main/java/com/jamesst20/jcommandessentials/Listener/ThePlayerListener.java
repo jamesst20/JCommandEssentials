@@ -7,6 +7,7 @@ import com.jamesst20.jcommandessentials.Commands.LockCommand;
 import com.jamesst20.jcommandessentials.Commands.MuteCommand;
 import com.jamesst20.jcommandessentials.Commands.TpBackCommand;
 import com.jamesst20.jcommandessentials.Commands.VanishCommand;
+import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils.AfkListener;
@@ -163,9 +164,14 @@ public class ThePlayerListener implements Listener, AfkListener {
     public void onPlayerDeath(PlayerDeathEvent e) {
         TpBackCommand.playersLastTeleport.put(e.getEntity().getName(), e.getEntity().getLocation());
         if (Methods.hasPermission(e.getEntity(), TpBackCommand.permPrefix + ".self")) {
-            Bukkit.getServer().broadcastMessage(e.getDeathMessage());
-            e.setDeathMessage("");
-            e.getEntity().sendMessage(ChatColor.GOLD + "Use /back command to return to your death point.");
+            /* We want this message to display after the death message*/
+            final Player deathPlayer = e.getEntity();
+            Bukkit.getServer().getScheduler().runTaskLater(JCMDEss.plugin, new Runnable() {
+                @Override
+                public void run() {
+                    deathPlayer.sendMessage(ChatColor.GOLD + "Use /back command to return to your death point.");
+                }
+            }, 1);
         }
     }
 }
