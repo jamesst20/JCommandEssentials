@@ -64,7 +64,7 @@
                     if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.edit")) {
                         return true;
                     }
-                    WarpConfig.deleteWarp((Player) cs, args[1]);
+                    WarpConfig.deleteWarp(cs, args[1]);
                 } else {
                     return false;
                 }

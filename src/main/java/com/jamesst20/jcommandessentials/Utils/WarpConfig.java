@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class WarpConfig {
@@ -33,7 +34,7 @@ public class WarpConfig {
         }
     }
 
-    public static void deleteWarp(Player player, String name) {
+    public static void deleteWarp(CommandSender player, String name) {
         if (warps.containsKey(name)) {
             config.getConfig().set("warps." + name, null);
             config.saveConfig();
