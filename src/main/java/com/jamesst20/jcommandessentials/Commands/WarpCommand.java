@@ -15,10 +15,6 @@
 
         @Override
         public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
-            if (Methods.isConsole(cs)) {
-                Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't use warp command.");
-                return true;
-            }
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("list")){
                     if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.list")){
@@ -37,6 +33,10 @@
                     Methods.sendPlayerMessage(cs, msgToSend.toString());
                     return true;
                 }else {
+                    if (Methods.isConsole(cs)) {
+                        Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't teleport to warps.");
+                        return true;
+                    }
                     if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.tp")) {
                         return true;
                     }
@@ -52,6 +52,10 @@
                 }
             } else if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("add")) {
+                    if (Methods.isConsole(cs)) {
+                        Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't add warps.");
+                        return true;
+                    }
                     if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.edit")) {
                         return true;
                     }
