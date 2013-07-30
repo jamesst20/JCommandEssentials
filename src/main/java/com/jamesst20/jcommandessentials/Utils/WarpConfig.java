@@ -2,6 +2,8 @@ package com.jamesst20.jcommandessentials.Utils;
 
 import com.jamesst20.config.JYamlConfiguration;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -65,5 +67,13 @@ public class WarpConfig {
         } else {
             return null;
         }
+    }
+
+    public static ArrayList<String> getWarpsName(){
+        ArrayList<String> warpsName = new ArrayList<String>();
+        for (String name:warps.keySet()){
+            warpsName.add(name);
+        }
+        return warpsName;
     }
 }
