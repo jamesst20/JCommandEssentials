@@ -2,8 +2,9 @@ package com.jamesst20.jcommandessentials.Objects;
 
 import com.jamesst20.config.JYamlConfiguration;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-import java.io.File;
 import org.bukkit.OfflinePlayer;
+
+import java.io.File;
 
 public class JOfflinePlayerConfig {
 

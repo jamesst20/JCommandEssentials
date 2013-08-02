@@ -1,11 +1,12 @@
 package com.jamesst20.config;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class JYamlConfiguration {
 
@@ -57,13 +58,13 @@ public class JYamlConfiguration {
     public YamlConfiguration getConfig() {
         return config;
     }
-    
-    public String getFileName(){
+
+    public String getFileName() {
         return configFile.getName();
     }
 
     private void loadConfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
     }
-    
+
 }

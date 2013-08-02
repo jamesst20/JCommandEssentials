@@ -29,7 +29,7 @@ public class TpAcceptCommand implements CommandExecutor {
                     secondPlayer.teleport(playerWhoAccept);
                     TpaCommand.tpaPlayers.remove(playerWhoAccept.getName());
                     return true;
-                }else{
+                } else {
                     Methods.sendPlayerMessage(playerWhoAccept, ChatColor.RED + "Player offline.");
                     TpaCommand.tpaPlayers.remove(playerWhoAccept.getName());
                     return true;
@@ -43,7 +43,7 @@ public class TpAcceptCommand implements CommandExecutor {
                     playerWhoAccept.teleport(secondPlayer);
                     TpaHereCommand.tpaPlayers.remove(playerWhoAccept.getName());
                     return true;
-                }else{
+                } else {
                     Methods.sendPlayerMessage(playerWhoAccept, ChatColor.RED + "Player offline.");
                     TpaHereCommand.tpaPlayers.remove(playerWhoAccept.getName());
                     return true;

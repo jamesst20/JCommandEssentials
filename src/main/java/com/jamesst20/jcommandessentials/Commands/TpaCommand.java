@@ -2,14 +2,15 @@ package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import com.jamesst20.jcommandessentials.Utils.Methods;
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TpaCommand implements CommandExecutor {
 
@@ -28,7 +29,7 @@ public class TpaCommand implements CommandExecutor {
         final Player from = ((Player) cs);
         final Player to = Bukkit.getServer().getPlayer(args[0]);
         if (from != null && to != null) {
-            if(tpaPlayers.containsKey(from.getName())||tpaPlayers.containsKey(to.getName())||tpaPlayers.containsValue(from.getName())||tpaPlayers.containsValue(to.getName())||TpaHereCommand.tpaPlayers.containsKey(from.getName())||TpaHereCommand.tpaPlayers.containsKey(to.getName())||TpaHereCommand.tpaPlayers.containsValue(from.getName())||TpaHereCommand.tpaPlayers.containsValue(to.getName())){ 
+            if (tpaPlayers.containsKey(from.getName()) || tpaPlayers.containsKey(to.getName()) || tpaPlayers.containsValue(from.getName()) || tpaPlayers.containsValue(to.getName()) || TpaHereCommand.tpaPlayers.containsKey(from.getName()) || TpaHereCommand.tpaPlayers.containsKey(to.getName()) || TpaHereCommand.tpaPlayers.containsValue(from.getName()) || TpaHereCommand.tpaPlayers.containsValue(to.getName())) {
                 Methods.sendPlayerMessage(cs, ChatColor.RED + "Error : You or " + to.getDisplayName() + " has already a pending request.");
                 return true;
             }

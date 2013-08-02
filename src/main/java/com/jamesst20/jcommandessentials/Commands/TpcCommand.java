@@ -29,8 +29,8 @@ public class TpcCommand implements CommandExecutor {
                 Methods.sendPlayerMessage(
                         cs,
                         "You teleported to (" + Methods.red(String.valueOf((int) loc.getX())) + ", "
-                        + Methods.red(String.valueOf((int) loc.getY())) + ", "
-                        + Methods.red(String.valueOf((int) loc.getZ())) + ").");
+                                + Methods.red(String.valueOf((int) loc.getY())) + ", "
+                                + Methods.red(String.valueOf((int) loc.getZ())) + ").");
             } else {
                 Methods.sendPlayerMessage(cs, ChatColor.RED + "Invalid location.");
             }
@@ -46,14 +46,14 @@ public class TpcCommand implements CommandExecutor {
                     Methods.sendPlayerMessage(
                             cs,
                             "You teleported " + Methods.red(player.getDisplayName()) + " to ("
-                            + Methods.red(String.valueOf((int) loc.getX())) + ", "
-                            + Methods.red(String.valueOf((int) loc.getY())) + ", "
-                            + Methods.red(String.valueOf((int) loc.getZ())) + ").");
+                                    + Methods.red(String.valueOf((int) loc.getX())) + ", "
+                                    + Methods.red(String.valueOf((int) loc.getY())) + ", "
+                                    + Methods.red(String.valueOf((int) loc.getZ())) + ").");
                     Methods.sendPlayerMessage(
                             player,
                             "You have been teleported to (" + Methods.red(String.valueOf((int) loc.getX())) + ", "
-                            + Methods.red(String.valueOf((int) loc.getY())) + ", "
-                            + Methods.red(String.valueOf((int) loc.getZ())) + ").");
+                                    + Methods.red(String.valueOf((int) loc.getY())) + ", "
+                                    + Methods.red(String.valueOf((int) loc.getZ())) + ").");
                 } else {
                     Methods.sendPlayerMessage(cs, ChatColor.RED + "Invalid location.");
                 }

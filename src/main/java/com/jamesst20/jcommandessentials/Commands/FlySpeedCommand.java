@@ -36,7 +36,7 @@ public class FlySpeedCommand implements CommandExecutor {
                     Methods.sendPlayerMessage(
                             cs,
                             "Fly speed of " + Methods.red(player.getDisplayName()) + " is "
-                            + Methods.red(String.valueOf(player.getFlySpeed() * 10F)) + ".");
+                                    + Methods.red(String.valueOf(player.getFlySpeed() * 10F)) + ".");
                 } else {
                     Methods.playerNotFound(cs, args[0]);
                     return true;

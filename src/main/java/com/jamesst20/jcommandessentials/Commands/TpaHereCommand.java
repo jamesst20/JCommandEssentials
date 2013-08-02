@@ -18,14 +18,15 @@ package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import com.jamesst20.jcommandessentials.Utils.Methods;
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TpaHereCommand implements CommandExecutor {
     public static Map<String, String> tpaPlayers = new HashMap<String, String>();
@@ -43,7 +44,7 @@ public class TpaHereCommand implements CommandExecutor {
         final Player playerAsked = ((Player) cs); //Destination Player
         final Player playerToTeleport = Bukkit.getServer().getPlayer(args[0]);
         if (playerAsked != null && playerToTeleport != null) {
-            if(tpaPlayers.containsKey(playerToTeleport.getName())||tpaPlayers.containsKey(playerAsked.getName())||tpaPlayers.containsValue(playerToTeleport.getName())||tpaPlayers.containsValue(playerAsked.getName())||TpaCommand.tpaPlayers.containsKey(playerToTeleport.getName())||TpaCommand.tpaPlayers.containsKey(playerAsked.getName())||TpaCommand.tpaPlayers.containsValue(playerToTeleport.getName())||TpaCommand.tpaPlayers.containsValue(playerAsked.getName())){ 
+            if (tpaPlayers.containsKey(playerToTeleport.getName()) || tpaPlayers.containsKey(playerAsked.getName()) || tpaPlayers.containsValue(playerToTeleport.getName()) || tpaPlayers.containsValue(playerAsked.getName()) || TpaCommand.tpaPlayers.containsKey(playerToTeleport.getName()) || TpaCommand.tpaPlayers.containsKey(playerAsked.getName()) || TpaCommand.tpaPlayers.containsValue(playerToTeleport.getName()) || TpaCommand.tpaPlayers.containsValue(playerAsked.getName())) {
                 Methods.sendPlayerMessage(cs, ChatColor.RED + "Error : You or " + playerToTeleport.getDisplayName() + " has already a pending request.");
                 return true;
             }

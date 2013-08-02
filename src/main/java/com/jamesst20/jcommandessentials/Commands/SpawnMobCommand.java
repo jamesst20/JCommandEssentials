@@ -40,7 +40,7 @@ public class SpawnMobCommand implements CommandExecutor {
                 Methods.sendPlayerMessage(
                         cs,
                         "You spawned " + Methods.red(String.valueOf(count)) + " "
-                        + Methods.red(EntityType.valueOf(args[0].toUpperCase()).getName()) + ".");
+                                + Methods.red(EntityType.valueOf(args[0].toUpperCase()).getName()) + ".");
                 return true;
             } catch (NumberFormatException e) {
                 Methods.sendPlayerMessage(cs, ChatColor.RED + "You must enter numbers for quantity.");

@@ -41,7 +41,7 @@ public class TpCommand implements CommandExecutor {
             if (from != null && to != null) {
                 Methods.sendPlayerMessage(cs,
                         "You teleported " + Methods.red(from.getDisplayName()) + " to " + Methods.red(to.getDisplayName())
-                        + ".");
+                                + ".");
                 Methods.sendPlayerMessage(from, "You have been teleported to " + Methods.red(to.getDisplayName()) + ".");
                 Methods.sendPlayerMessage(to, Methods.red(from.getDisplayName()) + " have been teleported to you.");
                 from.teleport(to);

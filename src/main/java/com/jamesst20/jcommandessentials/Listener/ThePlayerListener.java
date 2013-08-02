@@ -1,12 +1,6 @@
 package com.jamesst20.jcommandessentials.Listener;
 
-import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
-import com.jamesst20.jcommandessentials.Commands.GodCommand;
-import com.jamesst20.jcommandessentials.Commands.HandicapCommand;
-import com.jamesst20.jcommandessentials.Commands.LockCommand;
-import com.jamesst20.jcommandessentials.Commands.MuteCommand;
-import com.jamesst20.jcommandessentials.Commands.TpBackCommand;
-import com.jamesst20.jcommandessentials.Commands.VanishCommand;
+import com.jamesst20.jcommandessentials.Commands.*;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils;
@@ -25,13 +19,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 
 public class ThePlayerListener implements Listener, AfkListener {
 

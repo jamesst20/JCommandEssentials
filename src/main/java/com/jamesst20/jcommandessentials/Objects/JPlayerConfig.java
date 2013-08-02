@@ -2,11 +2,12 @@ package com.jamesst20.jcommandessentials.Objects;
 
 import com.jamesst20.config.JYamlConfiguration;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class JPlayerConfig {
 

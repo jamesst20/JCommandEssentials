@@ -102,6 +102,7 @@ public class TimeCommand implements CommandExecutor {
             Methods.sendPlayerMessage(cs, "The world " + Methods.red(worldStr) + " couldn't be found.");
         }
     }
+
     int DAY_TIME = 200;
     int NIGHT_TIME = 14400;
 }
