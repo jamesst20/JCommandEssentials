@@ -187,5 +187,9 @@ commands:
         aliases: [wit, whatisthis, wti, wii]
    tpahere:
         description: 'Ask to teleport to you a player'
-        usage: /tpahere <name>
+        usage: /tpahere <player>
         aliases: [tpherea, atphere]
+   waterwalk:
+        description: 'Allow yourself or a player to walk on water'
+        usage: /waterwalk [player]
+        aliases: [wwalk]

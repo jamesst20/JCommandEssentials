@@ -111,6 +111,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.regC("warp", new WarpCommand());
         Methods.regC("whatisit", new WhatIsItCommand());
         Methods.regC("tpahere", new TpaHereCommand());
+        Methods.regC("waterwalk", new WaterWalkCommand());
     }
 
     public void setCmdsConfig() {
@@ -165,6 +166,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.registerCommandConfigDefaultValue("warp");
         Methods.registerCommandConfigDefaultValue("whatisit");
         Methods.registerCommandConfigDefaultValue("tpahere");
+        Methods.registerCommandConfigDefaultValue("waterwalk");
     }
 
     private void checkForUpdate() {

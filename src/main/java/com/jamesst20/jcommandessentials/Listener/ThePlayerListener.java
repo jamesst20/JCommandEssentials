@@ -10,6 +10,8 @@ import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,6 +22,8 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+
+import java.util.ArrayList;
 
 public class ThePlayerListener implements Listener, AfkListener {
 
@@ -68,12 +72,30 @@ public class ThePlayerListener implements Listener, AfkListener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerMove(PlayerMoveEvent e) {
-        if (FreezeCommand.frozenPlayers.contains(e.getPlayer().getName())) {
+        Player player = e.getPlayer();
+        if (FreezeCommand.frozenPlayers.contains(player.getName())) {
             e.setCancelled(true);
         }
-        if (TeleportDelay.isPlayerQueued(e.getPlayer())) {
+        if (TeleportDelay.isPlayerQueued(player)) {
             if (e.getFrom().getX() != e.getTo().getX() || e.getFrom().getY() != e.getTo().getY() || e.getFrom().getZ() != e.getTo().getZ()) {
-                TeleportDelay.removeScheduledPlayer(e.getPlayer());
+                TeleportDelay.removeScheduledPlayer(player);
+            }
+        }
+        if (WaterWalkCommand.playersWalkingWaterList.containsKey(player.getName())) {
+            ArrayList<Location> blocksAroundLocation = WaterWalkCommand.getBlocksLocationAroundPlayer(player);
+            for (int i = 0; i < WaterWalkCommand.playersWalkingWaterList.get(player.getName()).size(); i++) {
+                Location loc = (Location) WaterWalkCommand.playersWalkingWaterList.get(player.getName()).keySet().toArray()[i];
+                if (!blocksAroundLocation.contains(loc)) {
+                    loc.getBlock().setType((Material) WaterWalkCommand.playersWalkingWaterList.get(player.getName()).values().toArray()[i]);  //Restore from ice to old block
+                }
+            }
+            for (Location loc : blocksAroundLocation) {
+                if (loc.getBlock().getType() == Material.WATER || loc.getBlock().getType() == Material.STATIONARY_WATER) {
+                    if (!WaterWalkCommand.playersWalkingWaterList.get(player.getName()).containsKey(loc)) {
+                        WaterWalkCommand.playersWalkingWaterList.get(player.getName()).put(loc, loc.getBlock().getType());  //Backup Block
+                    }
+                    loc.getBlock().setType(Material.ICE);  //Set block to ice
+                }
             }
         }
         AfkUtils.updatePlayerActivity(e.getPlayer());
