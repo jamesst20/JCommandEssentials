@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 
 public class WaterWalkCommand implements CommandExecutor {
-    public static HashMap<String, HashMap<Location, Material>> playersWalkingWaterList = new HashMap<String, HashMap<Location, Material>>();
+    public static HashMap<String, ArrayList<Location>> playersWalkingWaterList = new HashMap<String, ArrayList<Location>>();
 
     @Override
     public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
@@ -35,7 +35,7 @@ public class WaterWalkCommand implements CommandExecutor {
                 Methods.sendPlayerMessage(player, ChatColor.RED + "You can no longer walk on water.");
                 return true;
             } else {
-                playersWalkingWaterList.put(player.getName(), new HashMap<Location, Material>());
+                playersWalkingWaterList.put(player.getName(), new ArrayList<Location>());
                 Methods.sendPlayerMessage(player, "You can now walk on water.");
                 return true;
             }
@@ -55,7 +55,7 @@ public class WaterWalkCommand implements CommandExecutor {
                 Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " can no longer walk on water.");
                 return true;
             } else {
-                playersWalkingWaterList.put(player.getName(), new HashMap<Location, Material>());
+                playersWalkingWaterList.put(player.getName(), new ArrayList<Location>());
                 Methods.sendPlayerMessage(player, "You can now walk on water.");
                 Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " can now walk on water.");
                 return true;
@@ -77,9 +77,8 @@ public class WaterWalkCommand implements CommandExecutor {
     }
 
     public static void restoreBlocks(Player player) {
-        for (int i = 0; i < playersWalkingWaterList.get(player.getName()).size(); i++) {
-            Location loc = (Location) playersWalkingWaterList.get(player.getName()).keySet().toArray()[i];
-            loc.getBlock().setType((Material) playersWalkingWaterList.get(player.getName()).values().toArray()[i]);  //Restore old block
+        for (Location loc : playersWalkingWaterList.get(player.getName())) {
+            loc.getBlock().setType(Material.STATIONARY_WATER);  //Restore old block
         }
     }
 }

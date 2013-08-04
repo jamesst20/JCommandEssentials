@@ -83,16 +83,15 @@ public class ThePlayerListener implements Listener, AfkListener {
         }
         if (WaterWalkCommand.playersWalkingWaterList.containsKey(player.getName())) {
             ArrayList<Location> blocksAroundLocation = WaterWalkCommand.getBlocksLocationAroundPlayer(player);
-            for (int i = 0; i < WaterWalkCommand.playersWalkingWaterList.get(player.getName()).size(); i++) {
-                Location loc = (Location) WaterWalkCommand.playersWalkingWaterList.get(player.getName()).keySet().toArray()[i];
+            for (Location loc : WaterWalkCommand.playersWalkingWaterList.get(player.getName())) {
                 if (!blocksAroundLocation.contains(loc)) {
-                    loc.getBlock().setType((Material) WaterWalkCommand.playersWalkingWaterList.get(player.getName()).values().toArray()[i]);  //Restore from ice to old block
+                    loc.getBlock().setType(Material.STATIONARY_WATER);  //Restore from ice to old block
                 }
             }
             for (Location loc : blocksAroundLocation) {
                 if (loc.getBlock().getType() == Material.WATER || loc.getBlock().getType() == Material.STATIONARY_WATER) {
-                    if (!WaterWalkCommand.playersWalkingWaterList.get(player.getName()).containsKey(loc)) {
-                        WaterWalkCommand.playersWalkingWaterList.get(player.getName()).put(loc, loc.getBlock().getType());  //Backup Block
+                    if (!WaterWalkCommand.playersWalkingWaterList.get(player.getName()).contains(loc)) {
+                        WaterWalkCommand.playersWalkingWaterList.get(player.getName()).add(loc);  //Backup Block
                     }
                     loc.getBlock().setType(Material.ICE);  //Set block to ice
                 }
