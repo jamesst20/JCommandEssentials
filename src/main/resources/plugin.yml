@@ -193,3 +193,7 @@ commands:
         description: 'Allow yourself or a player to walk on water'
         usage: /waterwalk [player]
         aliases: [wwalk]
+   armor:
+        description: 'Give to yourself or a player an armor'
+        usage: /armor [player] <material>
+        aliases: [armour]
