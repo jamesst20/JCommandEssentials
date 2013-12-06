@@ -113,6 +113,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.regC("tpahere", new TpaHereCommand());
         Methods.regC("waterwalk", new WaterWalkCommand());
         Methods.regC("armor", new ArmorCommand());
+        Methods.regC("shoot", new ShootCommand());
     }
 
     public void setCmdsConfig() {
@@ -169,6 +170,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.registerCommandConfigDefaultValue("tpahere");
         Methods.registerCommandConfigDefaultValue("waterwalk");
         Methods.registerCommandConfigDefaultValue("armor");
+        Methods.registerCommandConfigDefaultValue("shoot");
     }
 
     private void checkForUpdate() {

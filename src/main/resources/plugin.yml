@@ -197,3 +197,7 @@ commands:
         description: 'Give to yourself or a player an armor'
         usage: /armor [player] <material>
         aliases: [armour]
+   shoot:
+        description: 'Shoot yourself or a player into the air'
+        usage: /shoot [player]
+        aliases: [throw]
