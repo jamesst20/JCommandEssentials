@@ -201,3 +201,11 @@ commands:
         description: 'Shoot yourself or a player into the air'
         usage: /shoot [player]
         aliases: [throw]
+   setitemname:
+        description: 'Set the name of the item you are holding'
+        usage: /setitemname <name>
+        aliases: [iname, itemname]
+   setitemdescription:
+        description: 'Set the description of the item you are holding'
+        usage: /setitemdescription <line 1> [line 2] [line 3]
+        aliases: [idescription, idesc, itemdescription, itemdesc]
