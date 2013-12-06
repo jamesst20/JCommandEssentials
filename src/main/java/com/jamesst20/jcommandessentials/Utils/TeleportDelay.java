@@ -17,15 +17,14 @@
 package com.jamesst20.jcommandessentials.Utils;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
+import java.util.HashMap;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-
 public class TeleportDelay {
 
-    private static HashMap<String, Integer> playerTasks = new HashMap<String, Integer>();
-    private static JCMDEss plugin = JCMDEss.plugin;
+    private static final HashMap<String, Integer> playerTasks = new HashMap<String, Integer>();
+    private static final JCMDEss plugin = JCMDEss.plugin;
 
     public static void schedulePlayer(Player player, Location loc) {
         playerTasks.put(player.getName(), scheduleTask(player, loc));

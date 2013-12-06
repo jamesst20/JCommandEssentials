@@ -17,19 +17,21 @@
 package com.jamesst20.jcommandessentials.Utils;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
 public class Methods {
 
     static JCMDEss plugin = JCMDEss.plugin;
+
+    public static String prefix = ChatColor.WHITE + "[" + ChatColor.GREEN + "JCMD" + ChatColor.DARK_GREEN + "Ess"
+            + ChatColor.WHITE + "] ";
 
     public static void regC(String command, CommandExecutor ce) {
         if (!plugin.getDescription().getCommands().toString().contains(command)) {
@@ -90,10 +92,7 @@ public class Methods {
     }
 
     public static boolean hasPermission(Player p, String node) {
-        if (p.hasPermission(node.toLowerCase()) || p.hasPermission(node)) {
-            return true;
-        }
-        return false;
+        return p.hasPermission(node.toLowerCase()) || p.hasPermission(node);
     }
 
     public static boolean hasPermission(CommandSender cs, String node) {
@@ -218,7 +217,4 @@ public class Methods {
         }
         return new String(b);
     }
-
-    public static String prefix = ChatColor.WHITE + "[" + ChatColor.GREEN + "JCMD" + ChatColor.DARK_GREEN + "Ess"
-            + ChatColor.WHITE + "] ";
 }

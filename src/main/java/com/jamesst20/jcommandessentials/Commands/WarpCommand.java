@@ -18,14 +18,13 @@ package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.WarpConfig;
+import java.util.ArrayList;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
 
 public class WarpCommand implements CommandExecutor {
 
@@ -43,7 +42,7 @@ public class WarpCommand implements CommandExecutor {
                 }
                 StringBuilder msgToSend = new StringBuilder("Available Warps (" + Methods.red(String.valueOf(warpsName.size())) + ") : ");
                 for (String name : warpsName) {
-                    msgToSend.append(Methods.red(name) + ", ");
+                    msgToSend.append(Methods.red(name)).append(", ");
                 }
                 msgToSend = Methods.replaceLast(msgToSend, ", ", ".");
                 Methods.sendPlayerMessage(cs, msgToSend.toString());

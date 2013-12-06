@@ -18,6 +18,7 @@ package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
+import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -26,14 +27,18 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-
 public class TpBackCommand implements CommandExecutor {
 
     public static HashMap<String, Location> playersLastTeleport = new HashMap<String, Location>();
     public static String permPrefix = "JCMDEss.commands.tpback";
 
-    @Override
+        public static void removePlayer(String name) {
+            if (playersLastTeleport.containsKey(name)) {
+                playersLastTeleport.remove(name);
+            }
+        }
+
+        @Override
     public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
         if (args.length == 0) {
             if (Methods.isConsole(cs)) {
@@ -75,11 +80,5 @@ public class TpBackCommand implements CommandExecutor {
             return false;
         }
         return true;
-    }
-
-    public static void removePlayer(String name) {
-        if (playersLastTeleport.containsKey(name)) {
-            playersLastTeleport.remove(name);
-        }
     }
 }

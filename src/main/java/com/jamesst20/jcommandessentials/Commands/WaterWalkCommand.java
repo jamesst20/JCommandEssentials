@@ -17,6 +17,8 @@
 package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.jcommandessentials.Utils.Methods;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -27,12 +29,26 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 
 public class WaterWalkCommand implements CommandExecutor {
     public static HashMap<String, ArrayList<Location>> playersWalkingWaterList = new HashMap<String, ArrayList<Location>>();
+
+        public static ArrayList<Location> getBlocksLocationAroundPlayer(Player player) {
+            ArrayList<Location> blocksAroundLocation = new ArrayList<Location>();
+            for (int x = -1; x < 2; x++) {
+                for (int y = -1; y < 2; y++) {
+                    Block block = player.getLocation().getBlock().getRelative(x, -1, y);
+                    blocksAroundLocation.add(block.getLocation());
+                }
+            }
+            return blocksAroundLocation;
+        }
+
+    public static void restoreBlocks(Player player) {
+        for (Location loc : playersWalkingWaterList.get(player.getName())) {
+            loc.getBlock().setType(Material.STATIONARY_WATER);  //Restore old block
+        }
+    }
 
     @Override
     public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
@@ -78,23 +94,6 @@ public class WaterWalkCommand implements CommandExecutor {
             }
         } else {
             return false;
-        }
-    }
-
-    public static ArrayList<Location> getBlocksLocationAroundPlayer(Player player) {
-        ArrayList<Location> blocksAroundLocation = new ArrayList<Location>();
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-                Block block = player.getLocation().getBlock().getRelative(x, -1, y);
-                blocksAroundLocation.add(block.getLocation());
-            }
-        }
-        return blocksAroundLocation;
-    }
-
-    public static void restoreBlocks(Player player) {
-        for (Location loc : playersWalkingWaterList.get(player.getName())) {
-            loc.getBlock().setType(Material.STATIONARY_WATER);  //Restore old block
         }
     }
 }

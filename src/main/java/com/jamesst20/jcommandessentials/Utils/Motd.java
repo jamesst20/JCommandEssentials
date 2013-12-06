@@ -17,15 +17,14 @@
 package com.jamesst20.jcommandessentials.Utils;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class Motd {
 

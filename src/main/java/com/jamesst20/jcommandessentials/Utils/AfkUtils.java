@@ -17,13 +17,12 @@
 package com.jamesst20.jcommandessentials.Utils;
 
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
-import javax.swing.event.EventListenerList;
 import java.util.EventListener;
 import java.util.HashMap;
 import java.util.HashSet;
+import javax.swing.event.EventListenerList;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class AfkUtils {
 
@@ -31,11 +30,6 @@ public class AfkUtils {
     public static HashMap<String, Long> idleTimeList = new HashMap<String, Long>();
     public static HashSet<String> afkList = new HashSet<String>();
     private final static EventListenerList listeners = new EventListenerList();
-
-    public interface AfkListener extends EventListener {
-
-        void playerAfkStateChanged(Player player, boolean afk);
-    }
 
     public static void startTask() {
         if (isAutoAfkEnabled()) {
@@ -148,10 +142,7 @@ public class AfkUtils {
     }
 
     public static boolean isPlayerAfk(Player player) {
-        if (afkList.contains(player.getName())) {
-            return true;
-        }
-        return false;
+        return afkList.contains(player.getName());
     }
 
     /* Listener Region */
@@ -171,5 +162,10 @@ public class AfkUtils {
 
     public static AfkListener[] getAfkListeners() {
         return listeners.getListeners(AfkListener.class);
+    }
+
+    public interface AfkListener extends EventListener {
+
+        void playerAfkStateChanged(Player player, boolean afk);
     }
 }

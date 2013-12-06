@@ -26,7 +26,11 @@ public class LockCommand implements CommandExecutor {
 
     public static boolean serverLocked = false;
 
-    @Override
+        public static boolean byPass(Player player) {
+            return Methods.hasPermission(player, "JCMDEss.bypass.lock");
+        }
+
+        @Override
     public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
         if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.lock")) {
             return true;
@@ -42,9 +46,5 @@ public class LockCommand implements CommandExecutor {
             Methods.broadcastMessage("The server is now unlocked!");
         }
         return true;
-    }
-
-    public static boolean byPass(Player player) {
-        return Methods.hasPermission(player, "JCMDEss.bypass.lock");
     }
 }

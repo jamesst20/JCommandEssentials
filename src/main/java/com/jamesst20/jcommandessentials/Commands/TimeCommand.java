@@ -27,6 +27,9 @@ import org.bukkit.entity.Player;
 
 public class TimeCommand implements CommandExecutor {
 
+    int DAY_TIME = 200;
+    int NIGHT_TIME = 14400;
+
     @Override
     public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
         if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.time")) {
@@ -118,7 +121,4 @@ public class TimeCommand implements CommandExecutor {
             Methods.sendPlayerMessage(cs, "The world " + Methods.red(worldStr) + " couldn't be found.");
         }
     }
-
-    int DAY_TIME = 200;
-    int NIGHT_TIME = 14400;
 }

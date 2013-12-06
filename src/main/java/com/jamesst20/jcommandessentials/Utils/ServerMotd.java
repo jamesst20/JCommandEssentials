@@ -21,7 +21,7 @@ import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 public class ServerMotd {
 
     static JCMDEss plugin = JCMDEss.plugin;
-    private static String defaultMotd = "&f[&aJCMD&2Ess&f] &cMotd not set!";
+    private static final String defaultMotd = "&f[&aJCMD&2Ess&f] &cMotd not set!";
 
     public static void setServerMotd(String message) {
         plugin.getConfig().set("server.motd", message);

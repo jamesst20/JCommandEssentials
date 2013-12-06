@@ -16,17 +16,16 @@
  */
 package com.jamesst20.config;
 
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class JYamlConfiguration {
 
-    private File configFile;
+    private final File configFile;
     private YamlConfiguration config;
 
     public JYamlConfiguration(String configFileName) {
