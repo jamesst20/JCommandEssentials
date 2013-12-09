@@ -16,63 +16,7 @@
  */
 package com.jamesst20.jcommandessentials.JCMDEssentials;
 
-import com.jamesst20.jcommandessentials.Commands.AfkCommand;
-import com.jamesst20.jcommandessentials.Commands.ArmorCommand;
-import com.jamesst20.jcommandessentials.Commands.BanCommand;
-import com.jamesst20.jcommandessentials.Commands.BroadcastCommand;
-import com.jamesst20.jcommandessentials.Commands.ClearInventoryCommand;
-import com.jamesst20.jcommandessentials.Commands.DisableCmdCommand;
-import com.jamesst20.jcommandessentials.Commands.EnableCmdCommand;
-import com.jamesst20.jcommandessentials.Commands.EnchantCommand;
-import com.jamesst20.jcommandessentials.Commands.FlyCommand;
-import com.jamesst20.jcommandessentials.Commands.FlySpeedCommand;
-import com.jamesst20.jcommandessentials.Commands.FreezeCommand;
-import com.jamesst20.jcommandessentials.Commands.GameModeCommand;
-import com.jamesst20.jcommandessentials.Commands.GodCommand;
-import com.jamesst20.jcommandessentials.Commands.HandicapCommand;
-import com.jamesst20.jcommandessentials.Commands.HealCommand;
-import com.jamesst20.jcommandessentials.Commands.HomeCommand;
-import com.jamesst20.jcommandessentials.Commands.IpCommand;
-import com.jamesst20.jcommandessentials.Commands.JCommandEssentialsCommand;
-import com.jamesst20.jcommandessentials.Commands.KickCommand;
-import com.jamesst20.jcommandessentials.Commands.KillCommand;
-import com.jamesst20.jcommandessentials.Commands.KillMobsCommand;
-import com.jamesst20.jcommandessentials.Commands.LockCommand;
-import com.jamesst20.jcommandessentials.Commands.MotdCommand;
-import com.jamesst20.jcommandessentials.Commands.MsgCommand;
-import com.jamesst20.jcommandessentials.Commands.MuteCommand;
-import com.jamesst20.jcommandessentials.Commands.OpenInventoryCommand;
-import com.jamesst20.jcommandessentials.Commands.ServerMotdCommand;
-import com.jamesst20.jcommandessentials.Commands.SetExpCommand;
-import com.jamesst20.jcommandessentials.Commands.SetHomeCommand;
-import com.jamesst20.jcommandessentials.Commands.SetItemDescriptionCommand;
-import com.jamesst20.jcommandessentials.Commands.SetItemNameCommand;
-import com.jamesst20.jcommandessentials.Commands.SetSpawnCommand;
-import com.jamesst20.jcommandessentials.Commands.ShootCommand;
-import com.jamesst20.jcommandessentials.Commands.SpawnCommand;
-import com.jamesst20.jcommandessentials.Commands.SpawnMobCommand;
-import com.jamesst20.jcommandessentials.Commands.StaffCommand;
-import com.jamesst20.jcommandessentials.Commands.SudoCommand;
-import com.jamesst20.jcommandessentials.Commands.TimeCommand;
-import com.jamesst20.jcommandessentials.Commands.TpAcceptCommand;
-import com.jamesst20.jcommandessentials.Commands.TpAllCommand;
-import com.jamesst20.jcommandessentials.Commands.TpBackCommand;
-import com.jamesst20.jcommandessentials.Commands.TpCommand;
-import com.jamesst20.jcommandessentials.Commands.TpDenyCommand;
-import com.jamesst20.jcommandessentials.Commands.TpHereCommand;
-import com.jamesst20.jcommandessentials.Commands.TpThereCommand;
-import com.jamesst20.jcommandessentials.Commands.TpaCommand;
-import com.jamesst20.jcommandessentials.Commands.TpaHereCommand;
-import com.jamesst20.jcommandessentials.Commands.TpcCommand;
-import com.jamesst20.jcommandessentials.Commands.UnbanCommand;
-import com.jamesst20.jcommandessentials.Commands.VanishCommand;
-import com.jamesst20.jcommandessentials.Commands.WalkSpeedCommand;
-import com.jamesst20.jcommandessentials.Commands.WarpCommand;
-import com.jamesst20.jcommandessentials.Commands.WaterWalkCommand;
-import com.jamesst20.jcommandessentials.Commands.WeatherCommand;
-import com.jamesst20.jcommandessentials.Commands.WhatIsItCommand;
-import com.jamesst20.jcommandessentials.Commands.WhoisCommand;
-import com.jamesst20.jcommandessentials.Commands.WorkbenchCommand;
+import com.jamesst20.jcommandessentials.Commands.*;
 import com.jamesst20.jcommandessentials.Listener.ServerListener;
 import com.jamesst20.jcommandessentials.Listener.ThePlayerListener;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils;
@@ -192,6 +136,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.regC("shoot", new ShootCommand());
         Methods.regC("setitemdescription", new SetItemDescriptionCommand());
         Methods.regC("setitemname", new SetItemNameCommand());
+        Methods.regC("freeme", new FreeMeCommand());
     }
 
     public void setCmdsConfig() {
@@ -251,6 +196,7 @@ public class JCMDEss extends JavaPlugin {
         Methods.registerCommandConfigDefaultValue("shoot");
         Methods.registerCommandConfigDefaultValue("setitemname");
         Methods.registerCommandConfigDefaultValue("setitemdescription");
+        Methods.registerCommandConfigDefaultValue("freeme");
     }
 
     private void checkForUpdate() {

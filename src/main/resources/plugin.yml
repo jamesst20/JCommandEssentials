@@ -209,3 +209,7 @@ commands:
         description: 'Set the description of the item you are holding'
         usage: /setitemdescription <line 1> [line 2] [line 3]
         aliases: [idescription, idesc, itemdescription, itemdesc]
+   freeme:
+        description: 'Throw and set on fire enemies around you'
+        usage: /freeme [Player]
+        aliases: [sparta, freedom]
