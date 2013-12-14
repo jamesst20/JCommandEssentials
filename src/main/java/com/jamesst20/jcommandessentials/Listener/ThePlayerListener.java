@@ -55,8 +55,6 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class ThePlayerListener implements Listener, AfkListener {
 
-    String serverLocked = "The server is currently locked!";
-
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(final PlayerJoinEvent e) {
         Player player = e.getPlayer();
@@ -130,13 +128,12 @@ public class ThePlayerListener implements Listener, AfkListener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onAsyncPlayerChat(AsyncPlayerChatEvent e) {
-        if (LockCommand.serverLocked) {
-            Player player = e.getPlayer();
-            if (!LockCommand.byPass(player)) {
-                Methods.sendPlayerMessage(player, serverLocked);
-                e.setCancelled(true);
-            }
+        Player player = e.getPlayer();
+        if (!LockCommand.byPass(player)) {
+            LockCommand.sendErrorMessage(player);
+            e.setCancelled(true);
         }
+
         if (MuteCommand.mutedPlayersList.contains(e.getPlayer().getName())) {
             Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "You are muted!");
             e.setCancelled(true);
@@ -146,23 +143,19 @@ public class ThePlayerListener implements Listener, AfkListener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (LockCommand.serverLocked) {
-            Player player = e.getPlayer();
-            if (!LockCommand.byPass(player)) {
-                Methods.sendPlayerMessage(player, serverLocked);
-                e.setCancelled(true);
-            }
+        Player player = e.getPlayer();
+        if (!LockCommand.byPass(player)) {
+            LockCommand.sendErrorMessage(player);
+            e.setCancelled(true);
         }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockBreak(BlockBreakEvent e) {
-        if (LockCommand.serverLocked) {
-            Player player = e.getPlayer();
-            if (!LockCommand.byPass(player)) {
-                Methods.sendPlayerMessage(player, serverLocked);
-                e.setCancelled(true);
-            }
+        Player player = e.getPlayer();
+        if (!LockCommand.byPass(player)) {
+            LockCommand.sendErrorMessage(player);
+            e.setCancelled(true);
         }
     }
 

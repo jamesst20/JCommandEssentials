@@ -17,6 +17,9 @@
 package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.jcommandessentials.Utils.Methods;
+import java.util.ArrayList;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,25 +28,57 @@ import org.bukkit.entity.Player;
 public class LockCommand implements CommandExecutor {
 
     public static boolean serverLocked = false;
+    public static ArrayList<String> lockedPlayersName = new ArrayList<String>();
 
-        public static boolean byPass(Player player) {
-            return Methods.hasPermission(player, "JCMDEss.bypass.lock");
-        }
-
-        @Override
-    public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
-        if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.lock")) {
-            return true;
-        }
-        if (args.length != 0) {
+    public static boolean byPass(Player player) {
+        if(serverLocked || lockedPlayersName.contains(player.getName())){
+            if(Methods.hasPermission(player, "JCMDEss.bypass.lock")) return true;
             return false;
         }
-        if (!serverLocked) {
-            serverLocked = true;
-            Methods.broadcastMessage("The server is now locked!");
+        return true;
+    }
+    
+    public static void sendErrorMessage(Player p){
+        if(serverLocked){
+            Methods.sendPlayerMessage(p, ChatColor.RED + "The server is locked.");
+        }else{
+            Methods.sendPlayerMessage(p, ChatColor.RED + "You are locked.");
+        }
+    }
+
+    @Override
+    public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
+        if (args.length == 0) {
+            if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.lock.server")) {
+                return true;
+            }
+            if (!serverLocked) {
+                serverLocked = true;
+                Methods.broadcastMessage("The server is now locked!");
+            } else {
+                serverLocked = false;
+                Methods.broadcastMessage("The server is now unlocked!");
+            }
+        } else if (args.length == 1) {
+            if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.lock.players")) {
+                return true;
+            }
+            Player p = Bukkit.getServer().getPlayer(args[0]);
+            if(p != null){
+                if(lockedPlayersName.contains(p.getName())){
+                    lockedPlayersName.remove(p.getName());
+                    Methods.sendPlayerMessage(cs, "The player " + Methods.red(p.getName()) + " is now " + Methods.red("unlocked") + ".");
+                    Methods.sendPlayerMessage(p, "You are now " + Methods.red("unlocked") + ".");
+                }else{
+                    lockedPlayersName.add(p.getName());
+                    Methods.sendPlayerMessage(cs, "The player " + Methods.red(p.getName()) + " is now " + Methods.red("locked") + ".");
+                    Methods.sendPlayerMessage(p, "You are now " + Methods.red("locked") + ".");
+                }
+            }else{
+                Methods.playerNotFound(cs, args[0]);
+            }
         } else {
-            serverLocked = false;
-            Methods.broadcastMessage("The server is now unlocked!");
+            return false;
         }
         return true;
     }

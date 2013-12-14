@@ -72,8 +72,8 @@ commands:
        usage: /freeze <player>
        aliases: unfreeze
    Lock:
-       description: 'Lock the server : Prevent breaking/placing blocks, chat messages and mobs spawning'
-       usage: /lock
+       description: 'Lock the server/player : Prevent breaking/placing blocks, chat messages and mobs spawning'
+       usage: /lock [player]
        aliases: unlock
    ServerMotd:
        description: 'Set the server list motd'
