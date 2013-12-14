@@ -3,213 +3,217 @@ version: 2.8
 authors: [Jamesst20]
 main: com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss
 commands:
-   jcommandessentials:
+   JCommandEssentials:
        description: 'JCommandsEssentials plugin'
        usage: /jcommandessentials
        aliases: [jcmdess]
-   enablecmd:
+   EnableCmd:
        description: 'Enable a JCMDEssentials Command'
        usage: /enablecmd <cmd>
-   disablecmd:
+   DisableCmd:
        description: 'Disable a JCMDEssentials Command'
        usage: /disablecmd <cmd>
-   sethome:
+   SetHome:
        description: 'Set your home location'
        usage: /setHome [Optional Home Name]
-   home:
+   Home:
        description: 'Teleport to your home location'
        usage: /Home [Optional Home Name]
        aliases: tphome
-   weather:
+   Weather:
        description: 'Set the weather of the current or other worlds'
        usage: /weather <sun,rain,storm,thunder> [world]
        aliases: [sun, rain, storm, thunder]
-   tpa:
+   Tpa:
        description: 'Ask a player to teleport to him'
        usage: /tpa <player>
-   tpaccept:
+   TpAccept:
        description: 'Accept a teleport request'
        usage: /tpaccept
        aliases: tpaaccept
-   tpdeny:
+   TpDeny:
        description: 'Deny a teleport request'
        usage: /tpdeny
        aliases: tpadeny
-   tp:
+   Tp:
        description: 'Teleport yourself or another player to a player'
        usage: /tp <player> [player]
-   tpall:
+   TpAll:
        description: 'Teleport all players to you'
        usage: /tpall
-   tphere:
+   TpHere:
        description: 'Teleport a player to your location'
        usage: /tphere <player>
-   time:
+   Time:
        description: 'Set the time of a world'
        usage: /day [world], /night [world], /time day/night [world]
        aliases: [day, night]
-   broadcast:
+   Broadcast:
        description: 'Broadcast a message'
        usage: /broadcast <message>
-   spawn:
+   Spawn:
        description: 'Teleport yourself or another player to spawn'
        usage: /spawn [player]
-   setspawn:
+   SetSpawn:
        description: 'Set default server spawn'
        usage: /setspawn
-   fly:
+   Fly:
        description: 'Enabled or disable fly for yourself or another player'
        usage: /fly [player]
-   god:
+   God:
        description: 'Enable or disable god mode for yourself or another player'
        usage: /god [player]
        aliases: ungod
-   motd:
+   Motd:
        description: 'Read the message of the day'
        usage: /motd
-   freeze:
+   Freeze:
        description: 'Prevent a player from moving'
        usage: /freeze <player>
        aliases: unfreeze
-   lock:
+   Lock:
        description: 'Lock the server : Prevent breaking/placing blocks, chat messages and mobs spawning'
        usage: /lock
        aliases: unlock
-   servermotd:
+   ServerMotd:
        description: 'Set the server list motd'
        usage: /servermotd set <motd>, /servermotd enable, /servermotd disable
-   sudo:
+   Sudo:
        description: 'Run a command as another player'
        usage: /sudo <player> <command [args]>
-   gamemode:
+   GameMode:
        description: 'Change your or a player gamemode'
        usage: /<gamemode/gm> <creative/survival/adventure> [player] or /<creative/survival/adventure> [player]
        aliases: [gm, survival, creative, adventure]
-   heal:
+   Heal:
        description: 'Heal a player (Health and Food)'
        usage: /heal
-   msg:
+   Msg:
        description: 'Send a private message to a player'
        usage: /msg <player> <message> or /pm <player> <message>
        aliases: [pm, tell]
-   staff:
+   Staff:
        description: 'Send a message to the staff chat'
        usage: /staff <message>
-   tpc:
+   Tpc:
        description: 'Teleport yourself or a player to coordinates'
        usage: /tpc <x> <y> <z> [player]
        aliases: [tppos, tpos, tpcoord]
-   kick:
+   Kick:
        description: 'Kick a player'
        usage: /kick <player> [reason]
-   ban:
+   Ban:
        description: 'Ban a player'
        usage: /ban <player> [reason]
-   unban:
+   Unban:
        description: 'Unban a player'
        usage: /unban <player>
-   clearinventory:
+   ClearInventory:
        description: 'Clear your or a player inventory'
        usage: /clearinventory [player]
        aliases: [ci, clear, clearinv, /ciinv]
-   kill:
+   Kill:
        description: 'Kill yourself or a player'
        usage: /kill [player/all/*]
-   workbench:
+   Workbench:
        description: 'Force opening a workbench anywhere'
        usage: /workbench
        aliases: [craft, crafting, craftingtable, crafttable, wb, ct]
-   flyspeed:
+   FlySpeed:
        description: 'Get or set fly speed'
        usage: /flyspeed get [player] or /flyspeed set <speed> [player]
-   openinventory:
+   OpenInventory:
        description: 'Open the inventory of a player'
        usage: /openinventory <player>
        aliases: [openinv, invopen, inventoryopen, oi]
-   vanish:
+   Vanish:
        description: 'Make yourself or a player invisible/visible from other players'
        usage: /vanish [player]
        aliases: unvanish
-   afk:
+   Afk:
        description: 'Tells everyone that you are now back or away'
        usage: /afk or /afk [enable/disable/delay] [delay]
        aliases: unafk
-   killmobs:
+   KillMobs:
        description: 'Kill mobs on the server'
        usage: /killmobs [animals/monsters/MobName]
        aliases: [killmob, killallmob, killallmobs]
-   spawnmob:
+   SpawnMob:
         description: 'Spawn mobs'
         usage: /spawnmob <mob> <quantity>
         aliases : spawnmobs
-   handicap:
+   Handicap:
         description: 'Block a player from using commands'
         usage: /handicap <player>
         aliases: unhandicap
-   ip:
+   Ip:
         description: 'Get your or a player IP'
         usage: /ip [player]
         aliases: [getip, ipaddress, getipaddress]
-   mute:
+   Mute:
         description: 'Mute a player'
         usage: /mute <player>
         aliases: unmute
-   tpthere:
+   TpThere:
         description: 'Teleport yourself or a player to your target block'
         usage: /tpthere [player]
         aliases: put
-   setexp:
+   SetExp:
         description: 'Set your or a player experience level'
         usage: /setexp [player] <exp>
         aliases: [setxp, xp, exp]
-   enchant:
+   Enchant:
         description: 'Enchant the item you are holding'
         usage: /enchant <enchantment> <level>
         aliases: [enchantment, enchantments, enchantitem]
-   walkspeed:
+   WalkSpeed:
         description: 'Manage your or a player walking speed'
         usage: /walkspeed get [player], /walkspeed set <speed> [player]
         aliases: [wspeed, speedwalk, walk, run]
-   tpback:
+   TpBack:
         description: 'Teleport to your last location'
         usage: /tpback [player]
         aliases: [teleportback, tplastlocation, back, teleportlastlocation, tplast, teleportlast]
-   whois:
+   Whois:
         description: 'Get info of a player'
         usage: /whois <player>
         aliases: [playerinfo, getplayerinfo, getpinfo, pinfo, playerinfo]
-   warp:
+   Warp:
         description: 'Teleport or edit a warp'
         usage: /warp <name>, /warp <add/delete> <name>
-   whatisit:
+   WhatIsIt:
         description: 'Give informations about an item'
         usage: /whatisit
         aliases: [wit, whatisthis, wti, wii]
-   tpahere:
+   TpaHere:
         description: 'Ask to teleport to you a player'
         usage: /tpahere <player>
         aliases: [tpherea, atphere]
-   waterwalk:
+   WaterWalk:
         description: 'Allow yourself or a player to walk on water'
         usage: /waterwalk [player]
         aliases: [wwalk]
-   armor:
+   Armor:
         description: 'Give to yourself or a player an armor'
         usage: /armor [player] <material>
         aliases: [armour]
-   shoot:
+   Shoot:
         description: 'Shoot yourself or a player into the air'
         usage: /shoot [player]
         aliases: [throw]
-   setitemname:
+   SetItemName:
         description: 'Set the name of the item you are holding'
         usage: /setitemname <name>
         aliases: [iname, itemname]
-   setitemdescription:
+   SetItemDescription:
         description: 'Set the description of the item you are holding'
         usage: /setitemdescription <line 1> [line 2] [line 3]
         aliases: [idescription, idesc, itemdescription, itemdesc]
-   freeme:
+   FreeMe:
         description: 'Throw and set on fire enemies around you'
         usage: /freeme [Player]
         aliases: [sparta, freedom]
+   Flat:
+       description: 'Make the map flat for a specific radius'
+       usage: /flat <radius>
+       aliases: [makeflat]

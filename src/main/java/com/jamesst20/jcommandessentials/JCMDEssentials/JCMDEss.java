@@ -31,8 +31,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class JCMDEss extends JavaPlugin {
@@ -49,11 +55,11 @@ public class JCMDEss extends JavaPlugin {
             Methods.log(ChatColor.RED + "Failed to send MCStats!");
         }
         writeDefaultSettings();
-        setCmdsConfig();
+        registerCommandsAndSetCmdsConfig();
         checkForUpdate();
         WarpConfig.reloadWarps();
         registerEvents();
-        registerCommands();
+        
         getLogger().info("Successfully enabled!");
     }
 
@@ -78,125 +84,21 @@ public class JCMDEss extends JavaPlugin {
         TeleportDelay.setDefaultDelay();
     }
 
-    private void registerCommands() {
-        Methods.regC("jcommandessentials", new JCommandEssentialsCommand());
-        Methods.regC("enablecmd", new EnableCmdCommand());
-        Methods.regC("disablecmd", new DisableCmdCommand());
-        Methods.regC("home", new HomeCommand());
-        Methods.regC("sethome", new SetHomeCommand());
-        Methods.regC("weather", new WeatherCommand());
-        Methods.regC("tpa", new TpaCommand());
-        Methods.regC("tpaccept", new TpAcceptCommand());
-        Methods.regC("tpdeny", new TpDenyCommand());
-        Methods.regC("tp", new TpCommand());
-        Methods.regC("tphere", new TpHereCommand());
-        Methods.regC("time", new TimeCommand());
-        Methods.regC("broadcast", new BroadcastCommand());
-        Methods.regC("spawn", new SpawnCommand());
-        Methods.regC("setspawn", new SetSpawnCommand());
-        Methods.regC("fly", new FlyCommand());
-        Methods.regC("god", new GodCommand());
-        Methods.regC("motd", new MotdCommand());
-        Methods.regC("tpall", new TpAllCommand());
-        Methods.regC("freeze", new FreezeCommand());
-        Methods.regC("lock", new LockCommand());
-        Methods.regC("servermotd", new ServerMotdCommand());
-        Methods.regC("sudo", new SudoCommand());
-        Methods.regC("gamemode", new GameModeCommand());
-        Methods.regC("heal", new HealCommand());
-        Methods.regC("msg", new MsgCommand());
-        Methods.regC("staff", new StaffCommand());
-        Methods.regC("tpc", new TpcCommand());
-        Methods.regC("kick", new KickCommand());
-        Methods.regC("ban", new BanCommand());
-        Methods.regC("unban", new UnbanCommand());
-        Methods.regC("clearinventory", new ClearInventoryCommand());
-        Methods.regC("kill", new KillCommand());
-        Methods.regC("workbench", new WorkbenchCommand());
-        Methods.regC("flyspeed", new FlySpeedCommand());
-        Methods.regC("openinventory", new OpenInventoryCommand());
-        Methods.regC("vanish", new VanishCommand());
-        Methods.regC("afk", new AfkCommand());
-        Methods.regC("killmobs", new KillMobsCommand());
-        Methods.regC("spawnmob", new SpawnMobCommand());
-        Methods.regC("handicap", new HandicapCommand());
-        Methods.regC("ip", new IpCommand());
-        Methods.regC("mute", new MuteCommand());
-        Methods.regC("tpthere", new TpThereCommand());
-        Methods.regC("setexp", new SetExpCommand());
-        Methods.regC("enchant", new EnchantCommand());
-        Methods.regC("walkspeed", new WalkSpeedCommand());
-        Methods.regC("tpback", new TpBackCommand());
-        Methods.regC("whois", new WhoisCommand());
-        Methods.regC("warp", new WarpCommand());
-        Methods.regC("whatisit", new WhatIsItCommand());
-        Methods.regC("tpahere", new TpaHereCommand());
-        Methods.regC("waterwalk", new WaterWalkCommand());
-        Methods.regC("armor", new ArmorCommand());
-        Methods.regC("shoot", new ShootCommand());
-        Methods.regC("setitemdescription", new SetItemDescriptionCommand());
-        Methods.regC("setitemname", new SetItemNameCommand());
-        Methods.regC("freeme", new FreeMeCommand());
-    }
-
-    public void setCmdsConfig() {
-        Methods.registerCommandConfigDefaultValue("enablecmd");
-        Methods.registerCommandConfigDefaultValue("disablecmd");
-        Methods.registerCommandConfigDefaultValue("home");
-        Methods.registerCommandConfigDefaultValue("sethome");
-        Methods.registerCommandConfigDefaultValue("weather");
-        Methods.registerCommandConfigDefaultValue("tpa");
-        Methods.registerCommandConfigDefaultValue("tpaccept");
-        Methods.registerCommandConfigDefaultValue("tpdeny");
-        Methods.registerCommandConfigDefaultValue("tp");
-        Methods.registerCommandConfigDefaultValue("tphere");
-        Methods.registerCommandConfigDefaultValue("time");
-        Methods.registerCommandConfigDefaultValue("broadcast");
-        Methods.registerCommandConfigDefaultValue("spawn");
-        Methods.registerCommandConfigDefaultValue("setspawn");
-        Methods.registerCommandConfigDefaultValue("fly");
-        Methods.registerCommandConfigDefaultValue("god");
-        Methods.registerCommandConfigDefaultValue("motd");
-        Methods.registerCommandConfigDefaultValue("tpall");
-        Methods.registerCommandConfigDefaultValue("freeze");
-        Methods.registerCommandConfigDefaultValue("lock");
-        Methods.registerCommandConfigDefaultValue("servermotd");
-        Methods.registerCommandConfigDefaultValue("sudo");
-        Methods.registerCommandConfigDefaultValue("gamemode");
-        Methods.registerCommandConfigDefaultValue("heal");
-        Methods.registerCommandConfigDefaultValue("msg");
-        Methods.registerCommandConfigDefaultValue("staff");
-        Methods.registerCommandConfigDefaultValue("tpc");
-        Methods.registerCommandConfigDefaultValue("kick");
-        Methods.registerCommandConfigDefaultValue("ban");
-        Methods.registerCommandConfigDefaultValue("unban");
-        Methods.registerCommandConfigDefaultValue("clearinventory");
-        Methods.registerCommandConfigDefaultValue("kill");
-        Methods.registerCommandConfigDefaultValue("workbench");
-        Methods.registerCommandConfigDefaultValue("flyspeed");
-        Methods.registerCommandConfigDefaultValue("openinventory");
-        Methods.registerCommandConfigDefaultValue("vanish");
-        Methods.registerCommandConfigDefaultValue("afk");
-        Methods.registerCommandConfigDefaultValue("killmobs");
-        Methods.registerCommandConfigDefaultValue("spawnmob");
-        Methods.registerCommandConfigDefaultValue("handicap");
-        Methods.registerCommandConfigDefaultValue("ip");
-        Methods.registerCommandConfigDefaultValue("mute");
-        Methods.registerCommandConfigDefaultValue("tpthere");
-        Methods.registerCommandConfigDefaultValue("setexp");
-        Methods.registerCommandConfigDefaultValue("enchant");
-        Methods.registerCommandConfigDefaultValue("walkspeed");
-        Methods.registerCommandConfigDefaultValue("tpback");
-        Methods.registerCommandConfigDefaultValue("whois");
-        Methods.registerCommandConfigDefaultValue("warp");
-        Methods.registerCommandConfigDefaultValue("whatisit");
-        Methods.registerCommandConfigDefaultValue("tpahere");
-        Methods.registerCommandConfigDefaultValue("waterwalk");
-        Methods.registerCommandConfigDefaultValue("armor");
-        Methods.registerCommandConfigDefaultValue("shoot");
-        Methods.registerCommandConfigDefaultValue("setitemname");
-        Methods.registerCommandConfigDefaultValue("setitemdescription");
-        Methods.registerCommandConfigDefaultValue("freeme");
+    private void registerCommandsAndSetCmdsConfig() {
+        List<String> cmdsList = new ArrayList<String>(this.getDescription().getCommands().keySet());
+        Collections.sort(cmdsList);
+        for(String cmd : cmdsList){
+            try {
+                Methods.regC(cmd, (CommandExecutor)Class.forName("com.jamesst20.jcommandessentials.Commands." + cmd + "Command").newInstance());
+                Methods.registerCommandConfigDefaultValue(cmd);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(JCMDEss.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(JCMDEss.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(JCMDEss.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     private void checkForUpdate() {
