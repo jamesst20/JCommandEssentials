@@ -221,3 +221,6 @@ commands:
        description: 'Strike lightning a player'
        usage: /strike <player>
        aliases: [thunder, zeus]
+   Spy:
+       description: 'Spy a player private messages'
+       usage: /spy <player or clear>

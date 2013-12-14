@@ -49,6 +49,7 @@ public class MsgCommand implements CommandExecutor {
             cs.sendMessage(ChatColor.GOLD + "[me -> " + to.getDisplayName() + ChatColor.GOLD + "] " + ChatColor.WHITE
                     + message);
             to.sendMessage(ChatColor.GOLD + "[" + from + ChatColor.GOLD + " -> me] " + ChatColor.WHITE + message);
+            SpyCommand.SpyPlayer(cs.getName(), to.getName(), ChatColor.GOLD + "[" + cs.getName() + " -> " + to.getName() + ChatColor.GOLD +  "] " + ChatColor.WHITE + message);
             return true;
         } else {
             Methods.playerNotFound(cs, args[0]);
