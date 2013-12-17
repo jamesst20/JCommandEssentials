@@ -21,12 +21,12 @@ import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import java.io.File;
 import org.bukkit.OfflinePlayer;
 
-public class JOfflinePlayerConfig {
+public class JOfflinePlayer {
 
     OfflinePlayer player;
     JYamlConfiguration playerConfig;
 
-    public JOfflinePlayerConfig(OfflinePlayer p) {
+    public JOfflinePlayer(OfflinePlayer p) {
         player = p;
         File playersDir = new File(JCMDEss.plugin.getDataFolder(), "players");
         // We do not make file if the player isn't found. We leave stuff to null

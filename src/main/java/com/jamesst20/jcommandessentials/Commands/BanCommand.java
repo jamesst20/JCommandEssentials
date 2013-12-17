@@ -16,8 +16,8 @@
  */
 package com.jamesst20.jcommandessentials.Commands;
 
-import com.jamesst20.jcommandessentials.Objects.JOfflinePlayerConfig;
-import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
+import com.jamesst20.jcommandessentials.Objects.JOfflinePlayer;
+import com.jamesst20.jcommandessentials.Objects.JPlayer;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -42,7 +42,7 @@ public class BanCommand implements CommandExecutor {
                     return true;
                 }
                 player.setBanned(true);
-                JPlayerConfig jConfig = new JPlayerConfig(player);
+                JPlayer jConfig = new JPlayer(player);
                 jConfig.setBanReason("");
                 player.kickPlayer(jConfig.getBanReason());
                 Methods.sendPlayerMessage(cs, "You banned " + Methods.red(player.getDisplayName()) + ".");
@@ -52,7 +52,7 @@ public class BanCommand implements CommandExecutor {
             } else {
                 OfflinePlayer oPlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
                 oPlayer.setBanned(true);
-                JOfflinePlayerConfig jConfig = new JOfflinePlayerConfig(oPlayer);
+                JOfflinePlayer jConfig = new JOfflinePlayer(oPlayer);
                 jConfig.setBanReason("");
                 Methods.sendPlayerMessage(cs, "You banned an offline player: " + Methods.red(oPlayer.getName()) + ".");
                 Methods.broadcastMessage(Methods.prefix + ChatColor.DARK_AQUA + ChatColor.ITALIC
@@ -72,7 +72,7 @@ public class BanCommand implements CommandExecutor {
                 }
                 Methods.replaceLast(reason, " ", "");
                 player.setBanned(true);
-                JPlayerConfig jConfig = new JPlayerConfig(player);
+                JPlayer jConfig = new JPlayer(player);
                 jConfig.setBanReason(reason.toString());
                 player.kickPlayer(reason.toString());
                 Methods.sendPlayerMessage(cs,
@@ -88,7 +88,7 @@ public class BanCommand implements CommandExecutor {
                 Methods.replaceLast(reason, " ", "");
                 OfflinePlayer oPlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
                 oPlayer.setBanned(true);
-                JOfflinePlayerConfig jConfig = new JOfflinePlayerConfig(oPlayer);
+                JOfflinePlayer jConfig = new JOfflinePlayer(oPlayer);
                 jConfig.setBanReason(reason.toString());
                 Methods.sendPlayerMessage(cs, "You banned an offline player: " + Methods.red(oPlayer.getName())
                         + " Reason: " + Methods.red(reason.toString()));

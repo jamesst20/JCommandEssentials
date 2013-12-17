@@ -24,12 +24,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class JPlayerConfig {
+public class JPlayer {
 
     Player player;
     JYamlConfiguration playerConfig;
 
-    public JPlayerConfig(Player p) {
+    public JPlayer(Player p) {
         player = p;
         playerConfig = new JYamlConfiguration(JCMDEss.plugin, "players/" + player.getName());
     }

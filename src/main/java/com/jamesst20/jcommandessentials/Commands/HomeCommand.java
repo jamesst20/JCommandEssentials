@@ -16,7 +16,7 @@
  */
 package com.jamesst20.jcommandessentials.Commands;
 
-import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
+import com.jamesst20.jcommandessentials.Objects.JPlayer;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 import org.bukkit.ChatColor;
@@ -37,7 +37,7 @@ public class HomeCommand implements CommandExecutor {
             if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.home.default")) {
                 return true;
             }
-            JPlayerConfig playerConf = new JPlayerConfig((Player) cs);
+            JPlayer playerConf = new JPlayer((Player) cs);
             if (playerConf.getHome() != null) {
                 if (TeleportDelay.getDelay() < 1) {
                     ((Player) cs).teleport(playerConf.getHome());
@@ -53,7 +53,7 @@ public class HomeCommand implements CommandExecutor {
             if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.home.custom")) {
                 return true;
             }
-            JPlayerConfig playerConf = new JPlayerConfig((Player) cs);
+            JPlayer playerConf = new JPlayer((Player) cs);
             if (playerConf.getHome(args[0]) != null) {
                 if (TeleportDelay.getDelay() < 1) {
                     ((Player) cs).teleport(playerConf.getHome(args[0]));

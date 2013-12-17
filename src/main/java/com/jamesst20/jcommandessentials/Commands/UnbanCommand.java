@@ -16,7 +16,7 @@
  */
 package com.jamesst20.jcommandessentials.Commands;
 
-import com.jamesst20.jcommandessentials.Objects.JOfflinePlayerConfig;
+import com.jamesst20.jcommandessentials.Objects.JOfflinePlayer;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -35,7 +35,7 @@ public class UnbanCommand implements CommandExecutor {
             OfflinePlayer player = Bukkit.getServer().getOfflinePlayer(args[0]);
             if (player.isBanned()) {
                 player.setBanned(false);
-                JOfflinePlayerConfig pConfig = new JOfflinePlayerConfig(player);
+                JOfflinePlayer pConfig = new JOfflinePlayer(player);
                 pConfig.removeBanReason();
                 Methods.sendPlayerMessage(cs, "The player " + Methods.red(args[0]) + " is now " + Methods.red("forgiven")
                         + ".");

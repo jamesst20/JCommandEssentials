@@ -16,7 +16,7 @@
  */
 package com.jamesst20.jcommandessentials.Commands;
 
-import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
+import com.jamesst20.jcommandessentials.Objects.JPlayer;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -36,14 +36,14 @@ public class SetHomeCommand implements CommandExecutor {
             if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.setHome.default")) {
                 return true;
             }
-            JPlayerConfig playerConf = new JPlayerConfig((Player) cs);
+            JPlayer playerConf = new JPlayer((Player) cs);
             playerConf.setHome();
             Methods.sendPlayerMessage(cs, "Home set.");
         } else if (args.length == 1) {
             if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.setHome.custom")) {
                 return true;
             }
-            JPlayerConfig playerConf = new JPlayerConfig((Player) cs);
+            JPlayer playerConf = new JPlayer((Player) cs);
             playerConf.setHome(args[0]);
             Methods.sendPlayerMessage(cs, "Home " + Methods.red(args[0]) + " set.");
         } else {

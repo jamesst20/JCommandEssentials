@@ -16,7 +16,7 @@
  */
 package com.jamesst20.jcommandessentials.Commands;
 
-import com.jamesst20.jcommandessentials.Objects.JOfflinePlayerConfig;
+import com.jamesst20.jcommandessentials.Objects.JOfflinePlayer;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -35,7 +35,7 @@ public class WhoisCommand implements CommandExecutor {
         if (args.length != 1) {
             return false;
         }
-        JOfflinePlayerConfig oPlayer = new JOfflinePlayerConfig(Bukkit.getServer().getOfflinePlayer(args[0]));
+        JOfflinePlayer oPlayer = new JOfflinePlayer(Bukkit.getServer().getOfflinePlayer(args[0]));
         if (!oPlayer.playerExist()) {
             if (Methods.isConsole(cs)) {
                 Methods.log(ChatColor.RED + "No config found for the player " + args[0] + ".");

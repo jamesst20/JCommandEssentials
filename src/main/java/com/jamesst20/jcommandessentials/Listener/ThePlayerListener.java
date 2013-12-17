@@ -26,7 +26,7 @@ import com.jamesst20.jcommandessentials.Commands.VanishCommand;
 import com.jamesst20.jcommandessentials.Commands.WarpCommand;
 import com.jamesst20.jcommandessentials.Commands.WaterWalkCommand;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
-import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
+import com.jamesst20.jcommandessentials.Objects.JPlayer;
 import com.jamesst20.jcommandessentials.Objects.Warp;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils.AfkListener;
@@ -64,7 +64,7 @@ public class ThePlayerListener implements Listener, AfkListener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(final PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        new JPlayerConfig(player).onLogin();
+        new JPlayer(player).onLogin();
         if (Motd.isEnable()) {
             Motd.sendMotd(player);
         }
@@ -79,7 +79,7 @@ public class ThePlayerListener implements Listener, AfkListener {
         /* This is not OnPlayerJoin!!! */
         Player player = e.getPlayer();
         if (player.isBanned()) {
-            e.setKickMessage(new JPlayerConfig(player).getBanReason());
+            e.setKickMessage(new JPlayer(player).getBanReason());
         }
     }
 
@@ -88,7 +88,7 @@ public class ThePlayerListener implements Listener, AfkListener {
         if (GodCommand.godPlayers.contains(e.getPlayer().getName())) {
             GodCommand.godPlayers.remove(e.getPlayer().getName());
         }
-        new JPlayerConfig(e.getPlayer()).onDisconnect();// Save Player Config
+        new JPlayer(e.getPlayer()).onDisconnect();// Save Player Config
         AfkUtils.removePlayer(e.getPlayer());
         TpBackCommand.removePlayer(e.getPlayer().getName());
     }
