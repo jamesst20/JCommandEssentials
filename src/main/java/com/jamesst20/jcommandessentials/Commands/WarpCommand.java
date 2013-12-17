@@ -16,9 +16,9 @@
  */
 package com.jamesst20.jcommandessentials.Commands;
 
+import com.jamesst20.jcommandessentials.Objects.Warp;
 import com.jamesst20.jcommandessentials.Utils.Methods;
-import com.jamesst20.jcommandessentials.Utils.WarpConfig;
-import java.util.ArrayList;
+import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -27,7 +27,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class WarpCommand implements CommandExecutor {
-    
+
     public static String PERMISSIONS_EDIT_WARP = "JCMDEss.commands.warp.edit";
     public static String PERMISSIONS_LIST_WARP = "JCMDEss.commands.warp.list";
     public static String PERMISSIONS_TP_WARP = "JCMDEss.commands.warp.tp.";
@@ -40,9 +40,9 @@ public class WarpCommand implements CommandExecutor {
                 if (!Methods.hasPermissionTell(cs, PERMISSIONS_LIST_WARP)) {
                     return true;
                 }
-                ArrayList<String> warpsName = WarpConfig.getWarpsName();
+                List<String> warpsName = Warp.getWarpsName();
                 if (warpsName.size() < 1) {
-                    Methods.sendPlayerMessage(cs, ChatColor.RED + "There is no warps available.");
+                    Methods.sendPlayerMessage(cs, ChatColor.RED + "No warps have been created yet.");
                     return true;
                 }
                 StringBuilder msgToSend = new StringBuilder("Available Warps (" + Methods.red(String.valueOf(warpsName.size())) + ") : ");
@@ -61,11 +61,17 @@ public class WarpCommand implements CommandExecutor {
                     Methods.sendPlayerMessage(cs, ChatColor.RED + "You are not allowed to teleport to this warp.");
                     return true;
                 }
-                Location location = WarpConfig.getWarpLocation(args[0]);
-                if (location != null) {
-                    Player player = (Player) cs;
-                    player.teleport(location);
-                    Methods.sendPlayerMessage(player, "You have been teleported to " + args[0] + ".");
+                Warp warp = Warp.getWarpByName(args[0]);
+                if (warp != null) {
+                    Location location = warp.getLocation();
+                    if (location != null) {
+                        Player player = (Player) cs;
+                        player.teleport(location);
+                        Methods.sendPlayerMessage(player, "You have been teleported to " + args[0] + ".");
+                    } else {
+                        Methods.sendPlayerMessage(cs, ChatColor.RED + "This warp location is invalid.");
+                        return true;
+                    }
                 } else {
                     Methods.sendPlayerMessage(cs, ChatColor.RED + "The warp " + args[0] + " doesn't exist.");
                     return true;
@@ -80,12 +86,23 @@ public class WarpCommand implements CommandExecutor {
                 if (!Methods.hasPermissionTell(cs, PERMISSIONS_EDIT_WARP)) {
                     return true;
                 }
-                WarpConfig.createWarp((Player) cs, args[1]);
+                Player p = (Player) cs;
+                if (new Warp(args[1], p.getWorld(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch()).save()) {
+                    Methods.sendPlayerMessage(p, "You have created a new warp named " + Methods.red(args[1]) + ".");
+                } else {
+                    Methods.sendPlayerMessage(p, ChatColor.RED + "Sorry, this warp already exists.");
+                }
             } else if (args[0].equalsIgnoreCase("delete")) {
                 if (!Methods.hasPermissionTell(cs, PERMISSIONS_EDIT_WARP)) {
                     return true;
                 }
-                WarpConfig.deleteWarp(cs, args[1]);
+                Warp warp = Warp.getWarpByName(args[1]);
+                if (warp != null) {
+                    warp.remove();
+                    Methods.sendPlayerMessage(cs, "You have deleted a warp named " + Methods.red(args[1]) + ".");
+                } else {
+                    Methods.sendPlayerMessage(cs, ChatColor.RED + "Sorry, this warp doesn't exist.");
+                }
             } else {
                 return false;
             }

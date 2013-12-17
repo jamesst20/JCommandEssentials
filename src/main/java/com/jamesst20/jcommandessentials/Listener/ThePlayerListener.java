@@ -27,12 +27,12 @@ import com.jamesst20.jcommandessentials.Commands.WarpCommand;
 import com.jamesst20.jcommandessentials.Commands.WaterWalkCommand;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
+import com.jamesst20.jcommandessentials.Objects.Warp;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils;
 import com.jamesst20.jcommandessentials.Utils.AfkUtils.AfkListener;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
-import com.jamesst20.jcommandessentials.Utils.WarpConfig;
 import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -114,16 +114,21 @@ public class ThePlayerListener implements Listener, AfkListener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerInteract(PlayerInteractEvent e) {
         Block block = e.getClickedBlock();
-        if (((block.getType() == Material.SIGN) || (block.getType() == Material.SIGN_POST) || (block.getType() == Material.WALL_SIGN)) && ((block.getState() instanceof Sign))) {
+        if (block != null && ((block.getType() == Material.SIGN) || (block.getType() == Material.SIGN_POST) || (block.getType() == Material.WALL_SIGN)) && ((block.getState() instanceof Sign))) {
             Sign sign = (Sign) block.getState();
             if (ChatColor.stripColor(sign.getLine(0)).equalsIgnoreCase("[Warp]")) {
                 String warpName = sign.getLine(1);
                 if (Methods.hasPermission(e.getPlayer(), WarpCommand.PERMISSIONS_TP_WARP + warpName)) {
-                    Location location = WarpConfig.getWarpLocation(warpName);
-                    if (location != null) {                        
-                        e.getPlayer().teleport(location);
-                        Methods.sendPlayerMessage(e.getPlayer(), "You have been teleported to " + Methods.red(warpName) + ".");
-                    } else {
+                    Warp warp = Warp.getWarpByName(warpName);
+                    if (warp != null) {
+                        Location location = warp.getLocation();
+                        if (location != null) {
+                            e.getPlayer().teleport(location);
+                            Methods.sendPlayerMessage(e.getPlayer(), "You have been teleported to " + Methods.red(warpName) + ".");
+                        } else {
+                            Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "This warp location is invalid.");
+                        }
+                    }else{
                         Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "The warp " + warpName + " doesn't exist.");
                     }
                 } else {

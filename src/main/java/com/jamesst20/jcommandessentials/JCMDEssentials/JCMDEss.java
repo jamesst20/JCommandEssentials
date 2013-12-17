@@ -24,7 +24,6 @@ import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.ServerMotd;
 import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
 import com.jamesst20.jcommandessentials.Utils.Updater;
-import com.jamesst20.jcommandessentials.Utils.WarpConfig;
 import com.jamesst20.jcommandessentials.mcstats.Metrics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +52,6 @@ public class JCMDEss extends JavaPlugin {
         writeDefaultSettings();
         registerCommandsAndSetCmdsConfig();
         checkForUpdate();
-        WarpConfig.reloadWarps();
         registerEvents();
         
         getLogger().info("Successfully enabled!");
