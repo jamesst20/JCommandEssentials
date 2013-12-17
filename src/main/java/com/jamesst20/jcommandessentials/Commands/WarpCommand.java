@@ -27,12 +27,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class WarpCommand implements CommandExecutor {
+    
+    public static String PERMISSIONS_EDIT_WARP = "JCMDEss.commands.warp.edit";
+    public static String PERMISSIONS_LIST_WARP = "JCMDEss.commands.warp.list";
+    public static String PERMISSIONS_TP_WARP = "JCMDEss.commands.warp.tp.";
+    public static String PERMISSIONS_WARPSIGNS_CREATE = "JCMDEss.commands.warp.signs";
 
     @Override
     public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("list")) {
-                if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.list")) {
+                if (!Methods.hasPermissionTell(cs, PERMISSIONS_LIST_WARP)) {
                     return true;
                 }
                 ArrayList<String> warpsName = WarpConfig.getWarpsName();
@@ -52,14 +57,15 @@ public class WarpCommand implements CommandExecutor {
                     Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't teleport to warps.");
                     return true;
                 }
-                if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.tp")) {
+                if (!Methods.hasPermission(cs, PERMISSIONS_TP_WARP + args[0])) {
+                    Methods.sendPlayerMessage(cs, ChatColor.RED + "You are not allowed to teleport to this warp.");
                     return true;
                 }
                 Location location = WarpConfig.getWarpLocation(args[0]);
                 if (location != null) {
                     Player player = (Player) cs;
                     player.teleport(location);
-                    Methods.sendPlayerMessage(player, "You have teleported to " + args[0] + ".");
+                    Methods.sendPlayerMessage(player, "You have been teleported to " + args[0] + ".");
                 } else {
                     Methods.sendPlayerMessage(cs, ChatColor.RED + "The warp " + args[0] + " doesn't exist.");
                     return true;
@@ -71,12 +77,12 @@ public class WarpCommand implements CommandExecutor {
                     Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't add warps.");
                     return true;
                 }
-                if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.edit")) {
+                if (!Methods.hasPermissionTell(cs, PERMISSIONS_EDIT_WARP)) {
                     return true;
                 }
                 WarpConfig.createWarp((Player) cs, args[1]);
             } else if (args[0].equalsIgnoreCase("delete")) {
-                if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.warp.edit")) {
+                if (!Methods.hasPermissionTell(cs, PERMISSIONS_EDIT_WARP)) {
                     return true;
                 }
                 WarpConfig.deleteWarp(cs, args[1]);

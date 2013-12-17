@@ -23,6 +23,7 @@ import com.jamesst20.jcommandessentials.Commands.LockCommand;
 import com.jamesst20.jcommandessentials.Commands.MuteCommand;
 import com.jamesst20.jcommandessentials.Commands.TpBackCommand;
 import com.jamesst20.jcommandessentials.Commands.VanishCommand;
+import com.jamesst20.jcommandessentials.Commands.WarpCommand;
 import com.jamesst20.jcommandessentials.Commands.WaterWalkCommand;
 import com.jamesst20.jcommandessentials.JCMDEssentials.JCMDEss;
 import com.jamesst20.jcommandessentials.Objects.JPlayerConfig;
@@ -31,22 +32,27 @@ import com.jamesst20.jcommandessentials.Utils.AfkUtils.AfkListener;
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import com.jamesst20.jcommandessentials.Utils.Motd;
 import com.jamesst20.jcommandessentials.Utils.TeleportDelay;
+import com.jamesst20.jcommandessentials.Utils.WarpConfig;
 import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -85,6 +91,46 @@ public class ThePlayerListener implements Listener, AfkListener {
         new JPlayerConfig(e.getPlayer()).onDisconnect();// Save Player Config
         AfkUtils.removePlayer(e.getPlayer());
         TpBackCommand.removePlayer(e.getPlayer().getName());
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onSignChange(SignChangeEvent e) {
+        if (e.getLine(0).equalsIgnoreCase("[warp]")) {
+            if (Methods.hasPermission(e.getPlayer(), WarpCommand.PERMISSIONS_WARPSIGNS_CREATE)) {
+                if (!e.getLine(1).isEmpty()) {
+                    e.setLine(0, ChatColor.BLUE + "[Warp]");
+                    Methods.sendPlayerMessage(e.getPlayer(), "You have created a new warp sign.");
+                } else {
+                    Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "Please include the warp name on the 2nd line.");
+                    e.setCancelled(true);
+                }
+            } else {
+                Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "You are not allowed to create warp signs.");
+                e.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onPlayerInteract(PlayerInteractEvent e) {
+        Block block = e.getClickedBlock();
+        if (((block.getType() == Material.SIGN) || (block.getType() == Material.SIGN_POST) || (block.getType() == Material.WALL_SIGN)) && ((block.getState() instanceof Sign))) {
+            Sign sign = (Sign) block.getState();
+            if (ChatColor.stripColor(sign.getLine(0)).equalsIgnoreCase("[Warp]")) {
+                String warpName = sign.getLine(1);
+                if (Methods.hasPermission(e.getPlayer(), WarpCommand.PERMISSIONS_TP_WARP + warpName)) {
+                    Location location = WarpConfig.getWarpLocation(warpName);
+                    if (location != null) {                        
+                        e.getPlayer().teleport(location);
+                        Methods.sendPlayerMessage(e.getPlayer(), "You have been teleported to " + Methods.red(warpName) + ".");
+                    } else {
+                        Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "The warp " + warpName + " doesn't exist.");
+                    }
+                } else {
+                    Methods.sendPlayerMessage(e.getPlayer(), ChatColor.RED + "You are not allowed to teleport to this warp.");
+                }
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
