@@ -18,11 +18,16 @@ package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SpawnMobCommand implements CommandExecutor {
 
@@ -49,8 +54,9 @@ public class SpawnMobCommand implements CommandExecutor {
             try {
                 count = Integer.parseInt(args[1]);
                 for (int i = 0; i < count; i++) {
+                    Set<Material> transparents = new HashSet<Material>(Arrays.asList(Material.AIR));
                     player.getWorld().spawnEntity(
-                            player.getTargetBlock(null, 0).getLocation().getBlock().getRelative(0, 1, 0).getLocation(),
+                            player.getTargetBlock(transparents, 10).getLocation().getBlock().getRelative(0, 1, 0).getLocation(),
                             EntityType.valueOf(args[0].toUpperCase()));
                 }
                 Methods.sendPlayerMessage(
