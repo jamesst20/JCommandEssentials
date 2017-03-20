@@ -82,9 +82,9 @@ public class EnchantCommand implements CommandExecutor {
             Enchantment ench = Enchantment.getByName(args[0].toUpperCase());
             int enchantLevel = Integer.parseInt(args[1]);
             if (ench != null) {
-                if (ench.canEnchantItem(player.getItemInHand())) {
+                if (ench.canEnchantItem(player.getInventory().getItemInMainHand())) {
                     if (ench.getMaxLevel() >= enchantLevel && ench.getStartLevel() <= enchantLevel) {
-                        player.getItemInHand().addEnchantment(ench, enchantLevel);
+                        player.getInventory().getItemInMainHand().addEnchantment(ench, enchantLevel);
                         Methods.sendPlayerMessage(cs, "You applied " + Methods.red(formatEnchantment(ench.getName())) + " to the item you're holding.");
                     } else {
                         Methods.sendPlayerMessage(cs, "Minimum for this enchantment is " + Methods.red(String.valueOf(ench.getStartLevel())) + " and maximum is " + Methods.red(String.valueOf(ench.getMaxLevel()) + "."));
@@ -103,8 +103,8 @@ public class EnchantCommand implements CommandExecutor {
     private void enchantAll(CommandSender cs, Player player) {
         StringBuilder enchantments = new StringBuilder();
         for (Enchantment ench : Enchantment.values()) {
-            if (ench.canEnchantItem(player.getItemInHand())) {
-                player.getItemInHand().addEnchantment(ench, ench.getMaxLevel());
+            if (ench.canEnchantItem(player.getInventory().getItemInMainHand())) {
+                player.getInventory().getItemInMainHand().addEnchantment(ench, ench.getMaxLevel());
                 enchantments.append("&4").append(formatEnchantment(ench.getName())).append("&3, ");
             }
         }

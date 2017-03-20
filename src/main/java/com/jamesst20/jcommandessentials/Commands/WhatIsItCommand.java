@@ -18,10 +18,12 @@ package com.jamesst20.jcommandessentials.Commands;
 
 import com.jamesst20.jcommandessentials.Utils.Methods;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class WhatIsItCommand implements CommandExecutor {
 
@@ -36,18 +38,19 @@ public class WhatIsItCommand implements CommandExecutor {
                 return true;
             }
             Player player = (Player) cs;
-            String itemHolding = player.getItemInHand().getType().toString();
-            int itemID = player.getItemInHand().getTypeId();
-            int data = player.getItemInHand().getData().getData();
+
+            ItemStack itemMainHand = player.getInventory().getItemInMainHand();
+            ItemStack itemOffHand = player.getInventory().getItemInOffHand();
+
+            //Main hand
             StringBuilder strToSend = new StringBuilder();
-            strToSend.append("You are holding : ");
-            strToSend.append(Methods.red(itemHolding));
-            strToSend.append(" ID : ");
-            strToSend.append(Methods.red(String.valueOf(itemID)));
-            if (data > 0) {
-                strToSend.append(":");
-                strToSend.append(Methods.red(String.valueOf(data)));
+            strToSend.append("You are holding : ").append(Methods.red(itemMainHand.getType().toString()));
+
+            //Second off hand
+            if(itemOffHand.getType() != Material.AIR) {
+                strToSend.append(" and : ").append(Methods.red(itemOffHand.getType().toString()));
             }
+
             Methods.sendPlayerMessage(cs, strToSend.toString());
         }
         return true;
