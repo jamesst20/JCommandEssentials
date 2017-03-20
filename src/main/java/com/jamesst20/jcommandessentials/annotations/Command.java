@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2013 James
+ * Copyright (C) 2017 James St-Pierre
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,20 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jamesst20.jcommandessentials.Listener;
+package com.jamesst20.jcommandessentials.annotations;
 
-import com.jamesst20.jcommandessentials.Utils.ServerMotd;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.server.ServerListPingEvent;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-public class ServerListener implements Listener {
-
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-    public void onServerListPing(ServerListPingEvent event) {
-        if (ServerMotd.isEnabled() && !ServerMotd.getServerMotd().isEmpty()) {
-            event.setMotd(ServerMotd.getServerMotd());
-        }
-    }
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Command {
+    String name() default "";
+    String permission() default "";
+    String usage() default "";
+    String[] aliases() default {};
+    String description() default "";
 }

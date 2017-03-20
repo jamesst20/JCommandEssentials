@@ -1,42 +1,30 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jamesst20</groupId>
-    <artifactId>jcommandessentials</artifactId>
-    <version>2.9-SNAPSHOT</version>
 
-    <name>JCommandEssentials</name>
-    <url>https://github.com/jamesst20/JCommandEssentials/</url>
+    <groupId>com.jamesst20.jcommandessentials</groupId>
+    <artifactId>JCommandEssentials</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-    <!-- Source code -->
-    <scm>
-        <developerConnection>scm:git:git@github.com:jamesst20/JCommandEssentials.git</developerConnection>
-        <connection>scm:git:git://github.com/jamesst20/JCommandEssentials.git</connection>
-        <url>https://github.com/jamesst20/JCommandEssentials/</url>
-    </scm>
-
-    <!-- Continuous integration -->
-    <ciManagement>
-        <system>jenkins</system>
-        <url>http://build.greatmancode.com/</url>
-    </ciManagement>
 
     <repositories>
         <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <id>sponge</id>
+            <url>https://repo.spongepowered.org/maven</url>
         </repository>
     </repositories>
 
     <dependencies>
-        <!--Bukkit API-->
         <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.11.2-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <groupId>org.spongepowered</groupId>
+            <artifactId>spongeapi</artifactId>
+            <version>6.0.0-20170316.204341-59</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
+
 
     <build>
         <defaultGoal>clean install</defaultGoal>
@@ -57,8 +45,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArguments>
                         <O>-Xlint:all</O>
                         <O>-Xlint:-path</O>
@@ -69,4 +57,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

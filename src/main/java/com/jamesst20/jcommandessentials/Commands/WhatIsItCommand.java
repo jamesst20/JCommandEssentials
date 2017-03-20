@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2013 James
+ * Copyright (C) 2017 James St-Pierre
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,45 +14,56 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jamesst20.jcommandessentials.Commands;
+package com.jamesst20.jcommandessentials.commands;
 
-import com.jamesst20.jcommandessentials.Utils.Methods;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
+import com.google.inject.Inject;
+import org.slf4j.Logger;
+import org.spongepowered.api.command.CommandCallable;
+import org.spongepowered.api.command.CommandException;
+import org.spongepowered.api.command.CommandResult;
+import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
-public class WhatIsItCommand implements CommandExecutor {
+import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+
+public class WhatIsItCommand implements CommandCallable {
+    @Inject
+    private Logger logger;
 
     @Override
-    public boolean onCommand(CommandSender cs, Command command, String cmd, String[] args) {
-        if (!Methods.hasPermissionTell(cs, "JCMDEss.commands.whatisit")) {
-            return true;
-        }
-        if (args.length == 0) {
-            if (Methods.isConsole(cs)) {
-                Methods.sendPlayerMessage(cs, ChatColor.RED + "The console can't hold an item.");
-                return true;
-            }
-            Player player = (Player) cs;
+    public CommandResult process(CommandSource commandSource, String s) throws CommandException {
+        commandSource.sendMessage(Text.of("WHAT IS IT :) !"));
+        return CommandResult.success();
+    }
 
-            ItemStack itemMainHand = player.getInventory().getItemInMainHand();
-            ItemStack itemOffHand = player.getInventory().getItemInOffHand();
+    @Override
+    public List<String> getSuggestions(CommandSource commandSource, String s, @Nullable Location<World> location) throws CommandException {
+        return Collections.emptyList();
+    }
 
-            //Main hand
-            StringBuilder strToSend = new StringBuilder();
-            strToSend.append("You are holding : ").append(Methods.red(itemMainHand.getType().toString()));
-
-            //Second off hand
-            if(itemOffHand.getType() != Material.AIR) {
-                strToSend.append(" and : ").append(Methods.red(itemOffHand.getType().toString()));
-            }
-
-            Methods.sendPlayerMessage(cs, strToSend.toString());
-        }
+    @Override
+    public boolean testPermission(CommandSource commandSource) {
         return true;
+    }
+
+    @Override
+    public Optional<Text> getShortDescription(CommandSource commandSource) {
+        return Optional.of(Text.of("Describe item you are holding"));
+    }
+
+    @Override
+    public Optional<Text> getHelp(CommandSource commandSource) {
+        return Optional.of(Text.of("Describe item you are holding"));
+    }
+
+    @Override
+    public Text getUsage(CommandSource commandSource) {
+        return Text.of("");
     }
 }
