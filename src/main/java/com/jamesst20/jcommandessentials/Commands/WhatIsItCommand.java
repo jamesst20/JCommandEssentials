@@ -16,12 +16,15 @@
  */
 package com.jamesst20.jcommandessentials.commands;
 
-import com.google.inject.Inject;
-import org.slf4j.Logger;
+import com.jamesst20.jcommandessentials.utils.Methods;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.command.source.ConsoleSource;
+import org.spongepowered.api.data.type.HandTypes;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
@@ -33,12 +36,22 @@ import java.util.Optional;
 
 
 public class WhatIsItCommand implements CommandCallable {
-    @Inject
-    private Logger logger;
-
     @Override
     public CommandResult process(CommandSource commandSource, String s) throws CommandException {
-        commandSource.sendMessage(Text.of("WHAT IS IT :) !"));
+        if(commandSource instanceof Player) {
+            Player player = (Player) commandSource;
+            ItemStack mainItem = player.getItemInHand(HandTypes.MAIN_HAND).orElse(null);
+            ItemStack offItem = player.getItemInHand(HandTypes.OFF_HAND).orElse(null);
+            if (mainItem != null) {
+                Methods.sendPlayerMessage(player, Text.of("Holding in left hand : " + offItem.getItem().getId()));
+            }
+            if (offItem != null) {
+                Methods.sendPlayerMessage(player, Text.of("Holding in right hand : " + offItem.getItem().getId()));
+            }
+        }
+        else if(commandSource instanceof ConsoleSource) {
+            Methods.sendPlayerMessage(commandSource, Text.of("You must be a player to use this command."));
+        }
         return CommandResult.success();
     }
 
@@ -49,7 +62,7 @@ public class WhatIsItCommand implements CommandCallable {
 
     @Override
     public boolean testPermission(CommandSource commandSource) {
-        return true;
+        return commandSource.hasPermission("JCMDEss.commands.whatisit");
     }
 
     @Override

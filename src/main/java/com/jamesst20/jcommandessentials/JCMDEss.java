@@ -48,6 +48,6 @@ public class JCMDEss {
     }
 
     private void registerAllCommands() {
-        game.getCommandManager().register(this, new WhatIsItCommand(), "whatisit");
+        game.getCommandManager().register(this, new WhatIsItCommand(), "whatisit", "wii");
     }
 }
