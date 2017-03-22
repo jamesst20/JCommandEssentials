@@ -17,6 +17,7 @@
 package com.jamesst20.jcommandessentials.utils;
 
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
@@ -30,5 +31,20 @@ public class Methods {
 
     public static void sendPlayerMessage(CommandSource src, Text msg) {
         src.sendMessage(Text.builder().append(prefix).append(msg).build());
+    }
+
+    public static boolean hasPermissionTell(CommandSource src, String permission) {
+        if(src instanceof ConsoleSource) {
+            return true;
+        }
+        if(!src.hasPermission(permission)) {
+            sendPlayerMessage(src, Text.of(TextColors.RED, "You do not have permission to run this command"));
+            return false;
+        }
+        return true;
+    }
+
+    public static void sendPlayerNotFound(CommandSource src, String playerName) {
+        src.sendMessage(Text.builder().append(prefix).append(Text.of("The player ")).append(Text.of(TextColors.RED, playerName)).append(Text.of(" couldn't be found.")).build());
     }
 }

@@ -19,6 +19,7 @@ package com.jamesst20.jcommandessentials;
 
 import com.google.inject.Inject;
 
+import com.jamesst20.jcommandessentials.commands.ArmorCommand;
 import com.jamesst20.jcommandessentials.commands.WhatIsItCommand;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
@@ -48,6 +49,7 @@ public class JCMDEss {
     }
 
     private void registerAllCommands() {
+        game.getCommandManager().register(this, new ArmorCommand(), "armor");
         game.getCommandManager().register(this, new WhatIsItCommand(), "whatisit", "wii");
     }
 }

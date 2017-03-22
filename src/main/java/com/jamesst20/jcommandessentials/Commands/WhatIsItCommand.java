@@ -37,9 +37,9 @@ import java.util.Optional;
 
 public class WhatIsItCommand implements CommandCallable {
     @Override
-    public CommandResult process(CommandSource commandSource, String s) throws CommandException {
-        if(commandSource instanceof Player) {
-            Player player = (Player) commandSource;
+    public CommandResult process(CommandSource source, String s) throws CommandException {
+        if(source instanceof Player) {
+            Player player = (Player) source;
             ItemStack mainItem = player.getItemInHand(HandTypes.MAIN_HAND).orElse(null);
             ItemStack offItem = player.getItemInHand(HandTypes.OFF_HAND).orElse(null);
             if (mainItem != null) {
@@ -49,34 +49,34 @@ public class WhatIsItCommand implements CommandCallable {
                 Methods.sendPlayerMessage(player, Text.of("Holding in right hand : " + offItem.getItem().getId()));
             }
         }
-        else if(commandSource instanceof ConsoleSource) {
-            Methods.sendPlayerMessage(commandSource, Text.of("You must be a player to use this command."));
+        else if(source instanceof ConsoleSource) {
+            Methods.sendPlayerMessage(source, Text.of("You must be a player to use this command."));
         }
         return CommandResult.success();
     }
 
     @Override
-    public List<String> getSuggestions(CommandSource commandSource, String s, @Nullable Location<World> location) throws CommandException {
+    public List<String> getSuggestions(CommandSource source, String s, @Nullable Location<World> location) throws CommandException {
         return Collections.emptyList();
     }
 
     @Override
-    public boolean testPermission(CommandSource commandSource) {
-        return commandSource.hasPermission("JCMDEss.commands.whatisit");
+    public boolean testPermission(CommandSource source) {
+        return source.hasPermission("JCMDEss.commands.whatisit");
     }
 
     @Override
-    public Optional<Text> getShortDescription(CommandSource commandSource) {
+    public Optional<Text> getShortDescription(CommandSource source) {
         return Optional.of(Text.of("Describe item you are holding"));
     }
 
     @Override
-    public Optional<Text> getHelp(CommandSource commandSource) {
+    public Optional<Text> getHelp(CommandSource source) {
         return Optional.of(Text.of("Describe item you are holding"));
     }
 
     @Override
-    public Text getUsage(CommandSource commandSource) {
+    public Text getUsage(CommandSource source) {
         return Text.of("");
     }
 }
