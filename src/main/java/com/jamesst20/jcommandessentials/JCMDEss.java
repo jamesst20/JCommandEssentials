@@ -22,6 +22,7 @@ import com.google.inject.Inject;
 import com.jamesst20.jcommandessentials.commands.ArmorCommand;
 import com.jamesst20.jcommandessentials.commands.ClearInventory;
 import com.jamesst20.jcommandessentials.commands.WhatIsItCommand;
+import com.jamesst20.jcommandessentials.utils.Methods;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.Listener;
@@ -50,8 +51,8 @@ public class JCMDEss {
     }
 
     private void registerAllCommands() {
-        game.getCommandManager().register(this, new ArmorCommand(), "armor");
-        game.getCommandManager().register(this, new ClearInventory(), "clearinventory", "clearinv", "cinv");
-        game.getCommandManager().register(this, new WhatIsItCommand(), "whatisit", "wii");
+        Methods.regC(game, new ArmorCommand());
+        Methods.regC(game, new ClearInventory());
+        Methods.regC(game, new WhatIsItCommand());
     }
 }

@@ -24,6 +24,9 @@ import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -31,6 +34,11 @@ public class WhatIsItCommand implements SpongeCommand {
     @Override
     public String getCommandUsage() {
         return "/whatisit";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return Arrays.asList("whatisit", "wii");
     }
 
     @Override

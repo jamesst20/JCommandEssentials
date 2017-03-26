@@ -26,6 +26,9 @@ import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class ArmorCommand implements SpongeCommand {
@@ -33,6 +36,11 @@ public class ArmorCommand implements SpongeCommand {
     @Override
     public String getCommandUsage() {
         return "/armor [player] <leather|iron|gold|diamond>";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return Arrays.asList("armor");
     }
 
     @Override

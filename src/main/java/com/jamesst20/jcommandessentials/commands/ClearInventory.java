@@ -24,6 +24,9 @@ import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class ClearInventory implements SpongeCommand {
@@ -31,6 +34,11 @@ public class ClearInventory implements SpongeCommand {
     @Override
     public String getCommandUsage() {
         return "/clearinv [player]";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return Arrays.asList("clearinventory", "clearinv", "cinv");
     }
 
     @Override

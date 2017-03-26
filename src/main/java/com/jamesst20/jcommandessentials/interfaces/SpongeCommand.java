@@ -40,6 +40,8 @@ public interface SpongeCommand extends CommandCallable {
 
     String getCommandUsage();
 
+    List<String> getAliases();
+
     SpongeCommandResult executeCommand(CommandSource src, String[] args);
 
     @Override

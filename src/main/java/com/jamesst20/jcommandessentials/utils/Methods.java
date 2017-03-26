@@ -16,11 +16,17 @@
  */
 package com.jamesst20.jcommandessentials.utils;
 
+import com.jamesst20.jcommandessentials.commands.ArmorCommand;
+import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
+import org.spongepowered.api.Game;
+import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+
+import java.util.List;
 
 public class Methods {
     public static Text prefix = Text.builder().append(Text.of(TextColors.WHITE, "[")).append(Text.of(TextColors.GREEN, "JCMD")).append(Text.of(TextColors.DARK_GREEN, "Ess")).append(Text.of(TextColors.WHITE, Text.builder("] "))).build();
@@ -42,6 +48,10 @@ public class Methods {
 
     public static void sendPlayerNotFound(CommandSource src, String playerName) {
         src.sendMessage(Text.builder().append(prefix).append(Text.of("The player ")).append(Text.of(TextColors.RED, playerName)).append(Text.of(" couldn't be found.")).build());
+    }
+
+    public static void regC(Game game, SpongeCommand command){
+        game.getCommandManager().register(game, command, command.getAliases());
     }
 
     public static String[] strSplit(String str, String pat) {
