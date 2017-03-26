@@ -23,12 +23,19 @@ import com.jamesst20.jcommandessentials.commands.ArmorCommand;
 import com.jamesst20.jcommandessentials.commands.ClearInventory;
 import com.jamesst20.jcommandessentials.commands.WhatIsItCommand;
 import com.jamesst20.jcommandessentials.utils.Methods;
+import ninja.leaping.configurate.ConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.config.ConfigDir;
+import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
+
+import java.io.IOException;
+import java.nio.file.Path;
 
 @Plugin(id = "jcommandessentials", name = "JCommandEssentials", version = "1.0", description = "Description")
 public class JCMDEss {
@@ -38,6 +45,14 @@ public class JCMDEss {
 
     @Inject
     private Logger logger;
+
+    @Inject
+    @DefaultConfig(sharedRoot = true)
+    private Path defaultConfig;
+
+    @Inject
+    @ConfigDir(sharedRoot = true)
+    private Path configDir;
 
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
@@ -51,8 +66,18 @@ public class JCMDEss {
     }
 
     private void registerAllCommands() {
-        Methods.regC(game, new ArmorCommand());
-        Methods.regC(game, new ClearInventory());
-        Methods.regC(game, new WhatIsItCommand());
+        try {
+            HoconConfigurationLoader loader = HoconConfigurationLoader.builder().setPath(defaultConfig).build();
+            ConfigurationNode rootNode = loader.load();
+            ConfigurationNode commandsNode = rootNode.getNode("commands");
+
+            Methods.regC(this, game, new ArmorCommand(), commandsNode);
+            Methods.regC(this, game, new ClearInventory(), commandsNode);
+            Methods.regC(this, game, new WhatIsItCommand(), commandsNode);
+
+            loader.save(rootNode);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
