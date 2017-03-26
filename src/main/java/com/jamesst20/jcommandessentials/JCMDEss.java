@@ -47,11 +47,11 @@ public class JCMDEss {
     private Logger logger;
 
     @Inject
-    @DefaultConfig(sharedRoot = true)
+    @DefaultConfig(sharedRoot = false)
     private Path defaultConfig;
 
     @Inject
-    @ConfigDir(sharedRoot = true)
+    @ConfigDir(sharedRoot = false)
     private Path configDir;
 
     @Listener
@@ -68,14 +68,13 @@ public class JCMDEss {
     private void registerAllCommands() {
         try {
             HoconConfigurationLoader loader = HoconConfigurationLoader.builder().setPath(defaultConfig).build();
-            ConfigurationNode rootNode = loader.load();
-            ConfigurationNode commandsNode = rootNode.getNode("commands");
+            ConfigurationNode rootNode = loader.load().getNode("commands");
 
-            Methods.regC(this, game, new ArmorCommand(), commandsNode);
-            Methods.regC(this, game, new ClearInventory(), commandsNode);
-            Methods.regC(this, game, new WhatIsItCommand(), commandsNode);
+            Methods.regC(this, game, new ArmorCommand(), rootNode);
+            Methods.regC(this, game, new ClearInventory(), rootNode);
+            Methods.regC(this, game, new WhatIsItCommand(), rootNode);
 
-            loader.save(rootNode);
+            loader.save(rootNode.getParent());
         } catch (IOException e) {
             e.printStackTrace();
         }

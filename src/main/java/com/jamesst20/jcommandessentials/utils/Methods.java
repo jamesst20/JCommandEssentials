@@ -50,10 +50,8 @@ public class Methods {
     public static void regC(Object pluginClass, Game game, SpongeCommand command, ConfigurationNode config){
         String commandName = command.getAliases().get(0);
         if(!config.getNode(commandName).isVirtual() && !config.getNode(commandName).getBoolean()) {
-            System.out.println("Was set to false : " + commandName);
             return;
         } else {
-            System.out.println("Set value of " + commandName + " to true");
             config.getNode(commandName).setValue(true);
         }
         game.getCommandManager().register(pluginClass, command, command.getAliases());
