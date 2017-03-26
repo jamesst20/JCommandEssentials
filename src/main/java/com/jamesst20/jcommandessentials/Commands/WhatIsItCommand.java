@@ -16,67 +16,48 @@
  */
 package com.jamesst20.jcommandessentials.commands;
 
+import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
 import com.jamesst20.jcommandessentials.utils.Methods;
-import org.spongepowered.api.command.CommandCallable;
-import org.spongepowered.api.command.CommandException;
-import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.World;
-
-import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 
-public class WhatIsItCommand implements CommandCallable {
+public class WhatIsItCommand implements SpongeCommand {
     @Override
-    public CommandResult process(CommandSource source, String s) throws CommandException {
-        if(source instanceof Player) {
-            Player player = (Player) source;
-            ItemStack mainItem = player.getItemInHand(HandTypes.MAIN_HAND).orElse(null);
-            ItemStack offItem = player.getItemInHand(HandTypes.OFF_HAND).orElse(null);
-            if (mainItem != null) {
-                Methods.sendPlayerMessage(player, Text.of("Holding in left hand : " + offItem.getItem().getId()));
+    public String getCommandUsage() {
+        return "/whatisit";
+    }
+
+    @Override
+    public SpongeCommandResult executeCommand(CommandSource src, String[] args) {
+        if (Methods.hasPermission(src, "JCMDEss.commands.whatisit")) {
+            if(src instanceof Player) {
+                Player player = (Player) src;
+                ItemStack mainItem = player.getItemInHand(HandTypes.MAIN_HAND).orElse(null);
+                ItemStack offItem = player.getItemInHand(HandTypes.OFF_HAND).orElse(null);
+                if (mainItem != null) {
+                    Methods.sendPlayerMessage(player, Text.of("Holding in left hand : " + mainItem.getItem().getId()));
+                }
+                if (offItem != null) {
+                    Methods.sendPlayerMessage(player, Text.of("Holding in right hand : " + offItem.getItem().getId()));
+                }
             }
-            if (offItem != null) {
-                Methods.sendPlayerMessage(player, Text.of("Holding in right hand : " + offItem.getItem().getId()));
+            else if(src instanceof ConsoleSource) {
+                Methods.sendPlayerMessage(src, Text.of("You must be a player to use this command."));
             }
+        } else {
+            return SpongeCommandResult.NO_PERMISSION;
         }
-        else if(source instanceof ConsoleSource) {
-            Methods.sendPlayerMessage(source, Text.of("You must be a player to use this command."));
-        }
-        return CommandResult.success();
+        return SpongeCommandResult.SUCCESS;
     }
 
     @Override
-    public List<String> getSuggestions(CommandSource source, String s, @Nullable Location<World> location) throws CommandException {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public boolean testPermission(CommandSource source) {
-        return source.hasPermission("JCMDEss.commands.whatisit");
-    }
-
-    @Override
-    public Optional<Text> getShortDescription(CommandSource source) {
+    public Optional<Text> getShortDescription(CommandSource src) {
         return Optional.of(Text.of("Describe item you are holding"));
-    }
-
-    @Override
-    public Optional<Text> getHelp(CommandSource source) {
-        return Optional.of(Text.of("Describe item you are holding"));
-    }
-
-    @Override
-    public Text getUsage(CommandSource source) {
-        return Text.of("");
     }
 }

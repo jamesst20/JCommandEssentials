@@ -16,11 +16,9 @@
  */
 package com.jamesst20.jcommandessentials.commands;
 
+import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.command.CommandCallable;
-import org.spongepowered.api.command.CommandException;
-import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
@@ -28,73 +26,57 @@ import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.World;
-
-import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 
-public class ArmorCommand implements CommandCallable {
+public class ArmorCommand implements SpongeCommand {
 
     @Override
-    public CommandResult process(CommandSource source, String arguments) throws CommandException {
-        String[] args = arguments.split(" ");
+    public String getCommandUsage() {
+        return "/armor [player] <leather|iron|gold|diamond>";
+    }
+
+    @Override
+    public SpongeCommandResult executeCommand(CommandSource src, String[] args) {
         if (args.length == 1) {
-            if (source instanceof ConsoleSource) {
-                Methods.sendPlayerMessage(source, Text.of("The console can't have an armor."));
-                return CommandResult.success();
+            if (src instanceof ConsoleSource) {
+                Methods.sendPlayerMessage(src, Text.of("The console can't have an armor."));
+                return SpongeCommandResult.SUCCESS;
             }
-            if (!Methods.hasPermissionTell(source, "JCMDEss.commands.armor.self")) {
-                return CommandResult.success();
-            }
-            Player player = (Player) source;
-            if (setArmor(player, args[0])) {
-                Methods.sendPlayerMessage(source, Text.of("You now have " + (args[0].equalsIgnoreCase("iron") ? "an " : "a ") + args[0] + " armor."));
-            } else {
-                Methods.sendPlayerMessage(source, Text.of("No such armor " + args[0] + "."));
-            }
-        } else if (args.length == 2) {
-            Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);
-            if (player != null) {
-                if (setArmor(player, args[1])) {
-                    Methods.sendPlayerMessage(source, Text.builder().append(Text.of("You gave " + (args[1].equalsIgnoreCase("iron") ? "an " : "a ") + args[1] + " armor to ")).append(Text.of(TextColors.RED, player.getName())).build());
-                    Methods.sendPlayerMessage(player, Text.of("You now have " + (args[1].equalsIgnoreCase("iron") ? "an " : "a ") + args[1] + " armor."));
+            if (Methods.hasPermission(src, "JCMDEss.commands.armor.self")) {
+                Player player = (Player) src;
+                if (setArmor(player, args[0])) {
+                    Methods.sendPlayerMessage(src, Text.of("You now have " + (args[0].equalsIgnoreCase("iron") ? "an " : "a ") + args[0] + " armor."));
                 } else {
-                    Methods.sendPlayerMessage(source, Text.of("No such armor " + args[1] + "."));
+                    Methods.sendPlayerMessage(src, Text.of("No such armor " + args[0] + "."));
                 }
             } else {
-                Methods.sendPlayerNotFound(source, args[0]);
+                return SpongeCommandResult.NO_PERMISSION;
+            }
+        } else if (args.length == 2) {
+            if (Methods.hasPermission(src, "JCMDEss.commands.armor.others")) {
+                Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);
+                if (player != null) {
+                    if (setArmor(player, args[1])) {
+                        Methods.sendPlayerMessage(src, Text.builder().append(Text.of("You gave " + (args[1].equalsIgnoreCase("iron") ? "an " : "a ") + args[1] + " armor to ")).append(Text.of(TextColors.RED, player.getName())).build());
+                        Methods.sendPlayerMessage(player, Text.of("You now have " + (args[1].equalsIgnoreCase("iron") ? "an " : "a ") + args[1] + " armor."));
+                    } else {
+                        Methods.sendPlayerMessage(src, Text.of("No such armor " + args[1] + "."));
+                    }
+                } else {
+                    Methods.sendPlayerNotFound(src, args[0]);
+                }
+            } else {
+                return SpongeCommandResult.NO_PERMISSION;
             }
         } else {
-            return CommandResult.empty();
+            return SpongeCommandResult.INVALID_SYNTHAX;
         }
-        return CommandResult.success();
+        return SpongeCommandResult.SUCCESS;
     }
 
     @Override
-    public List<String> getSuggestions(CommandSource source, String arguments, @Nullable Location<World> location) throws CommandException {
-        return null;
-    }
-
-    @Override
-    public boolean testPermission(CommandSource source) {
-        return source.hasPermission("JCMDEss.commands.armor.self") || source.hasPermission("JCMDEss.commands.armor.others");
-    }
-
-    @Override
-    public Optional<Text> getShortDescription(CommandSource source) {
-        return null;
-    }
-
-    @Override
-    public Optional<Text> getHelp(CommandSource source) {
-        return null;
-    }
-
-    @Override
-    public Text getUsage(CommandSource source) {
-        return null;
+    public Optional<Text> getShortDescription(CommandSource src) {
+        return Optional.of(Text.of("Give someone or yourself an armor. Leather, Iron, Gold, Diamond."));
     }
 
     private boolean setArmor(Player p, String armor) {

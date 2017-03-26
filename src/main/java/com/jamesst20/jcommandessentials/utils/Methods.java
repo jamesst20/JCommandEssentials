@@ -33,18 +33,22 @@ public class Methods {
         src.sendMessage(Text.builder().append(prefix).append(msg).build());
     }
 
-    public static boolean hasPermissionTell(CommandSource src, String permission) {
+    public static boolean hasPermission(CommandSource src, String permission) {
         if(src instanceof ConsoleSource) {
             return true;
         }
-        if(!src.hasPermission(permission)) {
-            sendPlayerMessage(src, Text.of(TextColors.RED, "You do not have permission to run this command"));
-            return false;
-        }
-        return true;
+        return src.hasPermission(permission);
     }
 
     public static void sendPlayerNotFound(CommandSource src, String playerName) {
         src.sendMessage(Text.builder().append(prefix).append(Text.of("The player ")).append(Text.of(TextColors.RED, playerName)).append(Text.of(" couldn't be found.")).build());
+    }
+
+    public static String[] strSplit(String str, String pat) {
+        if (str.length() == 0 || str.replaceAll(pat, "").length() == 0) {
+            return new String[0];
+        } else {
+            return str.split(pat);
+        }
     }
 }

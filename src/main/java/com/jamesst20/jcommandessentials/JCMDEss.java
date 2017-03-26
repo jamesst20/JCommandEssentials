@@ -20,6 +20,7 @@ package com.jamesst20.jcommandessentials;
 import com.google.inject.Inject;
 
 import com.jamesst20.jcommandessentials.commands.ArmorCommand;
+import com.jamesst20.jcommandessentials.commands.ClearInventory;
 import com.jamesst20.jcommandessentials.commands.WhatIsItCommand;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
@@ -28,7 +29,7 @@ import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 
-@Plugin(id = "jcommandesstials", name = "JCommandEssentials", version = "1.0", description = "Description")
+@Plugin(id = "jcommandessentials", name = "JCommandEssentials", version = "1.0", description = "Description")
 public class JCMDEss {
 
     @Inject
@@ -50,6 +51,7 @@ public class JCMDEss {
 
     private void registerAllCommands() {
         game.getCommandManager().register(this, new ArmorCommand(), "armor");
+        game.getCommandManager().register(this, new ClearInventory(), "clearinventory", "clearinv", "cinv");
         game.getCommandManager().register(this, new WhatIsItCommand(), "whatisit", "wii");
     }
 }
