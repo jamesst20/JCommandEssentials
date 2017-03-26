@@ -1,20 +1,27 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2017 James St-Pierre
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.jamesst20.jcommandessentials.commands;
 
-import com.google.inject.Inject;
 import com.jamesst20.jcommandessentials.JCMDEss;
 import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
 import org.spongepowered.api.command.CommandSource;
 import com.jamesst20.jcommandessentials.utils.Methods;
-import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.source.ConsoleSource;
-import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.Sponge;
 
@@ -25,13 +32,8 @@ import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.InventoryArchetypes;
-import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.format.TextColors;
 
-/**
- *
- * @author charl
- */
 public class WorkbenchCommand implements SpongeCommand{
 
     @Override
@@ -55,32 +57,29 @@ public class WorkbenchCommand implements SpongeCommand{
                 Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "The console can't open a workbench for itself."));
                 return SpongeCommandResult.SUCCESS;
             }
-            Player player = ((Player) src);
-            Inventory workbench = Inventory.builder().of(InventoryArchetypes.WORKBENCH).build(JCMDEss.pluginContainer);
-            player.openInventory(workbench, Cause.of(NamedCause.of("Plugin", JCMDEss.pluginContainer)));
+            Inventory workbench = Inventory.builder().of(InventoryArchetypes.WORKBENCH).build(JCMDEss.plugin);
+            ((Player) src).openInventory(workbench, Cause.of(NamedCause.of("Plugin", JCMDEss.plugin)));
+
             Methods.sendPlayerMessage(src, Text.of("You forced yourself to open a workbench."));
-            return SpongeCommandResult.SUCCESS;
         } else if (args.length == 1) {
-            Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);;
+            Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);
             if (player != null) {
-                Inventory workbench = Inventory.builder().of(InventoryArchetypes.WORKBENCH).build(JCMDEss.pluginContainer);
-                Cause cause = Cause.of(NamedCause.source(src), NamedCause.of("Plugin", JCMDEss.pluginContainer));
-                player.openInventory(workbench, cause);
+                Inventory workbench = Inventory.builder().of(InventoryArchetypes.WORKBENCH).build(JCMDEss.plugin);
+                player.openInventory(workbench, Cause.of(NamedCause.of("Plugin", JCMDEss.plugin)));
                 
                 Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "You forced " + args[0] + " to open a workbench."));
-                return SpongeCommandResult.SUCCESS;
             } else {
                 Methods.sendPlayerNotFound(src, args[0]);
-                return SpongeCommandResult.SUCCESS;
             }
         } else {
             return SpongeCommandResult.INVALID_SYNTHAX;
         }
+        return SpongeCommandResult.SUCCESS;
     }
 
     @Override
     public Optional<Text> getShortDescription(CommandSource source) {
-        return Optional.of(Text.of("Force opening a workbench anywhere"));
+        return Optional.of(Text.of("Open a workbench anywhere"));
     }
     
 }

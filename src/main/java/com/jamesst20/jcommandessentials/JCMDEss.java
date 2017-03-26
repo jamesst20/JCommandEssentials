@@ -22,6 +22,7 @@ import com.google.inject.Inject;
 import com.jamesst20.jcommandessentials.commands.ArmorCommand;
 import com.jamesst20.jcommandessentials.commands.ClearInventory;
 import com.jamesst20.jcommandessentials.commands.WhatIsItCommand;
+import com.jamesst20.jcommandessentials.commands.WorkbenchCommand;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
@@ -46,6 +47,8 @@ public class JCMDEss {
     @Inject
     private Logger logger;
 
+    public static JCMDEss plugin;
+
     @Inject
     @DefaultConfig(sharedRoot = false)
     private Path defaultConfig;
@@ -56,6 +59,8 @@ public class JCMDEss {
 
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
+        plugin = this;
+
         registerAllCommands();
         logger.info("JCommandEssentials initialized");
     }
@@ -73,6 +78,7 @@ public class JCMDEss {
             Methods.regC(this, game, new ArmorCommand(), rootNode);
             Methods.regC(this, game, new ClearInventory(), rootNode);
             Methods.regC(this, game, new WhatIsItCommand(), rootNode);
+            Methods.regC(this, game, new WorkbenchCommand(), rootNode);
 
             loader.save(rootNode.getParent());
         } catch (IOException e) {
