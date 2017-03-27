@@ -57,6 +57,7 @@ public class WorkbenchCommand implements SpongeCommand{
                 Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "The console can't open a workbench for itself."));
                 return SpongeCommandResult.SUCCESS;
             }
+            //TODO: Fix workbench inventory
             Inventory workbench = Inventory.builder().of(InventoryArchetypes.WORKBENCH).build(JCMDEss.plugin);
             ((Player) src).openInventory(workbench, Cause.of(NamedCause.of("Plugin", JCMDEss.plugin)));
 
@@ -64,6 +65,7 @@ public class WorkbenchCommand implements SpongeCommand{
         } else if (args.length == 1) {
             Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);
             if (player != null) {
+                //TODO: Fix workbench inventory
                 Inventory workbench = Inventory.builder().of(InventoryArchetypes.WORKBENCH).build(JCMDEss.plugin);
                 player.openInventory(workbench, Cause.of(NamedCause.of("Plugin", JCMDEss.plugin)));
                 
