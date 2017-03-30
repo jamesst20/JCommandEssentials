@@ -21,6 +21,8 @@ import com.google.inject.Inject;
 
 import com.jamesst20.jcommandessentials.commands.ArmorCommand;
 import com.jamesst20.jcommandessentials.commands.ClearInventory;
+import com.jamesst20.jcommandessentials.commands.WeatherCommand;
+import com.jamesst20.jcommandessentials.commands.WeatherCommand.WeatherAlias;
 import com.jamesst20.jcommandessentials.commands.WhatIsItCommand;
 import com.jamesst20.jcommandessentials.commands.WorkbenchCommand;
 import com.jamesst20.jcommandessentials.utils.Methods;
@@ -77,6 +79,11 @@ public class JCMDEss {
 
             Methods.regC(this, game, new ArmorCommand(), rootNode);
             Methods.regC(this, game, new ClearInventory(), rootNode);
+            Methods.regC(this, game, new WeatherCommand(), rootNode);
+            Methods.regC(this, game, new WeatherCommand(WeatherAlias.SUN), rootNode);
+            Methods.regC(this, game, new WeatherCommand(WeatherAlias.RAIN), rootNode);
+            Methods.regC(this, game, new WeatherCommand(WeatherAlias.STORM), rootNode);
+            Methods.regC(this, game, new WeatherCommand(WeatherAlias.THUNDER), rootNode);
             Methods.regC(this, game, new WhatIsItCommand(), rootNode);
             Methods.regC(this, game, new WorkbenchCommand(), rootNode);
 
