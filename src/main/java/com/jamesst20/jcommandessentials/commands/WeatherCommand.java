@@ -146,6 +146,6 @@ public class WeatherCommand implements SpongeCommand {
                 return Weathers.THUNDER_STORM;
             }
         }
-        return null;
+        return weather;
     }
 }
