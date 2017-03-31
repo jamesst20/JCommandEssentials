@@ -81,48 +81,71 @@ public class WeatherCommand implements SpongeCommand {
             return SpongeCommandResult.NO_PERMISSION;
         }
 
-        if (args.length > 2 || (weather != null && args.length > 1) || (weather == null && args.length == 0)) return SpongeCommandResult.INVALID_SYNTHAX;
+        if (isSynthaxInvalid(args))  return SpongeCommandResult.INVALID_SYNTHAX;
 
-        if (src instanceof ConsoleSource && (args.length == 0 || (weather == null && args.length == 1))) {
+        if (src instanceof ConsoleSource && !isWorldSpecified(args)) {
             Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "The console must specify a world."));
             return SpongeCommandResult.SUCCESS;
         }
 
-        World world;
-        if (args.length == 2) {
-            world = Sponge.getServer().getWorld(args[1]).orElse(null);
-        } else if (weather != null && args.length == 1) {
-            world = Sponge.getServer().getWorld(args[0]).orElse(null);
+        World world = getWorld(args, src);
+        
+        if(world == null){
+            Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "Unknown world \"" + args[args.length - 1] + "\"."));            
         } else {
-            world = ((Player) src).getWorld();
-        }
-
-        if (world != null) {
-            Weather weatherToSet = weather;
+            Weather weatherToSet = getWeatherToSet(args);
             if (weatherToSet == null) {
-                if (args[0].equalsIgnoreCase("sun")) {
-                    weatherToSet = Weathers.CLEAR;
-                } else if (args[0].equalsIgnoreCase("rain") || args[0].equalsIgnoreCase("storm")) {
-                    weatherToSet = Weathers.RAIN;
-                } else if (args[0].equalsIgnoreCase("thunderstorm")) {
-                    weatherToSet = Weathers.THUNDER_STORM;
-                }
-            }
-
-            if (weatherToSet != null) {
-                world.setWeather(weatherToSet);
-                Methods.sendPlayerMessage(src, Text.builder().append(Text.of("The weather has been changed to ")).append(Text.of(TextColors.RED, weatherToSet.getName())).build());
+                Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "Unknown weather \"" + args[0] + "\"."));                
             } else {
-                Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "Unknown weather \"" + args[0] + "\"."));
+                world.setWeather(weatherToSet);
+                
+                Text msg = Text.builder()
+                        .append(Text.of("The weather has been changed to "))
+                        .append(Text.of(TextColors.RED, weatherToSet.getName())).build();
+                
+                Methods.sendPlayerMessage(src, msg);
             }
-        } else {
-            Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "Unknown world \"" + args[args.length - 1] + "\"."));
         }
+        
         return SpongeCommandResult.SUCCESS;
     }
 
     @Override
     public Optional<Text> getShortDescription(CommandSource source) {
         return Optional.of(Text.of("Set the weather of the current or other worlds"));
+    }
+    
+    private boolean isSynthaxInvalid(String[] args){
+        return (args.length > 2) || 
+               (weather != null && args.length > 1) ||
+               (weather == null && args.length == 0);
+    }
+    
+    private boolean isWorldSpecified(String[] args){
+        return (args.length == 1 && weather != null) ||
+               (args.length == 2);
+    }
+    
+    private World getWorld(String[] args, CommandSource src){
+        if (args.length == 2) {
+            return Sponge.getServer().getWorld(args[1]).orElse(null);
+        } else if (weather != null && args.length == 1) {
+            return Sponge.getServer().getWorld(args[0]).orElse(null);
+        } else {
+            return ((Player)src).getWorld();
+        }
+    }
+    
+    private Weather getWeatherToSet(String[] args){
+        if (weather == null) {
+            if (args[0].equalsIgnoreCase("sun")) {
+                return Weathers.CLEAR;
+            } else if (args[0].equalsIgnoreCase("rain") || args[0].equalsIgnoreCase("storm")) {
+                return Weathers.RAIN;
+            } else if (args[0].equalsIgnoreCase("thunderstorm")) {
+                return Weathers.THUNDER_STORM;
+            }
+        }
+        return null;
     }
 }
