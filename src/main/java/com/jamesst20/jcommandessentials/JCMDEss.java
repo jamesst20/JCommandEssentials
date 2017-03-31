@@ -83,6 +83,7 @@ public class JCMDEss {
 
             Methods.regC(this, game, new ArmorCommand(), rootNode);
             Methods.regC(this, game, new ClearInventory(), rootNode);
+            Methods.regC(this, game, new WaterWalkCommand(), rootNode);
 
             Methods.regC(this, game, new WeatherCommand(), rootNode);
             Methods.regC(this, game, new WeatherCommand(Weathers.CLEAR), rootNode);

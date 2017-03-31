@@ -19,6 +19,7 @@ package com.jamesst20.jcommandessentials.utils;
 import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
 import ninja.leaping.configurate.ConfigurationNode;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
@@ -63,5 +64,9 @@ public class Methods {
         } else {
             return str.split(pat);
         }
+    }
+    
+    public static void logMessage(Text msg){
+        Sponge.getServer().getConsole().sendMessage(Text.builder().append(prefix).append(msg).build());
     }
 }
