@@ -20,7 +20,7 @@ package com.jamesst20.jcommandessentials.listerners;
 import com.flowpowered.math.vector.Vector3i;
 import com.jamesst20.jcommandessentials.JCMDEss;
 import com.jamesst20.jcommandessentials.commands.WaterWalkCommand;
-import static com.jamesst20.jcommandessentials.commands.WaterWalkCommand.LastKnownLocation;
+import com.jamesst20.jcommandessentials.commands.WaterWalkCommand.WaterWalker;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import java.util.ArrayList;
 import org.spongepowered.api.Sponge;
@@ -40,10 +40,6 @@ import org.spongepowered.api.util.Direction;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
-/**
- *
- * @author charl
- */
 public class PlayerMovementListener implements EventListener<MoveEntityEvent>{
 
     @Override
@@ -60,15 +56,16 @@ public class PlayerMovementListener implements EventListener<MoveEntityEvent>{
     }
     
     private void manageWaterWalk(Player player){  
-         if(!player.getLocation().getBlockPosition().toString().equals(WaterWalkCommand.LastKnownLocation.get(player.getName()))){
-            WaterWalkCommand.LastKnownLocation.replace(player.getName(), player.getLocation().getBlockPosition().toString()); 
+        String playerPosition = player.getLocation().getBlockPosition().toString();
+        if(!playerPosition.equals(WaterWalkCommand.WaterWalkers.get(player.getName()).LastKnownLocation)){
+            WaterWalkCommand.WaterWalkers.get(player.getName()).LastKnownLocation = playerPosition; 
             
             World world = player.getWorld();
             PluginContainer pc = Sponge.getPluginManager().fromInstance(JCMDEss.plugin).orElse(null);
             Cause cause = Cause.of(NamedCause.of("PluginContainer", pc));
             
             ArrayList<Vector3i> newSurrounding = getBlocksLocationAroundPlayer(player);
-            ArrayList<Vector3i> currentSurrounding = WaterWalkCommand.WaterWalkers.get(player.getName());
+            ArrayList<Vector3i> currentSurrounding = WaterWalkCommand.WaterWalkers.get(player.getName()).Surrounding;
             ArrayList<Vector3i> blocksToMelt = new ArrayList<>();
             
             for (Vector3i pos : currentSurrounding) {
@@ -83,14 +80,14 @@ public class PlayerMovementListener implements EventListener<MoveEntityEvent>{
                 BlockType type = world.getBlock(pos).getType();
                 if (type == BlockTypes.WATER || type == BlockTypes.FLOWING_WATER){
                     if (!currentSurrounding.contains(pos)) {
-                        WaterWalkCommand.WaterWalkers.get(player.getName()).add(pos);  //Backup Block
+                        WaterWalkCommand.WaterWalkers.get(player.getName()).Surrounding.add(pos);  //Backup Block
                         world.setBlockType(pos, BlockTypes.ICE, cause);  //Set block to ice
                     }
                 }                
             }
             
             for(int i = 0; i < blocksToMelt.size(); i++){
-                WaterWalkCommand.WaterWalkers.get(player.getName()).remove(blocksToMelt.get(i));
+                WaterWalkCommand.WaterWalkers.get(player.getName()).Surrounding.remove(blocksToMelt.get(i));
             }
         }
          

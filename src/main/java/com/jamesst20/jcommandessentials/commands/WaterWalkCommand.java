@@ -43,11 +43,20 @@ import org.spongepowered.api.plugin.PluginContainer;
  */
 public class WaterWalkCommand implements SpongeCommand {
 
-    public static HashMap<String, ArrayList<Vector3i>> WaterWalkers = new HashMap<String, ArrayList<Vector3i>>();
-    public static HashMap<String, String> LastKnownLocation = new HashMap<String, String>();
+    public class WaterWalker{
+        public ArrayList<Vector3i> Surrounding;
+        public String LastKnownLocation;
+        
+        public WaterWalker(String lastKnownLocation){
+            Surrounding = new ArrayList<>();
+            LastKnownLocation = lastKnownLocation;
+        }
+    }
     
-     public static void restoreBlocks(Player player) {
-        for (Vector3i loc : WaterWalkers.get(player.getName())) {
+    public static HashMap<String, WaterWalker> WaterWalkers = new HashMap<String, WaterWalker>();
+    
+    public static void restoreBlocks(Player player) {
+        for (Vector3i loc : WaterWalkers.get(player.getName()).Surrounding) {
             PluginContainer pc = Sponge.getPluginManager().fromInstance(JCMDEss.plugin).orElse(null);
             Cause cause = Cause.of(NamedCause.of("PluginContainer", pc));
             player.getWorld().setBlockType(loc, BlockTypes.WATER, cause);  //Restore old block
@@ -72,37 +81,31 @@ public class WaterWalkCommand implements SpongeCommand {
         
         if (src instanceof ConsoleSource && args.length == 0) {
             Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "The console can't walk on water."));
-            return SpongeCommandResult.SUCCESS;
-        }
-        
-        if (args.length == 0) {               
+            
+        } else if (args.length == 0) {               
             Player player = (Player) src;
             if (WaterWalkers.containsKey(player.getName())) {
                disableWalk(args, player, src, true);
             } else {
                enableWalk(args, player, src, true);
-            }
-            return SpongeCommandResult.SUCCESS;            
-        } 
-        
-        if (args.length == 1) {
+            }    
+            
+        } else if (args.length == 1) {
             Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);
             
             if (player == null) {
                 Methods.sendPlayerNotFound(src, args[0]);
-                return SpongeCommandResult.SUCCESS;
-            }
-            
-            if (WaterWalkers.containsKey(player.getName())) {
+            } else if (WaterWalkers.containsKey(player.getName())) {
                 disableWalk(args, player, src, false);
             } else {
                enableWalk(args, player, src, false);
-            }
-            return SpongeCommandResult.SUCCESS;            
+            }    
+            
+        } else {
+            return SpongeCommandResult.INVALID_SYNTHAX;        
         }
         
-        return SpongeCommandResult.INVALID_SYNTHAX;
-
+        return SpongeCommandResult.SUCCESS; 
     }
 
     @Override
@@ -111,8 +114,8 @@ public class WaterWalkCommand implements SpongeCommand {
     }
     
     private void enableWalk(String[] args, Player player, CommandSource src, boolean isSelf){
-        WaterWalkers.put(player.getName(), new ArrayList<>());
-        LastKnownLocation.put(player.getName(), player.getLocation().getBlockPosition().toString());
+        String lastKnownLocation = player.getLocation().getBlockPosition().toString();
+        WaterWalkers.put(player.getName(), new WaterWalker(lastKnownLocation));
         Methods.sendPlayerMessage(player, Text.of(TextColors.RED, "You can now walk on water."));
         if(!isSelf){
             Methods.sendPlayerMessage(src, Text.builder().append(Text.of("The player "))
@@ -124,7 +127,6 @@ public class WaterWalkCommand implements SpongeCommand {
     private void disableWalk(String[] args, Player player, CommandSource src, boolean isSelf){
         restoreBlocks(player);
         WaterWalkers.remove(player.getName());
-        LastKnownLocation.remove(player.getName());
         Methods.sendPlayerMessage(player, Text.of(TextColors.RED, "You can no longer walk on water."));
         if(!isSelf){
             Methods.sendPlayerMessage(src, Text.builder().append(Text.of("The player "))
