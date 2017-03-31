@@ -37,10 +37,6 @@ import org.spongepowered.api.world.Location;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.plugin.PluginContainer;
 
-/**
- *
- * @author charl
- */
 public class WaterWalkCommand implements SpongeCommand {
 
     public class WaterWalker{
