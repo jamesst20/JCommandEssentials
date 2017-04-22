@@ -17,31 +17,44 @@
 
 package com.jamesst20.jcommandessentials.listerners;
 
+import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3i;
 import com.jamesst20.jcommandessentials.JCMDEss;
+import com.jamesst20.jcommandessentials.commands.WalkSpeedCommand;
 import com.jamesst20.jcommandessentials.commands.WaterWalkCommand;
-import com.jamesst20.jcommandessentials.commands.WaterWalkCommand.WaterWalker;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.command.source.ConsoleSource;
+import org.spongepowered.api.data.DataContainer;
+import org.spongepowered.api.data.DataHolder;
+import org.spongepowered.api.data.key.Key;
+import org.spongepowered.api.data.manipulator.immutable.ImmutablePotionEffectData;
+import org.spongepowered.api.data.manipulator.mutable.PotionEffectData;
+import org.spongepowered.api.data.merge.MergeFunction;
+import org.spongepowered.api.data.value.BaseValue;
+import org.spongepowered.api.data.value.immutable.ImmutableValue;
+import org.spongepowered.api.data.value.mutable.ListValue;
+import org.spongepowered.api.effect.potion.PotionEffect;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.entity.Transform;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.EventListener;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.plugin.PluginContainer;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.util.Direction;
-import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.effect.potion.PotionEffectType;
+import org.spongepowered.api.effect.potion.PotionEffectTypes;
 
 public class PlayerMovementListener implements EventListener<MoveEntityEvent>{
-
+    
     @Override
     public void handle(MoveEntityEvent event) throws Exception {
         Entity entity = event.getTargetEntity();
@@ -51,7 +64,6 @@ public class PlayerMovementListener implements EventListener<MoveEntityEvent>{
             if (WaterWalkCommand.WaterWalkers.containsKey(player.getName())) {
                 manageWaterWalk(player);
             }
-            
         }
     }
     
@@ -104,6 +116,5 @@ public class PlayerMovementListener implements EventListener<MoveEntityEvent>{
         }
         
         return blocksAroundLocation;
-    }
-    
+    } 
 }
