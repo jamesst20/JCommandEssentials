@@ -26,6 +26,7 @@ import com.jamesst20.jcommandessentials.commands.WaterWalkCommand;
 import com.jamesst20.jcommandessentials.commands.WeatherCommand;
 import com.jamesst20.jcommandessentials.commands.WhatIsItCommand;
 import com.jamesst20.jcommandessentials.commands.WorkbenchCommand;
+import com.jamesst20.jcommandessentials.listerners.PlayerJoinListener;
 import com.jamesst20.jcommandessentials.listerners.PlayerMovementListener;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -43,7 +44,9 @@ import org.spongepowered.api.world.weather.Weathers;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.event.EventManager;
 import org.spongepowered.api.event.entity.MoveEntityEvent;
+import org.spongepowered.api.event.network.ClientConnectionEvent;
 
 @Plugin(id = "jcommandessentials", name = "JCommandEssentials", version = "1.0", description = "Description")
 public class JCMDEss {
@@ -67,8 +70,10 @@ public class JCMDEss {
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
         plugin = this;
-        Sponge.getEventManager().registerListener(plugin, MoveEntityEvent.class, new PlayerMovementListener());
+        
+        registerAllListeners();
         registerAllCommands();
+        
         logger.info("JCommandEssentials initialized");
     }
 
@@ -99,5 +104,12 @@ public class JCMDEss {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    private void registerAllListeners(){
+        EventManager manager = Sponge.getEventManager();
+        
+        manager.registerListener(plugin, MoveEntityEvent.class, new PlayerMovementListener());  
+        manager.registerListener(plugin, ClientConnectionEvent.Join.class, new PlayerJoinListener());           
     }
 }

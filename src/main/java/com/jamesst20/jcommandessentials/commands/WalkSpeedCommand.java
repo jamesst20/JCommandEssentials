@@ -19,23 +19,16 @@ package com.jamesst20.jcommandessentials.commands;
 import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.source.ConsoleSource;
-import org.spongepowered.api.data.key.Key;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.mutable.entity.MovementSpeedData;
-import org.spongepowered.api.data.value.immutable.ImmutableValue;
-import org.spongepowered.api.data.value.mutable.MutableBoundedValue;
-import org.spongepowered.api.data.value.mutable.Value;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.Text.Builder;
 import org.spongepowered.api.text.format.TextColors;
 
 public class WalkSpeedCommand implements SpongeCommand {
@@ -69,7 +62,7 @@ public class WalkSpeedCommand implements SpongeCommand {
             Player player = (args.length == 1) ? (Player)src : Sponge.getServer().getPlayer(args[1]).orElse(null);                  
             
             if(player == null){
-                Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "Unknown player \"" + args[1] + "\"."));                 
+                Methods.sendPlayerMessage(src, "<rdUnknown player <dr" + args[1] + "/>.");                 
             } else {
                 Methods.sendPlayerMessage(src, displayPlayerSpeed(player, args));
             } 
@@ -78,7 +71,7 @@ public class WalkSpeedCommand implements SpongeCommand {
             Player player = (args.length == 2) ? (Player)src : Sponge.getServer().getPlayer(args[2]).orElse(null);                  
             
             if(player == null){
-                Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "Unknown player \"" + args[1] + "\".")); 
+                Methods.sendPlayerMessage(src, "<rUnknown player <dr" + args[2] + "/>."); 
                                           
             } else {
                 try{                
@@ -86,7 +79,7 @@ public class WalkSpeedCommand implements SpongeCommand {
                     
                     if(src instanceof ConsoleSource){
                         String speed = String.format("%1$.2f", (Double.parseDouble(args[1])));
-                        Methods.sendPlayerMessage(player, Text.builder().append(Text.of("Your walk speed has been set to "), Text.of(TextColors.RED, speed), Text.of(".")).build());  
+                        Methods.sendPlayerMessage(player, "Your walk speed has been set to <gn" + speed + "/>.");  
                     }
                     
                 } catch (NumberFormatException ex) {
@@ -103,15 +96,15 @@ public class WalkSpeedCommand implements SpongeCommand {
         return Optional.of(Text.of("Manage your or a player walking speed"));
     }
     
-    private Text displayPlayerSpeed(Player player, String[] args){
+    private String displayPlayerSpeed(Player player, String[] args){
         MovementSpeedData speedData = player.getOrCreate(MovementSpeedData.class).orElse(null);
         
-        if(speedData == null) return Text.of(TextColors.RED, "Unable to access player data.");
+        if(speedData == null) return "<rdUnable to access player data.";
         
         String speed = String.format("%1$.2f", (speedData.getValue(Keys.WALKING_SPEED).get().get() * 10));
-        String introText = (args.length == 1) ? "Your walk speed is ": "The walk speed of \"" + player.getName() + "\" is ";
+        String introText = (args.length == 1) ? "Your walk speed is ": "The walk speed of <g>" + player.getName() + "</> is ";
         
-        return Text.builder().append(Text.of(introText), Text.of(TextColors.RED, speed), Text.of(".")).toText();
+        return introText + "<gn" + speed + "/>.";
     }
     
     private Text setPlayerSpeed(Player player, String[] args) throws NumberFormatException{
@@ -126,7 +119,7 @@ public class WalkSpeedCommand implements SpongeCommand {
         speedData.set(Keys.WALKING_SPEED, speed);
         player.offer(speedData);
         
-        String introText = (args.length == 2) ? "Your walk speed is now ": "The walk speed of \"" + player.getName() + "\" is now ";
+        String introText = (args.length == 2) ? "Your walk speed is now ": "The walk speed of <gn" + player.getName() + "/> is now ";
         String speedValue = String.format("%1$.2f", (speed * 10));
         
         return Text.builder().append(Text.of(introText), Text.of(TextColors.RED, speedValue), Text.of(".")).toText(); 

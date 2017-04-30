@@ -19,7 +19,6 @@ package com.jamesst20.jcommandessentials.utils;
 import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
 import ninja.leaping.configurate.ConfigurationNode;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
@@ -27,7 +26,7 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
 public class Methods {
-    public static Text prefix = Text.builder().append(Text.of(TextColors.WHITE, "[")).append(Text.of(TextColors.GREEN, "JCMD")).append(Text.of(TextColors.DARK_GREEN, "Ess")).append(Text.of(TextColors.WHITE, Text.builder("] "))).build();
+    public static Text prefix = StyledText.parseString("<wh[/><gnJCMD/><dgEss/><wh]/> ");
 
     public static void sendPlayerMessage(Player player, Text msg) {
         player.sendMessage(Text.builder().append(prefix).append(msg).build());
@@ -35,6 +34,10 @@ public class Methods {
 
     public static void sendPlayerMessage(CommandSource src, Text msg) {
         src.sendMessage(Text.builder().append(prefix).append(msg).build());
+    }
+    
+    public static void sendPlayerMessage(CommandSource src, String msg) {
+        src.sendMessage(Text.builder().append(prefix).append(StyledText.parseString(msg)).build());
     }
 
     public static boolean hasPermission(CommandSource src, String permission) {
@@ -64,9 +67,5 @@ public class Methods {
         } else {
             return str.split(pat);
         }
-    }
-    
-    public static void logMessage(Text msg){
-        Sponge.getServer().getConsole().sendMessage(Text.builder().append(prefix).append(msg).build());
     }
 }
