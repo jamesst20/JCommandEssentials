@@ -16,10 +16,12 @@
  */
 package com.jamesst20.jcommandessentials.utils;
 
+import com.jamesst20.jcommandessentials.commands.ColorsCommand;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Stack;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Text.Builder;
 import org.spongepowered.api.text.channel.MessageChannel;
@@ -47,7 +49,9 @@ public class StyledText implements MessageChannel{
             
             if(style != TextStyles.RESET){
                 node.Next = firstNode;                 
-            }           
+            } else {
+                size = 0;
+            }          
             
             firstNode = node;
             size++;
@@ -80,7 +84,7 @@ public class StyledText implements MessageChannel{
     @Override
     public Optional<Text> transformMessage(Object sender, MessageReceiver recipient, Text original, ChatType type) {
         String text = original.toPlain();
-        Text newText = parseStringOld(text);
+        Text newText = (ColorsCommand.xmlFormatUsers.get(((Player)sender).getName())) ? parseString(text) : parseStringOld(text);
         return Optional.of(newText);
     }
 
@@ -127,11 +131,13 @@ public class StyledText implements MessageChannel{
              	char innerC = (innerPart.length() > 0) ? innerPart.charAt(innerPart.length() - 1) : '?';
              	
                  if(innerC == '/'){  
-                     textParts.append(Text.builder(innerPart.replace("/", "")).color(colors.peek()).style(styles.getAll()).build());
+                     innerPart = (innerPart + ">").replace("/>","");
+                     textParts.append(Text.builder(innerPart).color(colors.peek()).style(styles.getAll()).build());
                      if(colors.size() > 1) colors.pop();
              		 
                  } else if(innerC == '\\'){
-                     textParts.append(Text.builder(innerPart.replace("\\", "")).color(colors.peek()).style(styles.getAll()).build());              
+                     innerPart = (innerPart + ">").replace("\\>","");
+                     textParts.append(Text.builder(innerPart).color(colors.peek()).style(styles.getAll()).build());              
                      styles.pop();
                  
                  } else {
@@ -167,11 +173,11 @@ public class StyledText implements MessageChannel{
                 } else if(style == TextStyles.ITALIC){
                     styles = styles.italic(true);
                 } else if(style == TextStyles.UNDERLINE){
-                    styles = styles.italic(true);
+                    styles = styles.underline(true);
                 } else if(style == TextStyles.STRIKETHROUGH){
-                    styles = styles.italic(true);
+                    styles = styles.strikethrough(true);
                 } else if(style == TextStyles.OBFUSCATED){
-                    styles = styles.italic(true);
+                    styles = styles.obfuscated(true);
                 } else if(style == TextStyles.RESET){
                     styles = style;
                 }
@@ -210,7 +216,7 @@ public class StyledText implements MessageChannel{
             case "8":
             case "dk": return TextColors.DARK_GRAY;
             case "9":
-            case "be": return TextColors.BLUE;
+            case "bl": return TextColors.BLUE;
             case "a":
             case "gn": return TextColors.GREEN;
             case "b":
