@@ -40,7 +40,8 @@ public class PlayerMovementListener implements EventListener<MoveEntityEvent>{
         Entity entity = event.getTargetEntity();
         
         if(entity instanceof Player){
-            Player player = (Player)entity; 
+            Player player = (Player)entity;
+            player.getLocation().getBlockPosition().
             if (WaterWalkCommand.WaterWalkers.containsKey(player.getName())) {
                 manageWaterWalk(player);
             }
