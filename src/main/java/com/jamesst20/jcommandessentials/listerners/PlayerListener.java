@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 James St-Pierre
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,19 +18,20 @@ package com.jamesst20.jcommandessentials.listerners;
 
 import com.jamesst20.jcommandessentials.utils.StyledText;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.event.EventListener;
+import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.text.channel.MessageChannel;
 
-public class PlayerJoinListener implements EventListener<ClientConnectionEvent.Join>{
-    private MessageChannel StyledChannel = new StyledText();
-    
-    @Override
-    public void handle(ClientConnectionEvent.Join event) throws Exception {
+public class PlayerListener {
+    private MessageChannel styledChannel = new StyledText();
+
+    @Listener
+    public void onClientConnectionJoin(ClientConnectionEvent.Join event) {
         Player player = event.getTargetEntity();
         MessageChannel originalChannel = event.getOriginalChannel();
-        MessageChannel newChannel = MessageChannel.combined(originalChannel, StyledChannel);
+        MessageChannel newChannel = MessageChannel.combined(originalChannel, styledChannel);
         player.setMessageChannel(newChannel);
+
     }
-    
+
 }

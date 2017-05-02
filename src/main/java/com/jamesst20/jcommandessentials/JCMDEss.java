@@ -27,7 +27,7 @@ import com.jamesst20.jcommandessentials.commands.WaterWalkCommand;
 import com.jamesst20.jcommandessentials.commands.WeatherCommand;
 import com.jamesst20.jcommandessentials.commands.WhatIsItCommand;
 import com.jamesst20.jcommandessentials.commands.WorkbenchCommand;
-import com.jamesst20.jcommandessentials.listerners.PlayerJoinListener;
+import com.jamesst20.jcommandessentials.listerners.PlayerListener;
 import com.jamesst20.jcommandessentials.listerners.PlayerMovementListener;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -110,8 +110,8 @@ public class JCMDEss {
     
     private void registerAllListeners(){
         EventManager manager = Sponge.getEventManager();
-        
+
         manager.registerListener(plugin, MoveEntityEvent.class, new PlayerMovementListener());  
-        manager.registerListener(plugin, ClientConnectionEvent.Join.class, new PlayerJoinListener());           
+        manager.registerListeners(plugin, new PlayerListener());
     }
 }

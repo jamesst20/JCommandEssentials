@@ -26,7 +26,7 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
 public class Methods {
-    public static Text prefix = StyledText.parseString("<wh[/><gnJCMD/><dgEss/><wh]/> ");
+    public static Text prefix = StyledText.parseString("&f[&aJCMD&2Ess&f] ");
 
     public static void sendPlayerMessage(Player player, Text msg) {
         player.sendMessage(Text.builder().append(prefix).append(msg).build());
@@ -34,10 +34,6 @@ public class Methods {
 
     public static void sendPlayerMessage(CommandSource src, Text msg) {
         src.sendMessage(Text.builder().append(prefix).append(msg).build());
-    }
-    
-    public static void sendPlayerMessage(CommandSource src, String msg) {
-        src.sendMessage(Text.builder().append(prefix).append(StyledText.parseString(msg)).build());
     }
 
     public static boolean hasPermission(CommandSource src, String permission) {

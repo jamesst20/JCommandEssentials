@@ -37,63 +37,32 @@ public class ColorsCommand implements SpongeCommand{
     
     public static HashMap<String, Boolean> xmlFormatUsers = new HashMap<String, Boolean>();
     
-    private final String XML_FORMAT_HELP = new StringBuilder("&a&nHow to use the xml format \n")
-            .append("&r&gUse the '<' character followed by the code related to the style you want to apply and ")
-            .append("use '/>' to go back to the last used color and '\\>' for the last used style.\n")
-            .append("&a- Color codes &g&r \n")
-            .append("'bk' for the color Black : \nA <bkgreat/> exemple gives A &0great&g exemple. \n")            
-            .append("'db' for the color Dark Blue : \nA <dbgreat/> exemple gives A &1great&g exemple. \n")
-            .append("'dg' for the color Dark Green : \nA <dggreat/> exemple gives A &2great&g exemple. \n")
-            .append("'da' for the color Dark Aqua : \nA <dagreat/> exemple gives A &3great&g exemple. \n")
-            .append("'dr' for the color Dark Red : \nA <drgreat/> exemple gives A &4great&g exemple. \n")
-            .append("'dp' for the color Dark Purple : \nA <rdgreat/> exemple gives A &5great&g exemple. \n")
-            .append("'gd' for the color Gold : \nA <rdgreat/> exemple gives A &6great&g exemple. \n")
-            .append("'gr' for the color Gray : \nA <rdgreat/> exemple gives A &7great&g exemple. \n")
-            .append("'dk' for the color Dark Gray : \nA <rdgreat/> exemple gives A &8great&g exemple. \n")
-            .append("'bl' for the color Blue : \nA <rdgreat/> exemple gives A &9great&g exemple. \n")
-            .append("'gn' for the color Green : \nA <rdgreat/> exemple gives A &agreat&g exemple. \n")
-            .append("'aq' for the color Aqua : \nA <rdgreat/> exemple gives A &bgreat&g exemple. \n")
-            .append("'rd' for the color Red : \nA <rdgreat/> exemple gives A &cgreat&g exemple. \n")
-            .append("'lp' for the color Light Purple : \nA <rdgreat/> exemple gives A &dgreat&g exemple. \n")
-            .append("'yl' for the color Yellow : \nA <rdgreat/> exemple gives A &egreat&g exemple. \n")
-            .append("'wh' for the color White : \nA <rdgreat/> exemple gives A &fgreat&g exemple. \n")
-            .append("'nn' for the color None : \n<rdA <nngreat/> exemple gives &cA &ggreat&c exemple. \n")
-            .append("&a&l- Style codes &g&r\n")
-            .append("'O' for the style Obfuscated : \nA <Ogreat\\> exemple gives A &kgreat&r exemple. \n")
-            .append("'B' for the style Bold : \nA <Bgreat\\> exemple gives A &lgreat&r exemple. \n")
-            .append("'S' for the style Strikethrough : \nA <Sgreat\\> exemple gives A &mgreat&r exemple. \n")
-            .append("'U' for the style Underline : \nA <Ugreat\\> exemple gives A &ngreat&r exemple. \n")
-            .append("'I' for the style Italic : \nA <Igreat\\> exemple gives A &ogreat&r exemple. \n")
-            .append("'R' to reset all styles : \n<UA <Rgreat<U exemple gives &nA &rgreat&n exemple. \n").toString();
-    
-    private final String HEX_FORMAT_HELP = new StringBuilder("<gn<BHow to use the hex format\\>/> \n")
-            .append("Use the '&' character followed by the code related to the style you want to apply. \n")
-            .append("<gn- Color codes /> \n")
-            .append("'0' for the color Black : \n&0A great exemple gives <bkA great exemple./> \n")            
-            .append("'1' for the color Dark Blue : \n&1A great exemple gives <dbA great exemple./> \n")
-            .append("'2' for the color Dark Green : \n&2A great exemple gives <dgA great exemple./> \n")
-            .append("'3' for the color Dark Aqua : \n&3A great exemple gives <daA great exemple./> \n")
-            .append("'4' for the color Dark Red : \n&4A great exemple gives <drA great exemple./> \n")
-            .append("'5' for the color Dark Purple : \n&5A great exemple gives <dpA great exemple./> \n")
-            .append("'6' for the color Gold : \n&6A great exemple gives <gdA great exemple./> \n")
-            .append("'7' for the color Gray : \n&7A great exemple gives <grA great exemple./> \n")
-            .append("'8' for the color Dark Gray : \n&8A great exemple gives <dkA great exemple./> \n")
-            .append("'9' for the color Blue : \n&9A great exemple gives <blA great exemple./> \n")
-            .append("'a' for the color Green : \n&aA great exemple gives <gnA great exemple./> \n")
-            .append("'b' for the color Aqua : \n&bA great exemple gives <aqA great exemple./> \n")
-            .append("'c' for the color Red : \n&cA great exemple gives <rdA great exemple./> \n")
-            .append("'d' for the color Light Purple : \n&dA great exemple gives <lpA great exemple./> \n")
-            .append("'e' for the color Yellow : \n&eA great exemple gives <ylA great exemple./> \n")
-            .append("'f' for the color White : \n&fA great exemple gives <whA great exemple./> \n")
-            .append("'g' for the color None : \n&cA &ggreat&c exemple gives <rdA <nngreat<rd exemple./> \n")
-            .append("<gn- Style codes />\n")
-            .append("'k' for the style Obfuscated : \n&kA great exemple gives <OA great exemple.\\> \n")
-            .append("'l' for the style Bold : \n&lA great exemple gives <BA great exemple.\\> \n")
-            .append("'m' for the style Strikethrough : \n&mA great exemple gives <SA great exemple.\\> \n")
-            .append("'n' for the style Underline : \n&nA great exemple gives <UA great exemple.\\> \n")
-            .append("'o' for the style Italic : \n&oA great exemple gives <IA great exemple.\\> \n")
-            .append("'r' to reset all styles : \n&lA &rgreat&l exemple gives <BA <Rgreat<B exemple.\\> \n").toString();
-
+    private static final String FORMAT_HELP = "How to use the hex format: \n" +
+            "Use the '&' character followed by the code related to the style you want to apply. \n" +
+            "&a- Color codes &r\n" +
+            "&0'0' for the color Black &r\n" +
+            "&1'1' for the color Dark Blue &r\n" +
+            "&2'2' for the color Dark Green &r\n" +
+            "&3'3' for the color Dark Aqua &r\n" +
+            "&4'4' for the color Dark Red &r\n" +
+            "&5'5' for the color Dark Purple &r\n" +
+            "&6'6' for the color Gold &r\n" +
+            "&7'7' for the color Gray &r\n" +
+            "&8'8' for the color Dark Gray &r\n" +
+            "&9'9' for the color Blue &r\n" +
+            "&a'a' for the color Green &r\n" +
+            "&b'b' for the color Aqua &r\n" +
+            "&c'c' for the color Red &r\n" +
+            "&d'd' for the color Light Purple &r\n" +
+            "&e'e' for the color Yellow &r\n" +
+            "&f'f' for the color White &r\n" +
+            "&a- Style codes &r\n" +
+            "&k'k' for the style Obfuscated &r\n" +
+            "&l'l' for the style Bold &r\n" +
+            "&m'm' for the style Strikethrough &r\n" +
+            "&n'n' for the style Underline &r\n" +
+            "&o'o' for the style Italic &r\n" +
+            "&r'r' to reset all styles &r\n";
 
     @Override
     public String getCommandUsage() {
@@ -107,52 +76,13 @@ public class ColorsCommand implements SpongeCommand{
 
     @Override
     public SpongeCommandResult executeCommand(CommandSource src, String[] args) {
-        
-        if(isSynthaxInvalid(args)) return SpongeCommandResult.INVALID_SYNTHAX;
-        
-        if(!Methods.hasPermission(src, "JCMDEss.commands.colors")) return SpongeCommandResult.NO_PERMISSION;
-        
-        if(src instanceof ConsoleSource) {
-            Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "Console doesn't have color support."));
-        
-        } else if (args[0].equals("get")) {
-            Player player = (Player)src;
-            String usedFormat = (xmlFormatUsers.containsKey(player.getName()) && xmlFormatUsers.get(player.getName())) ? "xml" : "hex";
-                       
-            Methods.sendPlayerMessage(src, "You are currently using the <gn" + usedFormat + "/> format. To learn how to use it, use the <gd/colors help/> command"); 
-        
-        } else if (args[0].equals("set")){
-            Player player = (Player)src;
-            boolean isXml = args[1].equals("xml");
-            
-            if(!xmlFormatUsers.containsKey(player.getName())){
-                xmlFormatUsers.put(player.getName(), isXml);
-            } else {
-                xmlFormatUsers.replace(player.getName(), isXml);
-            }
-            
-            Methods.sendPlayerMessage(src, "You are now using the <gn" + args[1] + "/> format. To learn how to use it, use the <gd/colors help/> command"); 
-        } else {
-            Player player = (Player)src;
-            Text helpMsg = (xmlFormatUsers.containsKey(player.getName()) && xmlFormatUsers.get(player.getName())) 
-                    ? StyledText.parseStringOld(XML_FORMAT_HELP)
-                    : StyledText.parseString(HEX_FORMAT_HELP);                       
-                        
-            Methods.sendPlayerMessage(src, helpMsg); 
-        }      
-        
+        Methods.sendPlayerMessage(src, StyledText.parseString(FORMAT_HELP));
         return SpongeCommandResult.SUCCESS;
     }
 
     @Override
     public Optional<Text> getShortDescription(CommandSource source) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Optional.of(Text.of("Display the colors chart."));
     }
-    
-    private boolean isSynthaxInvalid(String[] args){
-        return (args.length == 0) ||
-               (args.length == 1 && !args[0].equals("get") && !args[0].equals("help")) ||
-               (args.length == 2 && !args[0].equals("set") && (!args[1].equals("xml") && !args[1].equals("hex"))) ||
-               (args.length > 2);
-    }    
+
 }
