@@ -16,9 +16,11 @@
  */
 package com.jamesst20.jcommandessentials.listerners;
 
+import com.jamesst20.jcommandessentials.commands.WaterWalkCommand;
 import com.jamesst20.jcommandessentials.utils.StyledText;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.text.channel.MessageChannel;
 
@@ -31,7 +33,13 @@ public class PlayerListener {
         MessageChannel originalChannel = event.getOriginalChannel();
         MessageChannel newChannel = MessageChannel.combined(originalChannel, styledChannel);
         player.setMessageChannel(newChannel);
+    }
 
+    @Listener
+    public void onEntityMove(MoveEntityEvent event) {
+        if(event.getTargetEntity() instanceof Player){
+            WaterWalkCommand.processWaterWalk((Player)event.getTargetEntity());
+        }
     }
 
 }

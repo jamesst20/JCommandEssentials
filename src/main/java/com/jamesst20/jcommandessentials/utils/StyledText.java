@@ -28,8 +28,6 @@ import org.spongepowered.api.text.chat.ChatType;
 import org.spongepowered.api.text.serializer.TextSerializers;
 
 public class StyledText implements MessageChannel {
-    private static final String validColorsAndStyle = "0123456789abcdefgklmnor";
-
 
     @Override
     public Optional<Text> transformMessage(Object sender, MessageReceiver recipient, Text original, ChatType type) {

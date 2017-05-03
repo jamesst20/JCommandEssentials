@@ -23,7 +23,6 @@ import com.jamesst20.jcommandessentials.utils.Methods;
 
 import java.util.*;
 
-import javafx.util.Pair;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.command.CommandSource;
@@ -37,45 +36,6 @@ import org.spongepowered.api.Sponge;
 public class WaterWalkCommand implements SpongeCommand {
     private static final HashMap<String, HashMap<Vector3i, BlockState>> waterWalkers = new HashMap<>();
 
-
-    public static void processWaterWalk(Player player){
-        Vector3i playerPosition = player.getLocation().getBlockPosition();
-        List<Vector3i> blockLocations = new ArrayList<>();
-
-        blockLocations.add(playerPosition);
-        for(int x = -1; x < 2; x++) {
-            for(int z = -1; z < 2; z++) {
-                Vector3i blockLocation = playerPosition.add(x, 0, z);
-                if(player.getWorld().getBlock(blockLocation).getType() == BlockTypes.WATER || player.getWorld().getBlock(blockLocation).getType() == BlockTypes.FLOWING_WATER) {
-                    blockLocations.add(blockLocation);
-                }
-            }
-        }
-
-        if(!waterWalkers.containsKey(player.getName())) waterWalkers.put(player.getName(), new HashMap<>());
-
-        for(Vector3i blockLocation : blockLocations) {
-            if(!waterWalkers.get(player.getName()).containsKey(blockLocation)) {
-                waterWalkers.get(player.getName()).put(blockLocation, player.getWorld().getBlock(blockLocation));
-                player.getWorld().getLocation(blockLocation).setBlockType(BlockTypes.ICE, Cause.source(JCMDEss.plugin).build());
-            }
-        }
-
-        restoreBlocks(player, blockLocations);
-    }
-
-    private static void restoreBlocks(Player player, List<Vector3i> exceptions) {
-        Iterator<Map.Entry<Vector3i, BlockState>> it = waterWalkers.get(player.getName()).entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<Vector3i, BlockState> pair = it.next();
-            if(!exceptions.contains(pair.getKey())) {
-                player.getWorld().getLocation(pair.getKey()).setBlock(pair.getValue(), Cause.source(JCMDEss.plugin).build());
-                it.remove();
-            }
-        }
-        if (waterWalkers.get(player.getName()).size() == 0) waterWalkers.remove(player.getName());
-    }
-
     @Override
     public String getCommandUsage() {
         return "/waterwalk [player]";
@@ -88,31 +48,38 @@ public class WaterWalkCommand implements SpongeCommand {
 
     @Override
     public SpongeCommandResult executeCommand(CommandSource src, String[] args) {
-        if (!Methods.hasPermission(src, "JCMDEss.commands.waterwalk.self")) {
-            return SpongeCommandResult.NO_PERMISSION;
-        }
-
         if (src instanceof ConsoleSource && args.length == 0) {
             Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "The console can't walk on water."));
-
         } else if (args.length == 0) {
+            if (!Methods.hasPermission(src, "JCMDEss.commands.waterwalk.self")) {
+                return SpongeCommandResult.NO_PERMISSION;
+            }
             Player player = (Player) src;
             if (waterWalkers.containsKey(player.getName())) {
-                disableWalk(args, player, src, true);
+                restoreBlocks(player, null);
+                waterWalkers.remove(player.getName());
+                Methods.sendPlayerMessage(player, Text.of(TextColors.RED, "You can no longer walk on water."));
             } else {
-                enableWalk(args, player, src, true);
+                waterWalkers.put(player.getName(), new HashMap<>());
+                Methods.sendPlayerMessage(player, Text.of(TextColors.RED, "You can now walk on water."));
             }
         } else if (args.length == 1) {
+            if (!Methods.hasPermission(src, "JCMDEss.commands.waterwalk.others")) {
+                return SpongeCommandResult.NO_PERMISSION;
+            }
             Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);
-
             if (player == null) {
                 Methods.sendPlayerNotFound(src, args[0]);
             } else if (waterWalkers.containsKey(player.getName())) {
-                disableWalk(args, player, src, false);
+                restoreBlocks(player, null);
+                waterWalkers.remove(player.getName());
+                Methods.sendPlayerMessage(player, Text.of(TextColors.RED, "You can no longer walk on water."));
+                Methods.sendPlayerMessage(src, Text.builder().append(Text.of("The player ")).append(Text.of(TextColors.RED, player.getName())).append(Text.of(" can no longer walk on water.")).build());
             } else {
-                enableWalk(args, player, src, false);
+                waterWalkers.put(player.getName(), new HashMap<>());
+                Methods.sendPlayerMessage(player, Text.of(TextColors.RED, "You can now walk on water."));
+                Methods.sendPlayerMessage(src, Text.builder().append(Text.of("The player ")).append(Text.of(TextColors.RED, player.getName())).append(Text.of(" can now walk on water.")).build());
             }
-
         } else {
             return SpongeCommandResult.INVALID_SYNTHAX;
         }
@@ -124,26 +91,39 @@ public class WaterWalkCommand implements SpongeCommand {
         return Optional.of(Text.of("Allow yourself or a player to walk on water"));
     }
 
-    private void enableWalk(String[] args, Player player, CommandSource src, boolean isSelf) {
-        String lastKnownLocation = player.getLocation().getBlockPosition().toString();
-        WaterWalkers.put(player.getName(), new WaterWalker(lastKnownLocation));
-        Methods.sendPlayerMessage(player, Text.of(TextColors.RED, "You can now walk on water."));
-        if (!isSelf) {
-            Methods.sendPlayerMessage(src, Text.builder().append(Text.of("The player "))
-                    .append(Text.of(TextColors.RED, args[0]))
-                    .append(Text.of(" can now walk on water.")).build());
+    public static void processWaterWalk(Player player) {
+        if (!waterWalkers.containsKey(player.getName())) return;
+
+        Vector3i playerPosition = player.getLocation().getBlockPosition().add(0, -1, 0);
+
+        List<Vector3i> blockLocations = new ArrayList<>();
+        for (int x = -1; x < 2; x++) {
+            for (int z = -1; z < 2; z++) {
+                Vector3i blockLocation = playerPosition.add(x, 0, z);
+                if (player.getWorld().getBlock(blockLocation).getType() == BlockTypes.WATER || player.getWorld().getBlock(blockLocation).getType() == BlockTypes.FLOWING_WATER || player.getWorld().getBlock(blockLocation).getType() == BlockTypes.ICE) {
+                    blockLocations.add(blockLocation);
+                }
+            }
+        }
+
+        restoreBlocks(player, blockLocations);
+
+        for (Vector3i blockLocation : blockLocations) {
+            if (!waterWalkers.get(player.getName()).containsKey(blockLocation)) {
+                waterWalkers.get(player.getName()).put(blockLocation, player.getWorld().getBlock(blockLocation));
+                player.getWorld().getLocation(blockLocation).setBlockType(BlockTypes.ICE, Cause.source(Sponge.getPluginManager().fromInstance(JCMDEss.plugin).get()).build());
+            }
         }
     }
 
-    private void disableWalk(String[] args, Player player, CommandSource src, boolean isSelf) {
-        restoreBlocks(player);
-        WaterWalkers.remove(player.getName());
-        Methods.sendPlayerMessage(player, Text.of(TextColors.RED, "You can no longer walk on water."));
-        if (!isSelf) {
-            Methods.sendPlayerMessage(src, Text.builder().append(Text.of("The player "))
-                    .append(Text.of(TextColors.RED, args[0]))
-                    .append(Text.of(" can no longer walk on water.")).build());
+    private static void restoreBlocks(Player player, List<Vector3i> exceptions) {
+        Iterator<Map.Entry<Vector3i, BlockState>> it = waterWalkers.get(player.getName()).entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Vector3i, BlockState> pair = it.next();
+            if (exceptions == null || !exceptions.contains(pair.getKey())) {
+                player.getWorld().getLocation(pair.getKey()).setBlock(pair.getValue(), Cause.source(Sponge.getPluginManager().fromInstance(JCMDEss.plugin).get()).build());
+                it.remove();
+            }
         }
     }
-
 }
