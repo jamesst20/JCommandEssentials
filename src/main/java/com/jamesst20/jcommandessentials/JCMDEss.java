@@ -22,6 +22,7 @@ import com.google.inject.Inject;
 import com.jamesst20.jcommandessentials.commands.ArmorCommand;
 import com.jamesst20.jcommandessentials.commands.ClearInventory;
 import com.jamesst20.jcommandessentials.commands.ColorsCommand;
+import com.jamesst20.jcommandessentials.commands.TpcCommand;
 import com.jamesst20.jcommandessentials.commands.WalkSpeedCommand;
 import com.jamesst20.jcommandessentials.commands.WaterWalkCommand;
 import com.jamesst20.jcommandessentials.commands.WeatherCommand;
@@ -88,6 +89,7 @@ public class JCMDEss {
             Methods.regC(this, game, new ArmorCommand(), rootNode);
             Methods.regC(this, game, new ClearInventory(), rootNode);
             Methods.regC(this, game, new ColorsCommand(), rootNode);
+            Methods.regC(this, game, new TpcCommand(), rootNode);
             Methods.regC(this, game, new WalkSpeedCommand(), rootNode);
             Methods.regC(this, game, new WaterWalkCommand(), rootNode);
 
