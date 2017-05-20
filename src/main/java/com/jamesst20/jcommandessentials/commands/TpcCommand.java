@@ -20,6 +20,7 @@ import com.flowpowered.math.vector.Vector3d;
 import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import com.jamesst20.jcommandessentials.utils.StyledText;
+import com.jamesst20.jcommandessentials.utils.TpManager;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -69,7 +70,7 @@ public class TpcCommand implements SpongeCommand{
                     
                     String teleportedTo = " have been teleported to &cx: " + x + " &ay: " + y + " &9z: " + z;
 
-                    player.setLocation(new Location<>(player.getWorld(), new Vector3d(x, y, z))); 
+                    TpManager.teleport(player, new Vector3d(x, y, z)); 
                     
                     Methods.sendPlayerMessage(player, StyledText.parseString("You" + teleportedTo));
                     
