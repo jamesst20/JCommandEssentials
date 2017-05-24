@@ -75,7 +75,7 @@ public class TpcCommand implements SpongeCommand{
                     Methods.sendPlayerMessage(player, StyledText.parseString("You" + teleportedTo));
                     
                     if(!teleportSelf){                        
-                        Methods.sendPlayerMessage(src, Text.of("The player " + player.getName() + teleportedTo));
+                        Methods.sendPlayerMessage(src, StyledText.parseString("The player &a" + player.getName() + "&f" + teleportedTo));
                     }
 
                 } catch (NumberFormatException ex) {

@@ -69,6 +69,9 @@ public class TpRequestCommand implements SpongeCommand{
             if(target == null){
                 Methods.sendPlayerNotFound(src, args[0]);
             
+            } else if (target.getName().equals(source.getName())){
+                Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "You can't ask yourself to teleport to yourself"));                
+                
             } else {
                 String destinationText = (isHere) ? "wants you to teleport to him" : "wants to teleport to you";              
                 TpManager.request(source, target, !isHere);

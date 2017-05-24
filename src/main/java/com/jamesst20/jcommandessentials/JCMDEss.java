@@ -24,8 +24,10 @@ import com.jamesst20.jcommandessentials.commands.ClearInventory;
 import com.jamesst20.jcommandessentials.commands.ColorsCommand;
 import com.jamesst20.jcommandessentials.commands.TimeCommand;
 import com.jamesst20.jcommandessentials.commands.TimeCommand.Time;
+import com.jamesst20.jcommandessentials.commands.TpHereCommand;
 import com.jamesst20.jcommandessentials.commands.TpResponseCommand;
 import com.jamesst20.jcommandessentials.commands.TpRequestCommand;
+import com.jamesst20.jcommandessentials.commands.TpThereCommand;
 import com.jamesst20.jcommandessentials.commands.TpcCommand;
 import com.jamesst20.jcommandessentials.commands.WalkSpeedCommand;
 import com.jamesst20.jcommandessentials.commands.WaterWalkCommand;
@@ -93,14 +95,19 @@ public class JCMDEss {
             Methods.regC(this, game, new ArmorCommand(), rootNode);
             Methods.regC(this, game, new ClearInventory(), rootNode);
             Methods.regC(this, game, new ColorsCommand(), rootNode);
+            
             Methods.regC(this, game, new TimeCommand(), rootNode);
             Methods.regC(this, game, new TimeCommand(Time.DAY), rootNode);
             Methods.regC(this, game, new TimeCommand(Time.NIGHT), rootNode);
+            
             Methods.regC(this, game, new TpcCommand(), rootNode);
+            Methods.regC(this, game, new TpHereCommand(), rootNode);
             Methods.regC(this, game, new TpRequestCommand(true), rootNode);
             Methods.regC(this, game, new TpRequestCommand(false), rootNode);
             Methods.regC(this, game, new TpResponseCommand(true), rootNode);
             Methods.regC(this, game, new TpResponseCommand(false), rootNode);
+            Methods.regC(this, game, new TpThereCommand(), rootNode);
+            
             Methods.regC(this, game, new WalkSpeedCommand(), rootNode);
             Methods.regC(this, game, new WaterWalkCommand(), rootNode);
 
