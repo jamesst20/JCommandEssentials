@@ -54,9 +54,9 @@ public class TpThereCommand implements SpongeCommand{
 
     @Override
     public SpongeCommandResult executeCommand(CommandSource src, String[] args) {
-        if(!Methods.hasPermission(src, "JCMDEss.commands.tpthere")) return SpongeCommandResult.NO_PERMISSION;
-        
         if(args.length > 1) return SpongeCommandResult.INVALID_SYNTHAX;
+        
+        if(!doesSourceHavePermission(src, args)) return SpongeCommandResult.NO_PERMISSION;        
         
         if(src instanceof ConsoleSource){
             Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "The console can't teleport itself or players to looked position."));
@@ -102,6 +102,11 @@ public class TpThereCommand implements SpongeCommand{
     @Override
     public Optional<Text> getShortDescription(CommandSource source) {
         return Optional.of(Text.of("Teleport yourself or a player to your target block"));
+    }
+    
+    private boolean doesSourceHavePermission(CommandSource src, String[] args){
+        return (Methods.hasPermission(src, "JCMDEss.commands.tpthere.self") && args.length == 0) ||
+               (Methods.hasPermission(src, "JCMDEss.commands.tpthere.others") && args.length == 1);
     }
     
     private Vector3d getSafeLocation(Vector3i location, World world){         

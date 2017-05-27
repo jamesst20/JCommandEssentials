@@ -17,22 +17,25 @@
 package com.jamesst20.jcommandessentials.utils;
 
 import com.flowpowered.math.vector.Vector3d;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Stack;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
 
 public class TpManager {
-    
+     
     private class TpRequest{
         private final Player source;
         private final Player target;
-        private final boolean sourceToTarget;
         private final Timer timer;
+        private final boolean sourceToTarget;
         
         public TpRequest(Player source, Player target, boolean sourceToTarget){
             this.source = source;
@@ -79,6 +82,8 @@ public class TpManager {
     
     private static final HashSet<TpRequest> REQUESTS = new HashSet<>();
     
+    private static HashMap<String, Stack<Location>> playersPastLocations = new HashMap<String, Stack<Location>>();
+    
     public static void request(Player source, Player target, boolean isSourceToTarget){   
         if(source == null || target == null) return;
         
@@ -121,10 +126,33 @@ public class TpManager {
         return true;
     }
     
-    public static void teleport(Player player, Vector3d location){        
-        if(player == null || location == null) return;
+    public static boolean teleport(Player player, Vector3d position){        
+        if(player == null || position == null) return false;
+                
+        if(!playersPastLocations.containsKey(player.getName())){
+            playersPastLocations.put(player.getName(), new Stack<>());        
+        }
+        playersPastLocations.get(player.getName()).push(player.getLocation());
         
-        player.setLocation(new Location<>(player.getWorld(), location));
+        player.setLocation(new Location<>(player.getWorld(), position));
+        
+        return true;
+    }
+    
+    public static boolean teleportBack(Player player){        
+        if(player != null){
+            if(playersPastLocations.containsKey(player.getName())){                
+                Stack<Location> pastLocations = playersPastLocations.get(player.getName());
+                
+                if(!pastLocations.empty()) {
+                    player.setLocation(pastLocations.pop());
+                    
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
     
     private static void expire(TpRequest request){        
