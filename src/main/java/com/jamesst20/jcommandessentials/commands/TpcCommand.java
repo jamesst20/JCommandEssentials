@@ -30,6 +30,8 @@ import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
 public class TpcCommand implements SpongeCommand{
 
@@ -65,8 +67,9 @@ public class TpcCommand implements SpongeCommand{
                     double z = Double.parseDouble(args[2]);                    
                     
                     String teleportedTo = " have been teleported to &cx: " + x + " &ay: " + y + " &9z: " + z;
-
-                    TpManager.teleport(player, new Vector3d(x, y, z)); 
+                    
+                    Location location = new Location<World>(player.getWorld(), new Vector3d(x, y, z));
+                    TpManager.teleport(player, location); 
                     
                     Methods.sendPlayerMessage(player, StyledText.parseString("You" + teleportedTo));
                     

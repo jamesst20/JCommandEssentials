@@ -38,6 +38,7 @@ import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.util.blockray.BlockRay;
+import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 public class TpThereCommand implements SpongeCommand{
@@ -85,7 +86,7 @@ public class TpThereCommand implements SpongeCommand{
                     Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "Block is out of range."));           
                     
                 } else {  
-                    TpManager.teleport(player, getSafeLocation(location, world).toDouble());
+                    TpManager.teleport(player, getSafeLocation(location, world));
                     String teleportedTo = " have been teleported to &cx: " + location.getX() + " &ay: " + location.getY() + " &9z: " + location.getZ();
                     Methods.sendPlayerMessage(player, StyledText.parseString("You" + teleportedTo));
                     
@@ -109,7 +110,7 @@ public class TpThereCommand implements SpongeCommand{
                (Methods.hasPermission(src, "JCMDEss.commands.tpthere.others") && args.length == 1);
     }
     
-    private Vector3d getSafeLocation(Vector3i location, World world){         
+    private Location getSafeLocation(Vector3i location, World world){         
         Cause cause = Cause.source(Sponge.getPluginManager().fromInstance(JCMDEss.plugin).get()).build();
         Vector3d fixedLocation = location.add(0, 1, 0).toDouble().add(0.5, 0, 0.5);
         BlockState block = BlockState.builder().blockType(BlockTypes.AIR).build();
@@ -119,7 +120,7 @@ public class TpThereCommand implements SpongeCommand{
             world.setBlock(location.add(0, 2, 0), block, cause);            
         }      
         
-        return fixedLocation;
+        return new Location(world, fixedLocation);
     }
     
 }

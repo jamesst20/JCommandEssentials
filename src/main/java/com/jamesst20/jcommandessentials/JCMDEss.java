@@ -24,6 +24,7 @@ import com.jamesst20.jcommandessentials.commands.ClearInventory;
 import com.jamesst20.jcommandessentials.commands.ColorsCommand;
 import com.jamesst20.jcommandessentials.commands.TimeCommand;
 import com.jamesst20.jcommandessentials.commands.TimeCommand.Time;
+import com.jamesst20.jcommandessentials.commands.TpAllCommand;
 import com.jamesst20.jcommandessentials.commands.TpBackCommand;
 import com.jamesst20.jcommandessentials.commands.TpHereCommand;
 import com.jamesst20.jcommandessentials.commands.TpResponseCommand;
@@ -101,6 +102,7 @@ public class JCMDEss {
             Methods.regC(this, game, new TimeCommand(Time.DAY), rootNode);
             Methods.regC(this, game, new TimeCommand(Time.NIGHT), rootNode);
             
+            Methods.regC(this, game, new TpAllCommand(), rootNode);
             Methods.regC(this, game, new TpBackCommand(), rootNode);
             Methods.regC(this, game, new TpcCommand(), rootNode);
             Methods.regC(this, game, new TpHereCommand(), rootNode);

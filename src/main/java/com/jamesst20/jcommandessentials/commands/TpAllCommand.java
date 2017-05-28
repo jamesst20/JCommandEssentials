@@ -29,41 +29,43 @@ import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.world.Location;
 
-public class TpHereCommand implements SpongeCommand{
+public class TpAllCommand implements SpongeCommand{
 
     @Override
     public String getCommandUsage() {
-        return "/tphere <player>";
+        return "/tpall";
     }
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("tphere");
+        return Arrays.asList("tpall");
     }
 
     @Override
-    public SpongeCommandResult executeCommand(CommandSource src, String[] args) {        
-        if(!Methods.hasPermission(src, "JCMDEss.commands.tphere")) return SpongeCommandResult.NO_PERMISSION;
+    public SpongeCommandResult executeCommand(CommandSource src, String[] args) {
         
-        if(args.length != 1) return SpongeCommandResult.INVALID_SYNTHAX;
+        if(args.length != 0) return SpongeCommandResult.INVALID_SYNTHAX;
+        
+        if(!Methods.hasPermission(src, "JCMDEss.commands.tpall")) return SpongeCommandResult.INVALID_SYNTHAX;
         
         if(src instanceof ConsoleSource){
-            Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "The console can't teleport players to its position."));
+            Methods.sendPlayerMessage(src, Text.of(TextColors.RED, "The console can't teleport player to itself."));
         
-        } else {
-            Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);     
+        } else {  
+            Player source = ((Player)src);
+            Location location = source.getLocation();
             
-            if(player == null){
-                Methods.sendPlayerNotFound(src, args[0]);
-            
-            } else {
-                Player source = ((Player)src);
-                TpManager.teleport(player, source.getLocation());
+            for(Player player : Sponge.getServer().getOnlinePlayers()){
                 
-                Methods.sendPlayerMessage(player, StyledText.parseString("You have been teleported to &a" + source.getName() + "&f."));                                         
-                Methods.sendPlayerMessage(src, StyledText.parseString("&a" + player.getName() + "&f has been teleported to you."));                    
+                if(player.getName().equals(source.getName())) continue;
+                
+                Methods.sendPlayerMessage(player, StyledText.parseString("You have been teleported to &a" + source.getName() + "&f."));                 
+                TpManager.teleport(player, location);
             }
+            
+            Methods.sendPlayerMessage(src, Text.of("All players have been teleported to you"));
         }
         
         return SpongeCommandResult.SUCCESS;
@@ -71,6 +73,6 @@ public class TpHereCommand implements SpongeCommand{
 
     @Override
     public Optional<Text> getShortDescription(CommandSource source) {
-        return Optional.of(Text.of("Teleport a player to your location"));
+        return Optional.of(Text.of("Teleport all players to you"));
     }    
 }

@@ -67,10 +67,10 @@ public class TpManager {
         
         public void execute(){
             if(sourceToTarget){
-                TpManager.teleport(source, target.getLocation().getPosition());                
+                TpManager.teleport(source, target.getLocation());                
             
             } else {
-                TpManager.teleport(target, source.getLocation().getPosition());      
+                TpManager.teleport(target, source.getLocation());      
             }
             cancel();
         }
@@ -126,7 +126,7 @@ public class TpManager {
         return true;
     }
     
-    public static boolean teleport(Player player, Vector3d position){        
+    public static boolean teleport(Player player, Location position){        
         if(player == null || position == null) return false;
                 
         if(!playersPastLocations.containsKey(player.getName())){
@@ -134,7 +134,7 @@ public class TpManager {
         }
         playersPastLocations.get(player.getName()).push(player.getLocation());
         
-        player.setLocation(new Location<>(player.getWorld(), position));
+        player.setLocation(position);
         
         return true;
     }
