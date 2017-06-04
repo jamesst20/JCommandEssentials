@@ -16,6 +16,7 @@
  */
 package com.jamesst20.jcommandessentials.commands;
 
+import com.jamesst20.jcommandessentials.JCMDEss;
 import com.jamesst20.jcommandessentials.interfaces.SpongeCommand;
 import com.jamesst20.jcommandessentials.utils.Methods;
 import com.jamesst20.jcommandessentials.utils.StyledText;
@@ -24,27 +25,37 @@ import java.util.List;
 import java.util.Optional;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.entity.EntityArchetype;
+import org.spongepowered.api.entity.EntitySnapshot;
+import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.weather.Lightning;
+import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.text.Text;
 
-
-public class SudoCommand implements SpongeCommand{
+/**
+ *
+ * @author charl
+ */
+public class StrikeCommand implements SpongeCommand{
 
     @Override
     public String getCommandUsage() {
-        return "/sudo <player> <command [args]>";
+        return "/strike <player>";
     }
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("sudo", "cmd");
+        return Arrays.asList("strike", "lightning", "zeus");
     }
 
     @Override
     public SpongeCommandResult executeCommand(CommandSource src, String[] args) {
-        if(args.length < 2) return SpongeCommandResult.INVALID_SYNTHAX;
         
-        if(!Methods.hasPermission(src, "JCMDEss.commands.sudo")) return SpongeCommandResult.NO_PERMISSION;
+        if(args.length != 1) return SpongeCommandResult.INVALID_SYNTHAX;
+        
+        if(!Methods.hasPermission(src, "JCMDEss.commands.strike")) return SpongeCommandResult.NO_PERMISSION;
         
         Player player = Sponge.getServer().getPlayer(args[0]).orElse(null);
         
@@ -52,22 +63,19 @@ public class SudoCommand implements SpongeCommand{
             Methods.sendPlayerNotFound(src, args[0]);
         
         } else {
-            StringBuilder command = new StringBuilder();
-            for (int i = 1; i < args.length; i++) {
-                command.append(args[i]).append(" ");
-            }
+            Entity lightning = player.getWorld().createEntity(EntityTypes.LIGHTNING, player.getLocation().getPosition());            
+            player.getWorld().spawnEntity(lightning, Cause.source(Sponge.getPluginManager().fromInstance(JCMDEss.plugin).get()).build());
             
-            Sponge.getCommandManager().process(player, command.toString());
-            Methods.sendPlayerMessage(src, StyledText.parseString("&a" + args[0] + "&f was forced to run: &6" + command.toString()));
-            Methods.sendPlayerMessage(player, Text.of("You were forced to run a command"));
-        }       
+            Methods.sendPlayerMessage(src, StyledText.parseString("You struck &a" + player.getName() + "&f."));
+            Methods.sendPlayerMessage(player, Text.of("You've got struck by lightning."));
+        }
         
         return SpongeCommandResult.SUCCESS;
     }
 
     @Override
     public Optional<Text> getShortDescription(CommandSource source) {
-        return Optional.of(Text.of("Run a command as another player"));
+        return Optional.of(Text.of("Strike lightning a player"));
     }
     
 }
